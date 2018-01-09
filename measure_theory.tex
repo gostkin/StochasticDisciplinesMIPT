@@ -607,9 +607,9 @@
 	\end{theorem}
 	\begin{proof}
 		Пусть $ [a, b) = \bigsqcup\limits_{i=1}^{\infty}{[a_{i}, b_{i})},\ a, b \in \Real $.\\
-		Пользуясь непрерывностью слева, выберем такие $ c < b,\ a_{i} < c_{i} < b_{i} $, что: 
+		Пользуясь непрерывностью слева, выберем такие $ c < b,\  c_{i} < a_{i} $, что: 
 		\begin{gather*} 
-			[a, c] \subset \bigcup\limits_{i=1}^{\infty}{(c_{i}, b_{i})},\quad \phi(b)-\phi(c) < \frac{\eps}{2},\quad \phi(b_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}}
+			[a, c] \subset \bigcup\limits_{i=1}^{\infty}{(c_{i}, b_{i})},\quad \phi(b)-\phi(c) < \frac{\eps}{2},\quad \phi(a_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}}
 		\end{gather*}
 		Из полученного открытого покрытия выберем конечное подпокрытие $ \{ (c_{i_{k}}, b_{i_{k}})\}_{k=1}^{n} $.\\
 		Приведём все промежутки к полуоткрытым справа интервалам, получим: $ [a, c) \subset \bigcup_{k=1}^{n}{ [c_{i_{k}}, b_{i_{k}} )} $.\\
@@ -624,8 +624,8 @@
 		Значит, $ m([a, b)) \le \sum_{i=1}^{\infty}{m([a_{i}, b_{i}))} $.\\
 		Если $ a = -\infty $ и $ (-\infty, b) := \bigsqcup\limits_{i=1}^{\infty}{A_{i}} $, то:
 		\begin{gather*} 
-			\mu((-\infty, b)) = \mu\left (\lim\limits_{n\to\infty}{[-n, b)}\right ) = \mu\left (\lim\limits_{n\to\infty}{\bigsqcup\limits_{i=1}^{\infty} A_{i} \cap [-n, b)}\right ) \le\\
-			\le  \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{\infty}\mu(A_{k} \cap [-n, b))} \le \sum\limits_{n=1}^{\infty}\mu(A_{i})
+			m((-\infty, b)) = m\left (\lim\limits_{n\to\infty}{[-n, b)}\right ) = m\left (\lim\limits_{n\to\infty}{\bigsqcup\limits_{i=1}^{\infty} A_{i} \cap [-n, b)}\right ) \le\\
+			\le  \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{\infty}m(A_{k} \cap [-n, b))} \le \sum\limits_{n=1}^{\infty}m(A_{i})
 		\end{gather*}
 		где переход с первой строки на вторую допустим по доказанному для случая $ a, b \in \Real $.\\
 		Доказательство для случая $ b = +\infty $ аналогично.\\
@@ -648,8 +648,8 @@
 		На каждом из $ R_{i} $ продолжим сужение $ \nu $ до $ \sigma $-аддитивной меры $ \mu_{i} $ на $ \sigma $-алгебре $ \Sigma_{i} $.
 	\end{definition}
 	\begin{definition}
-		Множество $ Y \subseteq X $ называется \textit{измеримым}, если $ \forall i: Y \cap A_{i} \in \Sigma_{i} $.\\
-		При этом: \[ \mu(A) := \sum_{i=1}^{\infty}{\mu_{i}(A \cap B_{i})} \]
+		Множество $ A \subseteq X $ называется \textit{измеримым}, если $ \forall i: A \cap A_{i} \in \Sigma_{i} $.\\
+		При этом: \[ \mu(A) := \sum_{i=1}^{\infty}{\mu_{i}(A \cap A_{i})} \]
 	\end{definition}
 	\begin{theorem}
 		Совокупность $ M $ измеримых подмножеств $ X $ образуется $ \sigma $-алгебру.
