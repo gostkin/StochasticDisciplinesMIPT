@@ -473,14 +473,14 @@
 	\begin{definition}[Критерий измеримости по Лебегу]$  $\\
 		$ A \subseteq E $ \textbf{измеримо по Лебегу}, если: 
 		\[ \forall \eps > 0\ \exists A_{\eps} \in R(S): \mu^{*}(A \triangle A_{\eps}) < \eps \] 
-		Совокупность всех измеримых подмножеств $ E $ обозначим через $ M $. 
+		Совокупность всех измеримых подмножеств $ E $ обозначим через $ \mathcal{M}(\mu) $. 
 	\end{definition}
 	\begin{lemma}
-		$ M $ — алгебра.
+		$ \mathcal{M}(\mu) $ — алгебра.
 	\end{lemma}
 	\begin{proof}
-		$ E \in M $, т.к. $ \mu^{*}(E) = m(E) $.\\ 
-		Пусть $ A, B \in M $. Нужно показать, что $ A \triangle B,\ A \cap B \in M $.\\
+		$ E \in \mathcal{M}(\mu) $, т.к. $ \mu^{*}(E) = m(E) $.\\ 
+		Пусть $ A, B \in \mathcal{M}(\mu) $. Нужно показать, что $ A \triangle B,\ A \cap B \in M $.\\
 		Для данного $ \eps > 0 $ выберем $ A_{\eps/2}, B_{\eps/2} $ из определения измеримости по Лебегу. Тогда:\\ 
 		\[ 
 			\begin{cases}
@@ -492,14 +492,14 @@
 				\mu^{*}((A \triangle B) \triangle (A_{\eps/2} \triangle B_{\eps/2})) &< \eps
 			\end{cases}
 		\]
-		Следовательно, $ A \triangle B,\ A \cap B \in M $
+		Следовательно, $ A \triangle B,\ A \cap B \in \mathcal{M}(\mu) $
 	\end{proof}
 	\begin{lemma}
-		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ M $ измеримых множеств аддитивно.
+		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ \mathcal{M}(\mu) $ измеримых множеств аддитивно.
 	\end{lemma}
 	\begin{proof}$  $\\
-		Достаточно показать, что $ \mu^{*}(A) = \mu^{*}(B) + \mu^{*}(C) $ при $ B, C \in M $ и $ A := B \sqcup C $.\\
-		$ M $ — алгебра, значит, $ A \in M $. $ \mu^{*} $ монотонна, значит, $ \mu^{*}(A) \le \mu^{*}(B) + \mu^{*}(C) $.\\
+		Достаточно показать, что $ \mu^{*}(A) = \mu^{*}(B) + \mu^{*}(C) $ при $ B, C \in \mathcal{M}(\mu) $ и $ A := B \sqcup C $.\\
+		$ \mathcal{M}(\mu) $ — алгебра, значит, $ A \in \mathcal{M}(\mu) $. $ \mu^{*} $ монотонна, значит, $ \mu^{*}(A) \le \mu^{*}(B) + \mu^{*}(C) $.\\
 		Осталось доказать, что $ \mu^{*}(A) \ge \mu^{*}(B) + \mu^{*}(C) $.\\
 		Выберем $ B_{\eps}, C_{\eps} \in R(S) $ из определения измеримости по Лебегу.\\
 		Докажем, что имеет место следующая цепочка неравенств:
@@ -519,7 +519,7 @@
 		\end{enumerate}
 	\end{proof}
 	\begin{theorem}
-		$ M $ — $ \sigma $-алгебра.\footnote{В учебнике Дьяченко-Ульянова доказан только первый случай. В общем случае ниоткуда не следует, что единица кольца имеет конечную меру. Очевидный пример — $ R(S) $, где $ S $ — полукольцо промежутков вещественной прямой. Тем не менее, своя логика в таком построении курса есть: мера Лебега в $ \Real^{n} $ сигма-конечна, потому достаточно уметь оперировать мерой Лебега на брусах, где единица кольца как раз имеет конечную меру. }
+		$ \mathcal{M}(\mu) $ — $ \sigma $-алгебра.\footnote{В учебнике Дьяченко-Ульянова доказан только первый случай. В общем случае ниоткуда не следует, что единица кольца имеет конечную меру. Очевидный пример — $ R(S) $, где $ S $ — полукольцо промежутков вещественной прямой. Тем не менее, своя логика в таком построении курса есть: мера Лебега в $ \Real^{n} $ сигма-конечна, потому достаточно уметь оперировать мерой Лебега на брусах, где единица кольца как раз имеет конечную меру. }
 	\end{theorem}
 	\begin{proof}
 		Пусть $ A_{1}, A_{2}, \dots \in M $  и $ A := \bigcup_{i=1}^{\infty}{A_{i}} $.\\
@@ -531,32 +531,19 @@
 			Найдём такой номер $ N $, что хвост $ \sum_{i=N+1}^{\infty}{\mu(B_{i})} < \eps $.\\ 
 			Найдём $ C_{\eps} \in R(S): \mu\left (C_{\eps} \triangle \bigsqcup_{i=1}^{N}{B_{i}} \right ) < \eps $.\\
 			Поскольку $ A \triangle C_{\eps} \subseteq \left (C_{\eps} \triangle \bigsqcup_{i=1}^{N}{B_{i}} \right ) \cup \left (\bigsqcup_{i=N+1}^{\infty}B_{i}\right ) $.\footnote{Достаточно понять, что $ (A \sqcup B) \triangle C \subseteq (A \triangle C) \cup B $, нарисовав картинку.}\\
-			Значит, $ \mu^{*}(A \triangle C_{\eps}) < 2\eps $, откуда следует, что $ A \in M $.
+			Значит, $ \mu^{*}(A \triangle C_{\eps}) < 2\eps $, откуда следует, что $ A \in \mathcal{M}(\mu) $.
 			\item Пусть $ \mu^{*}(A) = \infty $.\footnote{И доказательство, которое дали на семинаре, проходит только в случае $ \sigma $-конечности меры Лебега на $ X $}.
 		\end{enumerate}
 	\end{proof}
 	\begin{theorem}
-		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ M $ измеримых множеств $ \sigma $-аддитивно.
+		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ \mathcal{M}(\mu) $ измеримых множеств $ \sigma $-аддитивно.
 	\end{theorem}
 	\begin{proof}
-		Пусть $ A := \bigsqcup_{i=1}^{\infty}{A_{i}} \in M $.\\
+		Пусть $ A := \bigsqcup_{i=1}^{\infty}{A_{i}} \in \mathcal{M}(\mu) $.\\
 		По $ \sigma $-полуаддитвности, $ \mu(A) \le \sum_{i=1}^{\infty}{\mu(A_{i})} $.\\
 		В силу аддитивности $ \mu $, $ \forall n: \mu(A) \ge \mu\left (\bigsqcup_{i=1}^{n}{A_{i}}\right )  \ge \sum_{i=1}^{n}{\mu(A_{i})} $.\\ 
 		Переходя к пределу, получим, что $ \mu(A) \ge \sum_{i=1}^{\infty}{\mu(A_{i})} $.\\
 		Значит, $ \mu(A) = \sum_{i=1}^{\infty}{\mu(A_{i})} $.
-	\end{proof}
-	\begin{theorem}[Критерий измеримости по Каратеодори, \href{https://goo.gl/RH4wbo}{Carathéodory's criterion}]$  $\\
-		Пусть $ \mu^{*}: 2^{X} \to [0, +\infty] $ — внешняя мера\footnote{Равна нулю на $ \emptyset $, монотонна и счётно полуаддитивна.} на $ X $. Тогда\footnote{$ \mathcal{M}(\mu) \subseteq 2^{X} $ — множество измеримых относительно $ \mu $ подмножеств $ X $.}
-		\[ \forall E \in 2^{X}: E \in \mathcal{M}(\mu) \iff \forall A \in 2^{X}: \mu^{*}(A) = \mu^{*}(A \cap E) + \mu^{*}(A \setminus E) \]
-	\end{theorem}
-	\begin{proof}
-		Докажем эквивалентность критериев Лебега и Каратеодори.
-		\begin{itemize}
-			\item \textbf{Каратеодори $ \implies  $ Лебег}:\\
-				Пусть $ \forall A \in 2^{X}: \mu(A) = \mu(A \cap E) + \mu(A \setminus E) $.\\
-				Покажем, что $ \forall \eps > 0\ \exists E_{\eps} \in 2^{X}: \mu^{*}(E \triangle E_{\eps}) < \eps $.
-			\item \textbf{Лебег $ \implies  $ Каратеодори}:
-		\end{itemize}
 	\end{proof}
 	\section{Полнота и непрерывность мер. Теоремы о связи непрерывности и сигма-аддитивности.}
 	\begin{definition}
