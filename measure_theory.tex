@@ -138,6 +138,7 @@
 		\end{enumerate}
 	\section{Геометрическая вероятность. "Задача о встрече”}
 		\[ \Omega \subseteq \mathbb{R}^{n},\ \salg := \{A\ |\ A \subseteq \Omega \},\ \prob(A) := \frac{\mu(A)}{\mu(\Omega)}\] где $ \mu $ — мера Лебега в $ \mathbb{R}^{n} $.
+		Продолжение —\href{http://www.nsu.ru/mmf/tvims/chernova/tv/lec/node6.html}{в конспектах НГУ}.
 	\section{Независимость событий, виды и взаимосвязь.}
 		\begin{definition}
 			$ A \independent B \iff P(A \cap B) = P(A) P(B) $
@@ -310,17 +311,24 @@
 		Минимальная $ \sigma $-алгебра, содержащая все открытые $ A \subseteq \Real^{n} $ — \textbf{Борелевская}.
 	\end{definition}
 	\begin{lemma}
-		Пусть $ A, A_{1}, \dots, A_{n} \in S,\ \bigsqcup_{i=1}^{n}{A_{i}} \subseteq A $, тогда $ \exists A_{n+1}, \dots, A_{s} \in S: A = \bigsqcup_{i=1}^{s}{A_{i}} $.\footnote{первое доказательство, которое приходит на ум, не проходит из-за убогости полуколец: т.к. в них ничего нельзя с уверенностью сказать даже про дизъюнктное объединение, приходится выдумывать доказательства по индукции... Тем не менее, полукольца нужны, потому что они формализуют процесс построения меры Лебега на борелевских множествах в $ \mathbb{R}^{n} $ и позволяют обобщить его на нетривиальные пространства.}   
+		Пусть $ A, A_{1}, \dots, A_{n} \in S,\ \bigsqcup_{i=1}^{n}{A_{i}} \subseteq A $, тогда 
+		\[ \exists A_{n+1}, \dots, A_{s} \in S: A = \bigsqcup_{i=1}^{s}{A_{i}} \]
 	\end{lemma}
 	\begin{proof}
 		Воспользуемся индукцией по $ n $.\\
 		\textit{База}: при $ n = 1 $ утверждение следует из определения полукольца.\\
-		\textit{Шаг}: $ n > 1 $. Пусть $ A = (\bigsqcup_{i=1}^{n-1}{A_{i}}) \sqcup (\bigsqcup_{j=1}^{s}{B_{j}}) $.\\
-		$ A_{n} \subseteq A,\ A_{n} \in S,\ \forall i < n: A_{i} \cap A_{n} = \emptyset $.\\ 
-		По определению полукольца, $ \exists C_{1}, \dots, C_{l} \in S: A = A_{n} \sqcup (\bigsqcup_{k=1}^{l}{C_{k}}) $.\\
-		$ A \setminus \bigsqcup_{i=1}^{n}{A_{i}} = (\bigsqcup_{j=1}^{s}{B_{j}}) \setminus A_{n} = (\bigsqcup_{j=1}^{s}{B_{j}}) \cap (A \setminus A_{n}) = (\bigsqcup_{j=1}^{s}{B_{j}}) \cap (\bigsqcup_{k=1}^{l}{C_{k}}) $.\\
+		\textit{Шаг}: $ n > 1 $. Пусть 
+		\begin{gather*} 
+			A = \left (\bigsqcup_{i=1}^{n-1}{A_{i}}\right ) \bigsqcup \left (\bigsqcup_{j=1}^{s}{B_{j}}\right )\\
+			A_{n} \subseteq A,\ A_{n} \in S,\ \forall i < n: A_{i} \cap A_{n} = \emptyset
+		\end{gather*}
+		По определению полукольца,
+		\begin{gather*}
+			\exists C_{1}, \dots, C_{l} \in S: A = A_{n} \bigsqcup \left (\bigsqcup_{k=1}^{l}{C_{k}}\right )\\
+			A \setminus \bigsqcup_{i=1}^{n}{A_{i}} = \left (\bigsqcup_{j=1}^{s}{B_{j}}\right ) \setminus A_{n} = \left (\bigsqcup_{j=1}^{s}{B_{j}}\right ) \bigcap \left (A \setminus A_{n}\right ) = \left (\bigsqcup_{j=1}^{s}{B_{j}}\right ) \bigcap  \left (\bigsqcup_{k=1}^{l}{C_{k}}\right )
+		\end{gather*}
 		Введём обозначения: $ D_{j, k} := B_{j} \cap C_{k} $.\\
-		Тогда $ A = (\bigsqcup_{i=1}^{n}{A_{i}}) \sqcup (\bigsqcup_{j, k} D_{j, k}) $
+		Тогда $ A = \left (\bigsqcup\limits_{i=1}^{n}{A_{i}}\right ) \bigsqcup \left (\bigsqcup\limits_{j, k} D_{j, k}\right ) $
 	\end{proof}
 	\begin{lemma}
 		Если $ A_{1}, \dots, A_{n} \in S $, то найдутся попарно непересекающиеся $ B_{1}, \dots, B_{s} \in S $, такие что каждое $ A_{i} $ представляется в виде объединения каких-то из $ B_{j} $.
@@ -363,7 +371,12 @@
 	\end{proof}
 	\section{Меры на полукольцах. Классическая мера Лебега на полукольце промежутков и ее сигма-аддитивность.}
 	\begin{definition}
-	Мерой $m$ на полукольце множеств $S$ называется отображение: $S\rightarrow\left [0; +\infty\right)$ такое, что $\forall A, A_1, \ldots, A_n \in S: (A = \bigsqcup_{i=1}^{n} A_i\implies m(A) = \sum_{i=1}^{n}m(A_i))$. Если это же верно для $A, A_1, \ldots, A_n,\ldots$ для $A=\bigsqcup_{i=1}^{+\infty}A_i$, то мера называется $\sigma$-аддитивной.
+	Пусть $ S $ — полукольцо множество, тогда отображение $ m: S \to [0; +\infty]$ называют \textbf{мерой}, если оно удовлетворяет следующим условиям:
+	\begin{itemize}
+		\item $ m(\emptyset) = 0 $
+		\item \textbf{Монотонность}: $ \forall A, B \in S: A \subseteq B \implies m(A) \le m(B) $
+		\item \textbf{Конечная аддитивность}: $ A = \bigsqcup\limits_{i=1}^{n} A_{i},\ A_{i} \in S \implies m(A) = \sum\limits_{i=1}^{n} m(A_{i}) $
+	\end{itemize}
 	\end{definition}
 	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
 		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
@@ -454,7 +467,7 @@
 	\end{definition}
 	\begin{definition}
 		\textbf{Внешняя мера Лебега}:
-		\[ \forall A \subset E,\ \mu_{J}^{*}(A) := \inf_{\substack{A_{1}, A_{2}, \dots \in S\\A\subset\bigcup_{i=1}^{\infty}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
+		\[ \forall A \subset E,\ \mu^{*}(A) := \inf_{\substack{A_{1}, A_{2}, \dots \in S\\A\subset\bigcup_{i=1}^{\infty}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
 	\end{definition}
 	\begin{theorem}[О $ \sigma $-полуаддитивности внешней меры Лебега]$  $\\
 		Если $ A, A_{1}, A_{2}, \dots E $ и $ A \subset \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \mu^{*}(A) \le \sum_{i=1}^{\infty}{\mu^{*}(A_{i})} $
@@ -616,7 +629,7 @@
 	\section{Сигма-конечные меры.}
 	\textbf{Мотивировка.} $ \sigma $-конечные меры обладают рядом полезных свойств:
 	\begin{itemize}
-		\item Для них единственно Лебегово прододолжение меры.
+		\item Для них единственно Лебегово продолжение меры.
 		\item На их основе можно задать вероятностную меру на той же $ \sigma $-алгебре.
 		\item Для них работает теорема Фубини, без которой вычисления превращаются в ад.
 		\item В их терминах формулируется теорема Радона-Никодима, вводится плотность вероятности.
@@ -680,9 +693,33 @@
 		Тогда $ A \in M' $ и $ \mu'(A) =  \sum\limits_{i=1}^{\infty}{\sum\limits_{j=1}^{\infty}{\mu'(A \cap C_{i, j})}} = \mu(A) $.
 	\end{proof}
 	\section{Неизмеримые множества. Теорема о структуре измеримых множеств.}
+	\begin{theorem}[О множествах Витали]$  $\\
+		Пусть $ A \subseteq [0, 1] $ измеримо относительно классической меры Лебега и $ \mu(A) > 0 $.\\ 
+		Тогда у $ A $ есть неизмеримое подмножество.\footnote{Эта же конструкция демонстрирует отсутствие счётной аддитивности внешней меры Лебега. Более того, в случае полной меры внешняя мера всякого неизмеримого множества отлична от нуля.}
+	\end{theorem}
+	\begin{proof}
+		Введём отношение эквивалентности: $ x \sim y \iff x - y \in \Rational $.\\
+		Пусть $ E $ — множество представителей классов эквивалентности по этому отношению.\\
+		Пусть $ \{r_{n}\}_{n \in \Natural} = \Rational \cap [-1, 1] $.\\ 
+		Рассмотрим множество $ X := \bigsqcup\limits_{n=1}^{\infty} E_{n} \subseteq [-1, 2],\ E_{n} := E + r_{n} $\\
+		По построению очевидно, что $ [0, 1] \subset X $.\\
+		Предположим, что $ E $ измеримо.\\ 
+		Пусть какое-то $ E_{n} $ содержит измеримое подмн-во $ C_{n}: \mu^{*}(C_{n}) = d > 0 $.\\
+		Тогда $ \mu(C_{m} := C_{n} - r_{n} + r_{m}) = \mu(C_{n}),\ C_{m} \subseteq E_{m} $.\footnote{Мера Лебега в $ \Real^{n} $ инвариантна относительно сдвига.}\\
+		Тогда $ \bigsqcup\limits_{n=0}^{\infty} C_{n} \subseteq \bigsqcup\limits_{n=0}^{\infty} E_{n} \subseteq [-1, 2] $.\\
+		Откуда $ \sum\limits_{n=0}^{\infty} \mu(C_{n}) = +\infty > 3 = \mu([-1, 2]) $.\\
+		Значит, $ \forall B \subseteq A: \mu^{*}(B) = 0 $, но $ \mu^{*}(A) > 0 $.\\
+		Отсюда следует неизмеримость $ E $.
+	\end{proof}
 	\begin{theorem}
 		Всякое множество ненулевой меры Лебега имеет неизмеримое подмножество.\footnote{For $ \Real^{n} $ case various proofs can be found in the Internet. All of them rely upon translation-invariance of Lebesgue measure. Thereby, the question arises: can this be proven from the first principles, in the most general setting?}
 	\end{theorem}
+	\begin{proof}$  $
+			\begin{itemize}
+				\item \textbf{Случай $ \Real $} (для $ \Real^{n} $ конструкция аналогична):\\ \href{https://math.stackexchange.com/questions/84491/does-the-set-of-differences-of-a-lebesgue-measurable-set-contains-elements-of-at/104126#104126}{math.stackexchange, док-во на основе теоремы Steinhaus-а.}
+				\item В общем случае это неверно. Контрпример — считающая мера на $ \Natural $.
+			\end{itemize}
+	\end{proof}
 	\begin{theorem}[О структуре измеримых множеств]$  $\\
 		Пусть $ \mu $ — $ \sigma $-конечная мера Лебега на $ \sigma $-алгебре $ M $, полученная продолжением $ \sigma $-аддитивной меры с полукольца $ S $, $ A \in M $, $ \mu(A) < \infty $. Тогда $ A = \bigcap\limits_{i=1}^{\infty}{\bigcup\limits_{j=1}^{\infty}{A_{i, j}} \setminus A_{0}},\ A_{0} \in M,\ \mu(A_{0}) = 0 $.\footnote{А где в доказательстве $ A_{0} $? Оно нужно для доказательства следствия, т.к. в $ \Real^{n} $ элементарное множество отличается от открытого на множество лебеговой меры нуль, а из элементарных уже можно получить все открытые.}\\
 		Множества $ A_{i, j} $  все лежат в $ R(S) $ и образуют возрастающий флаг $ A_{i, j} \subseteq A_{i, j+1} $.\\
@@ -845,7 +882,7 @@
 	\begin{corollary}
 		Мера Бореля может быть неполна.
 	\end{corollary}
-	\section{Сходимость по мере и почти всюду. Их свойства (критерий Коши сходимости по мере, арифметические, связь сходимостей, Теорема Рисса).}\footnote{Убийственный по объёму билет...}
+	\section{Сходимость по мере и почти всюду. Их свойства (критерий Коши сходимости по мере, арифметические, связь сходимостей, Теорема Рисса).}
 		Здесь и далее пусть $ \{f_{n}(x)\}_{n=1}^{\infty},\ f(x) $ — измеримые и конечные на $ (X, \Sigma, \mu) $ функции \footnote{Хотя бы для того, чтобы выражения вида $ |f_{n}(x) - f(x)| $ имели смысл}.
 		\begin{definition}
 			$ \{f_{n}(x)\}_{n=1}^{\infty} $ \textbf{сходится по мере} к $ f(x) $ ($ f_{n}(x) \xrightarrow{\mu} f(x) $), если:\
@@ -1214,11 +1251,11 @@
 				\item Очевидно из определения.
 				\item Достаточно доказать для неотрицательных функций $ f, g: E \to \Real^{+} $. Заметим, что в случае полноты меры все эквивалентные функции либо измеримы, либо неизмеримы одновременно.\\
 				Пусть $ E' := \{ f = g \} $, тогда $ \mu(E \setminus E') = 0 $ и, пользуясь пунктом (1),
-				\[
-					\int_{E} g d\mu = \int_{E'} g d\mu + \int_{E \setminus E'} g d\mu = \int_{E'} g d\mu = \int_{E'} f d\mu = \int_{E'} f d\mu + \int_{E \setminus E'} f d\mu = \int_{E} f d\mu
-				\] 
+				\begin{gather*}
+					\int_{E} g d\mu = \int_{E'} g d\mu + \int_{E \setminus E'} g d\mu = \int_{E'} g d\mu =\\= \int_{E'} f d\mu = \int_{E'} f d\mu + \int_{E \setminus E'} f d\mu = \int_{E} f d\mu
+				\end{gather*}
 				\item И снова достаточно доказать для $ f: E \to \Real^{+},\ f \in L(E),\ E \in \Sigma $.\\
-				Положим $ E_{\infty} := \{ f = \infty \} $ и выберем $ F_{\infty} \in \Sigma,\ F_{\infty} \subset E_{\infty},\ \mu(F_{\infty}) < \infty $.\\
+				Положим $ E_{\infty} := \{ f = \infty \} $ и выберем $ F_{\infty} \in \Sigma,\ F_{\infty} \subset E_{\infty},\ \mu(F_{\infty}) < \infty $\footnote{Пользуясь $ \sigma $-конечностью меры, пересечём $ E_{\infty} $ со всеми множествами $ X_{i} $, где $ X := \bigsqcup\limits_{i=1}^{\infty} X_{i} $, тогда $ E_{\infty} = \bigsqcup\limits_{n=1}^{\infty} E_{\infty} \cap X_{i} $ и в случае, когда $ \mu(E_{\infty}) > 0 $, хотя бы одно такое пересечение будет иметь положительную конечную меру.}.\\
 				Рассмотрим последовательность функций из $ \mbox{SF}(f) $: $ h_{n} := n \mathbf{I}_{F_{\infty}} $.\\
 				По определению интеграла Лебега\footnote{Пользуясь соглашением $ \infty \cdot 0 = 0 $}, 
 				\[ +\infty > \int_{E} f d\mu \ge \sup\limits_{n} \int_{E} h_{n} d\mu = \sup\limits_{n} n \mathbf{I}_{F_{\infty}} = +\infty \cdot \mu(F_{\infty}) \]
@@ -1446,7 +1483,7 @@
 			\int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} h d\mu \le\\\le \int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} \sum_{i=1}^{n} (a_{k} \cdot \mbox{I}_{E_{i} \cap A}) d\mu <\\< \frac{\eps}{2} + \sum_{i=1}^{n} a_{k} \mu(\mbox{I}_{E_{i} \cap A}) \le \frac{\eps}{2} + \max\limits_{1 \le i \le n} a_{i} \sum\limits_{k=1}^{n} \mu(E_{k} \cap A) \le \frac{\eps}{2} + \max\limits_{1 \le k \le n} a_{k} \cdot \mu(A) \le \eps
 		\end{gather*}
 	\end{proof}
-	\begin{theorem}[Критерий интегрируемости по Лебегу на множествах конечной меры]
+	\begin{theorem}[Критерий интегрируемости по Лебегу на множествах конечной меры]$  $\\
 		Пусть $ \mu(E) < \infty $ и $ f $ измерима на $ E $. Тогда\footnote{Наглядный пример того, почему это работает — интегрируемость по Лебегу функции $ f(x) := x^{-\frac{1}{2}} $ на $ [0, 1] $ } 
 		\[ f \in L(E) \iff \sum\limits_{k=1}^{\infty} \mu(\{ |f| \ge k \}) < \infty \]
 		Например, ограниченная измеримая функция на мн-ве конечной меры интегрируема по Лебегу.
@@ -1518,6 +1555,41 @@
 		\[
 			\mbox{L-}\int\limits_{[a, b]} f d\mu = I
 		\]
+	\end{proof}
+	\section{Контрпримеры и задачи}
+	\begin{preposition}
+		Для всякого $ n \in \Natural $ существует полукольцо $ S: |S| = n $.
+	\end{preposition}
+	\begin{proof}
+		$ S := \{\emptyset, \{1\}, \dots, \{n-2\}, \{1, 2, \dots, n-2 \}\} $.
+	\end{proof}
+	\begin{task}
+		Построить пример конечно-аддитивной неотрицательной функции на полукольце, не являющейся мерой.
+	\end{task}
+	\begin{preposition}
+		Классическая внешняя мера Лебега не аддитивна:
+		\[
+			\exists A, B \subset [0, 1]: \mu^{*}(A) + \mu^{*}(B) \neq \mu^{*}(A \sqcup B)
+		\] 
+	\end{preposition}
+	\begin{proof}
+		Рассмотрим конструкцию множества Витали из теоремы 14.1.\\
+		Пусть $ E, X $ — множества из её доказательства.\\
+		Поскольку $ \mu^{*} $ счётно-полуаддитивна, $ \mu^{*}(E) > 0 $\footnote{Иначе было бы $ \mu^{*}(X) \le \sum\limits_{n=1}^{\infty}  \mu^{*} E_{n} \le 0 $.}\\
+		Говоря точнее, $ \exists n \in \Natural: \mu^{*}(E) > \frac{1}{n} $.\\
+		Но тогда достаточно рассмотреть объединение $ 3n $ множеств $ E_{m} $, чтобы прийти к противоречию: внешняя мера их объединения будет больше меры отрезка $ [-1, 2] $.
+	\end{proof}
+	\begin{preposition}
+		Если $ f, g \in L(E) $, то $ \min\{f, g\},\ \max\{f, g\} \in L(E) $.
+	\end{preposition}
+	\begin{proof}$  $
+		\begin{itemize}
+			\item \textbf{Вариант 1}:\\
+				\[ \min\{f, g\} \le \max\{f, g\} \le \max\{|f|, |g|\} \le |f| + |g| \] а $ \min, \max $ сохраняют измеримость функций.
+			\item \textbf{Вариант 2}:
+			\[ \min\{f, g\} = \frac{1}{2} (f + g - |f - g|)\quad \max\{f, g\} = \frac{1}{2} (f + g + |f - g|) \]
+			а класс интегрируемых по Лебегу замкнут относительно арифметических операций.
+		\end{itemize}
 	\end{proof}
   \part{Теория вероятности, ФИВТ, семестр 4}
   \part{Математическая статистика, ФИВТ, семестр 5}
