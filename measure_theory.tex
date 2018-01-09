@@ -363,7 +363,12 @@
 	\end{proof}
 	\section{Меры на полукольцах. Классическая мера Лебега на полукольце промежутков и ее сигма-аддитивность.}
 	\begin{definition}
-	Мерой $m$ на полукольце множеств $S$ называется отображение: $S\rightarrow\left [0; +\infty\right)$ такое, что $\forall A, A_1, \ldots, A_n \in S: (A = \bigsqcup_{i=1}^{n} A_i\implies m(A) = \sum_{i=1}^{n}m(A_i))$. Если это же верно для $A, A_1, \ldots, A_n,\ldots$ для $A=\bigsqcup_{i=1}^{+\infty}A_i$, то мера называется $\sigma$-аддитивной.
+	Пусть $ S $ — полукольцо множество, тогда отображение $ m: S \to [0; +\infty]$ называют \textbf{мерой}, если оно удовлетворяет следующим условиям:
+	\begin{itemize}
+		\item $ m(\emptyset) = 0 $
+		\item \textbf{Монотонность}: $ \forall A, B \in S: A \subseteq B \implies m(A) \le m(B) $
+		\item \textbf{Конечная аддитивность}: $ A = \bigsqcup\limits_{i=1}^{n} A_{i},\ A_{i} \in S \implies m(A) = \sum\limits_{i=1}^{n} m(A_{i}) $
+	\end{itemize}
 	\end{definition}
 	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
 		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
