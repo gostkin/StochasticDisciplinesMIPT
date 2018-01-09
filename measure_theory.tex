@@ -1251,11 +1251,11 @@
 				\item Очевидно из определения.
 				\item Достаточно доказать для неотрицательных функций $ f, g: E \to \Real^{+} $. Заметим, что в случае полноты меры все эквивалентные функции либо измеримы, либо неизмеримы одновременно.\\
 				Пусть $ E' := \{ f = g \} $, тогда $ \mu(E \setminus E') = 0 $ и, пользуясь пунктом (1),
-				\[
-					\int_{E} g d\mu = \int_{E'} g d\mu + \int_{E \setminus E'} g d\mu = \int_{E'} g d\mu = \int_{E'} f d\mu = \int_{E'} f d\mu + \int_{E \setminus E'} f d\mu = \int_{E} f d\mu
-				\] 
+				\begin{gather*}
+					\int_{E} g d\mu = \int_{E'} g d\mu + \int_{E \setminus E'} g d\mu = \int_{E'} g d\mu =\\= \int_{E'} f d\mu = \int_{E'} f d\mu + \int_{E \setminus E'} f d\mu = \int_{E} f d\mu
+				\end{gather*}
 				\item И снова достаточно доказать для $ f: E \to \Real^{+},\ f \in L(E),\ E \in \Sigma $.\\
-				Положим $ E_{\infty} := \{ f = \infty \} $ и выберем $ F_{\infty} \in \Sigma,\ F_{\infty} \subset E_{\infty},\ \mu(F_{\infty}) < \infty $.\\
+				Положим $ E_{\infty} := \{ f = \infty \} $ и выберем $ F_{\infty} \in \Sigma,\ F_{\infty} \subset E_{\infty},\ \mu(F_{\infty}) < \infty $\footnote{Пользуясь $ \sigma $-конечностью меры, пересечём $ E_{\infty} $ со всеми множествами $ X_{i} $, где $ X := \bigsqcup\limits_{i=1}^{\infty} X_{i} $, тогда $ E_{\infty} = \bigsqcup\limits_{n=1}^{\infty} E_{\infty} \cap X_{i} $ и в случае, когда $ \mu(E_{\infty}) > 0 $, хотя бы одно такое пересечение будет иметь положительную конечную меру.}.\\
 				Рассмотрим последовательность функций из $ \mbox{SF}(f) $: $ h_{n} := n \mathbf{I}_{F_{\infty}} $.\\
 				По определению интеграла Лебега\footnote{Пользуясь соглашением $ \infty \cdot 0 = 0 $}, 
 				\[ +\infty > \int_{E} f d\mu \ge \sup\limits_{n} \int_{E} h_{n} d\mu = \sup\limits_{n} n \mathbf{I}_{F_{\infty}} = +\infty \cdot \mu(F_{\infty}) \]
