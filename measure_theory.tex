@@ -459,7 +459,7 @@
 	\end{definition}
 	\begin{definition}
 		\textbf{Внешняя мера Лебега}:
-		\[ \forall A \subset E,\ \mu_{J}^{*}(A) := \inf_{\substack{A_{1}, A_{2}, \dots \in S\\A\subset\bigcup_{i=1}^{\infty}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
+		\[ \forall A \subset E,\ \mu^{*}(A) := \inf_{\substack{A_{1}, A_{2}, \dots \in S\\A\subset\bigcup_{i=1}^{\infty}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
 	\end{definition}
 	\begin{theorem}[О $ \sigma $-полуаддитивности внешней меры Лебега]$  $\\
 		Если $ A, A_{1}, A_{2}, \dots E $ и $ A \subset \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \mu^{*}(A) \le \sum_{i=1}^{\infty}{\mu^{*}(A_{i})} $
@@ -1475,7 +1475,7 @@
 			\int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} h d\mu \le\\\le \int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} \sum_{i=1}^{n} (a_{k} \cdot \mbox{I}_{E_{i} \cap A}) d\mu <\\< \frac{\eps}{2} + \sum_{i=1}^{n} a_{k} \mu(\mbox{I}_{E_{i} \cap A}) \le \frac{\eps}{2} + \max\limits_{1 \le i \le n} a_{i} \sum\limits_{k=1}^{n} \mu(E_{k} \cap A) \le \frac{\eps}{2} + \max\limits_{1 \le k \le n} a_{k} \cdot \mu(A) \le \eps
 		\end{gather*}
 	\end{proof}
-	\begin{theorem}[Критерий интегрируемости по Лебегу на множествах конечной меры]
+	\begin{theorem}[Критерий интегрируемости по Лебегу на множествах конечной меры]$  $\\
 		Пусть $ \mu(E) < \infty $ и $ f $ измерима на $ E $. Тогда\footnote{Наглядный пример того, почему это работает — интегрируемость по Лебегу функции $ f(x) := x^{-\frac{1}{2}} $ на $ [0, 1] $ } 
 		\[ f \in L(E) \iff \sum\limits_{k=1}^{\infty} \mu(\{ |f| \ge k \}) < \infty \]
 		Например, ограниченная измеримая функция на мн-ве конечной меры интегрируема по Лебегу.
@@ -1555,6 +1555,9 @@
 	\begin{proof}
 		$ S := \{\emptyset, \{1\}, \dots, \{n-2\}, \{1, 2, \dots, n-2 \}\} $.
 	\end{proof}
+	\begin{task}
+		Построить пример конечно-аддитивной неотрицательной функции на полукольце, не являющейся мерой.
+	\end{task}
 	\begin{preposition}
 		Классическая внешняя мера Лебега не аддитивна:
 		\[
@@ -1567,6 +1570,18 @@
 		Поскольку $ \mu^{*} $ счётно-полуаддитивна, $ \mu^{*}(E) > 0 $\footnote{Иначе было бы $ \mu^{*}(X) \le \sum\limits_{n=1}^{\infty}  \mu^{*} E_{n} \le 0 $.}\\
 		Говоря точнее, $ \exists n \in \Natural: \mu^{*}(E) > \frac{1}{n} $.\\
 		Но тогда достаточно рассмотреть объединение $ 3n $ множеств $ E_{m} $, чтобы прийти к противоречию: внешняя мера их объединения будет больше меры отрезка $ [-1, 2] $.
+	\end{proof}
+	\begin{preposition}
+		Если $ f, g \in L(E) $, то $ \min\{f, g\},\ \max\{f, g\} \in L(E) $.
+	\end{preposition}
+	\begin{proof}$  $
+		\begin{itemize}
+			\item \textbf{Вариант 1}:\\
+				\[ \min\{f, g\} \le \max\{f, g\} \le \max\{|f|, |g|\} \le |f| + |g| \] а $ \min, \max $ сохраняют измеримость функций.
+			\item \textbf{Вариант 2}:
+			\[ \min\{f, g\} = \frac{1}{2} (f + g - |f - g|)\quad \max\{f, g\} = \frac{1}{2} (f + g + |f - g|) \]
+			а класс интегрируемых по Лебегу замкнут относительно арифметических операций.
+		\end{itemize}
 	\end{proof}
   \part{Теория вероятности, ФИВТ, семестр 4}
   \part{Математическая статистика, ФИВТ, семестр 5}
