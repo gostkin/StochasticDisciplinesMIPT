@@ -257,18 +257,18 @@
 		\textbf{Формулировка 1:}\\
 		\begin{gather*}
 			P_{n}(k) := \begin{cases} 
-					{{n}\choose{k}} p^{k} q^{n-k}, & k \in \Natural\\
+					{{n}\choose{k}} p^{k} q^{n-k}, & k \in \Natural,\\
 					0, & \text{иначе}
-				\end{cases},\quad
+				\end{cases}\quad
 			\ P_{n}(a, b] := \sum\limits_{a < x \le b} P_{n}(np + x\sqrt{npq})
 		\end{gather*}
 		Тогда 
 		\[ \sup\limits_{-\infty \le a < b \le +\infty }  \left| P_{n}(a, b] - \frac{1}{\sqrt{2\pi}} \int_{a}^{b} e^{-\frac{x^{2}}{2}} dx \right| \to 0 \]
 		Или 
 		\begin{gather*} 
-			\sup\limits_{-\infty \le a < b \le +\infty }  \left| P_{n}\left\{ a < \frac{S_{n} - \E S_{n}}{\sqrt{\Var S_{n}}} \right\} - \frac{1}{\sqrt{2\pi}} \int_{a}^{b} e^{-\frac{x^{2}}{2}} dx \right| \to 0\\
+			\sup\limits_{-\infty \le a < b \le +\infty }  \left| P_{n}\left\{ a < \frac{S_{n} - \E S_{n} }{\sqrt{\Var S_{n}}} \le b \right\} - \frac{1}{\sqrt{2\pi}} \int_{a}^{b} e^{-\frac{x^{2}}{2}} dx \right| \to 0\\
 			\\
-			S_{n} := \xi_{1} + \dots + \xi_{n},\quad \xi_{i} := \mathbf{I}_{\{ \omega \in \Omega: \omega[i] = 1 \}}
+			\text{где } S_{n} := \xi_{1} + \dots + \xi_{n},\quad \xi_{i} := \mathbf{I}_{\{ \omega \in \Omega: \omega[i] = 1 \}}
 		\end{gather*}
 		\textbf{Формулировка 2:}\\
 		\[ {{n}\choose{k}} p^{k} q^{n-k} \simeq \frac{1}{\sqrt{2 \pi npq}} e^{-\frac{(k - np)^{2}}{2npq}},\ p + q = 1,\ p, q > 0  \]
@@ -553,7 +553,7 @@
 		\begin{itemize}
 			\item \textbf{Каратеодори $ \implies  $ Лебег}:\\
 				Пусть $ \forall A \in 2^{X}: \mu(A) = \mu(A \cap E) + \mu(A \setminus E) $.\\
-				Покажем, что $ \forall \eps > 0\ \exists E_{\eps} \in 2^{X}: \mu^{*}(E \triangle E_{\eps}) < \eps $
+				Покажем, что $ \forall \eps > 0\ \exists E_{\eps} \in 2^{X}: \mu^{*}(E \triangle E_{\eps}) < \eps $.
 			\item \textbf{Лебег $ \implies  $ Каратеодори}:
 		\end{itemize}
 	\end{proof}
