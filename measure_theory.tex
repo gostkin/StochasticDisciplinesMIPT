@@ -685,6 +685,24 @@
 		Тогда $ A \in M' $ и $ \mu'(A) =  \sum\limits_{i=1}^{\infty}{\sum\limits_{j=1}^{\infty}{\mu'(A \cap C_{i, j})}} = \mu(A) $.
 	\end{proof}
 	\section{Неизмеримые множества. Теорема о структуре измеримых множеств.}
+	\begin{theorem}[О множествах Витали]$  $\\
+		Пусть $ A \subseteq [0, 1] $ измеримо относительно классической меры Лебега и $ \mu(A) > 0 $.\\ 
+		Тогда у $ A $ есть неизмеримое подмножество.
+	\end{theorem}
+	\begin{proof}
+		Введём отношение эквивалентности: $ x \sim y \iff x - y \in \Rational $.\\
+		Пусть $ E $ — множество представителей классов эквивалентности по этому отношению.\\
+		Пусть $ \{r_{n}\}_{n \in \Natural} = \Rational \cap [-1, 1] $.\\ 
+		Рассмотрим множество $ X := \bigsqcup\limits_{n=1}^{\infty} (r_{n} + E) \subseteq [-1, 2] $\\
+		По построению очевидно, что $ [0, 1] \subset X $.\\
+		Предположим, что $ E $ измеримо.\\ 
+		Пусть какое-то $ E_{n} $ содержит измеримое подмн-во $ C_{n}: \mu^{*}(C_{n}) = d > 0 $.\\
+		Тогда $ \mu(C_{m} := C_{n} - r_{n} + r_{m}) = \mu(C_{n}),\ C_{m} \subseteq E_{m} $.\footnote{Мера Лебега в $ \Real^{n} $ инвариантна относительно сдвига.}\\
+		Тогда $ \bigsqcup\limits_{n=0}^{\infty} C_{n} \subseteq \bigsqcup\limits_{n=0}^{\infty} E_{n} \subseteq [-1, 2] $.\\
+		Откуда $ \sum\limits_{n=0}^{\infty} \mu(C_{n}) = +\infty > 3 = \mu([-1, 2]) $.\\
+		Значит, $ \forall B \subseteq A: \mu^{*}(B) = 0 $, но $ \mu^{*}(A) > 0 $.\\
+		Отсюда следует неизмеримость $ E $.
+	\end{proof}
 	\begin{theorem}
 		Всякое множество ненулевой меры Лебега имеет неизмеримое подмножество.\footnote{For $ \Real^{n} $ case various proofs can be found in the Internet. All of them rely upon translation-invariance of Lebesgue measure. Thereby, the question arises: can this be proven from the first principles, in the most general setting?}
 	\end{theorem}
@@ -1524,6 +1542,13 @@
 			\mbox{L-}\int\limits_{[a, b]} f d\mu = I
 		\]
 	\end{proof}
+	\section{Контрпримеры и задачи}
+	\begin{preposition}
+		Классическая внешняя мера Лебега не аддитивна:
+		\[
+			\exists A, B \subset [0, 1]: \mu^{*}(A) + \mu^{*}(B) \neq \mu^{*}(A \sqcup B)
+		\] 
+	\end{preposition}
   \part{Теория вероятности, ФИВТ, семестр 4}
   \part{Математическая статистика, ФИВТ, семестр 5}
   \part{Случайные процессы, ФИВТ, семестр 6}
