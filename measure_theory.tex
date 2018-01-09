@@ -371,13 +371,13 @@
 	\begin{proof}
 		Если $ A, A_{1}, \dots, A_{n} \in S $ и:
 		\begin{itemize}
-			\item $ A \in \bigcup_{i=1}^{n}{A_{i}} $, то $ m(A) \le \sum_{i=1}^{n}{m(A_{i})} $.\\ 
-			Применим лемму 8.5. к множествам $ A, A_{1}, \dots, A_{n} $. Получим набор непересекающихся множеств $ B_{j} $ из $ S $, для которых верна оценка $ \sum_{i=1}^{n}{m(A_{i})} \ge \sum_{j=1}^{m}{m(B_{j})}  \ge m(A) $.
-			\item $ \bigcup_{i=1}^{n}{A_{i}} \subseteq A $, то $ \sum_{i=1}^{n}{m(A_{i})} \le m(A) $. Следует из лемм 8.5 и 8.4.
+			\item $ A \subseteq \bigcup_{i=1}^{n}{A_{i}} $, то $ m(A) \le \sum_{i=1}^{n}{m(A_{i})} $.\\ 
+			Применим лемму 8.2. к множествам $ A, A_{1}, \dots, A_{n} $. Получим набор непересекающихся множеств $ B_{j} $ из $ S $, для которых верна оценка $ \sum_{i=1}^{n}{m(A_{i})} \ge \sum_{j=1}^{m}{m(B_{j})}  \ge m(A) $.
+			\item $ \bigcup_{i=1}^{n}{A_{i}} \subseteq A $, то $ \sum_{i=1}^{n}{m(A_{i})} \le m(A) $. Следует из лемм 8.1 и 8.2.
 		\end{itemize}
 	\end{proof}
 	\begin{corollary}
-		Если $ m $ — мера на полукольце $ S $ и $ A, A_{1} \dots \in S,\ \bigsqcup_{i=1}^{\infty}{A_{i}} \subseteq A $, то $ m(A) \ge \sum_{i=1}^{\infty}{m(A_{i})} $. 
+		Если $ m $ — мера на полукольце $ S $ и $ A, A_{1}, \ldots \in S,\ \bigsqcup_{i=1}^{\infty}{A_{i}} \subseteq A $, то $ m(A) \ge \sum_{i=1}^{\infty}{m(A_{i})} $. 
 	\end{corollary}
 	\begin{definition}
 		\textbf{Классической мерой Лебега на полукольце промежутков} называют меру, сопоставляющую n-мерным брусам $ \times_{i=1}^{n} \{a_{i}, b_{i}\} $ объём $ \prod_{i=1}^{n}{(b_{i} - a_{i})} $.
