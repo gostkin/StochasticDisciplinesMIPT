@@ -1,0 +1,1534 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[a4paper, left=20mm, right=20mm, top=30mm, bottom=20mm]{geometry}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig,epstopdf,titling,url,array}
+\usepackage[T2A,T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{xparse}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\def\E{\mathbb{E}}
+\def\Var{\mathrm{Var}}
+\def\Cov{\mathrm{cov}}
+\def\Corr{\mathrm{corr}}
+\def\salg{\mathcal{F}}
+\def\prob{\mathcal{P}}
+\def\borel{\mathcal{B}}
+\def\cantor{\mathcal{C}}
+
+\def\eps{\varepsilon}
+\def\Real{\mathbb{R}}
+\def\Proj{\mathbb{P}}
+\def\Hyper{\mathbb{H}}
+\def\Integer{\mathbb{Z}}
+\def\Natural{\mathbb{N}}
+\def\Complex{\mathbb{C}}
+\def\Rational{\mathbb{Q}}
+
+\usepackage{stackengine,graphicx,amssymb}
+\stackMath
+\newcommand\frightarrow{\scalebox{1}[.3]{$\rule[.45ex]{2ex}{1.5pt}%
+		\kern-.2ex{\blacktriangleright}$}}
+\newcommand\darrow[1][]{\mathrel{\stackon[1pt]{\stackanchor[1pt]{\frightarrow}{\frightarrow}}{\scriptstyle#1}}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\renewcommand{\thesection}{\arabic{section}}
+
+\theoremstyle{definition}
+\newtheorem{task}{Задача}[section]
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{preposition}{Утверждение}[section]
+\newtheorem{corollary}{Следствие}[section]
+\newtheorem{remark}{Замечание}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}[section]
+
+\makeatletter
+\renewcommand\footnoterule{%
+	\kern-3\p@
+	\hrule\@width \textwidth
+	\kern2.6\p@}
+\makeatother
+
+\title{\textbf{Вероятностные дисциплины, ФПМИ МФТИ\\2017-2020}}
+\author{Иванов Вячеслав Владимирович\\группа 699}
+\date{}
+
+\begin{document}
+  \setlength{\parindent}{1cm}
+  \maketitle
+  \tableofcontents
+  \newpage
+  \part{Основы вероятности и теории меры, ФИВТ, семестр 3}
+  \section{Вероятностное пространство как математическая модель случайного эксперимента. Статистическая устойчивость.}
+	  Для формализации исходов эксперимента в вероятностных терминах (сигма-алгебра событий, вероятностная мера на ней) необходимо выполнение принципа статистической устойчивости: частота исходов не меняется во времени.\\
+	  Несколько забегая вперёд, определим следующие основополагающие понятия:
+	  \begin{definition}
+	  	$ \mathcal{F} \subseteq 2^{\Omega} $ — называют \textbf{сигма-алгеброй} над множеством событий $ \Omega $, если $ \Omega \in \mathcal{F} $, а также $ \mathcal{F} $ замкнуто относительно дополнения и счётного объединения своих компонент. 
+	  \end{definition}
+	  \begin{definition}
+	  	В аксиоматике Колмогорова \textbf{вероятностной мерой} называют отображение $ \mathcal{P}: \mathcal{F} \to [0, 1] $, нормированное ($ \prob(\Omega) = 1 $) и счётно-аддитивное.\\
+	  	Непосредственно из определения выводятся следующие полезные свойства вероятностной меры:
+	  	\begin{enumerate}
+	  		\item $ \prob(\emptyset) = 0 $
+	  		\item $ \forall A, B \in \salg: A \subseteq B \implies \prob(A) \le \prob(B) $
+	  		\item $ \prob\left (\overline{A}\right ) =  1 - \prob(A) $ 
+	  		\item \textbf{Формула включений-исключений.}
+	  		\item \textbf{Непрерывность вероятностной меры}: \[ \forall \{A_{i}\}_{i=1}^{\infty}: (\forall i (A_{i+1} \subseteq A_{i}) \land  \cap_{i=1}^{n}{A_{i}} = \emptyset) \implies \lim_{i\to\infty}{\prob(A_{i})} = 0 \]
+	  	\end{enumerate}
+	  \end{definition}
+	  \begin{definition}
+	  	В данных выше обозначениях, пара $ (\Omega, \salg) $ называется \textbf{измеримым пространством}, а тройка $ (\Omega, \salg, \prob) $ — \textbf{вероятностным пространством}.
+	  \end{definition}
+  \section{Дискретное вероятностное пространство. Классическая вероятность. Построение простейших вероятностных пространств. Элементы комбинаторики. Вероятность суммы событий.}
+		  \textbf{TODO}\\\\
+  		$(\Omega, P),\ |\Omega| \in \mathbb{N}, P(\omega_{i}) = const,\ i = \{1,\dots,n\}$\\
+  		Пример — урновая схема. Шаров в урне $N $, $w = (i_{1}, \dots, i_{k}),\ i_{j}$ — номер шара.
+   		\begin{enumerate}[1.]
+   			\item{Урновая схема: выбор с порядком без возвращения}
+   			\begin{itemize}
+   				\item{$|\Omega| = N \dots (N - K + 1)$}
+   			\end{itemize}
+   			\item{Урновая схема: выбор с порядком с возвращением:}
+   			\begin{itemize}
+   				\item{$|\Omega| = N^{k}$}
+   			\end{itemize}
+  			\item{Урновая схема: выбор без порядка без возвращения:}
+   			\begin{itemize}
+   				\item{$|\Omega| = C^{k}_{n}$}
+   			\end{itemize}
+   			\item{Урновая схема: выбор без порядка с возвращением:}
+   			\begin{itemize}
+   				\item{$|\Omega| = C^{k}_{n+k-1}$}
+   			\end{itemize}
+   		\end{enumerate}
+	\section{Условная вероятность. Формулы полной вероятности, умножения и Байеса.}
+		\[ (\Omega, \salg, \prob),\ B \subseteq \Omega\]
+		\[ \Omega_{B} := B,\ \salg_{B} := \{A \cap B | A \in \salg\},\ \prob_{B} := \prob|_{\salg_{B}}\]
+		\[\prob(A | B) = \frac{\prob(A \cap B)}{\prob(B)} \]
+	    \begin{enumerate}[1.]
+	    \item \textbf{Формула полной вероятности}
+		   \begin{theorem}
+			   	\[ B_{i} \cap B_{j} = \emptyset,\ \bigsqcup_{i} B_{i} = \Omega \implies P(A) = \sum_{i} P(A | B_{i}) 	P(B_{i}) \]
+		   \end{theorem}
+		   \begin{proof}
+			   	Следует из аддитивности и определения условной вероятности.
+		   \end{proof}
+		\item \textbf{Формула умножения вероятностей}
+			\[P(A_{1} \cap \dots \cap A_{n}) = P(A_{1}) P(A_{2} | A_{1}) P (A_{3} | A_{1} \cap A_{2}) \dots P(A_{n} | A_{1} \ \cap \dots \cap A_{n-1}) \]
+		\item \textbf{Формула Байеса (апостериорная вероятность)}
+			\[P(B_{k} | A) = \frac{P(A \cap B_{k})}{P(A)} = \frac{P(A | B_{k}) P (B)}{\sum_{i=1}^{n}{P(A|B_{i})P(B_{i})}} \]
+		\end{enumerate}
+	\section{Геометрическая вероятность. "Задача о встрече”}
+		\[ \Omega \subseteq \mathbb{R}^{n},\ \salg := \{A\ |\ A \subseteq \Omega \},\ \prob(A) := \frac{\mu(A)}{\mu(\Omega)}\] где $ \mu $ — мера Лебега в $ \mathbb{R}^{n} $.
+	\section{Независимость событий, виды и взаимосвязь.}
+		\begin{definition}
+			$ A \independent B \iff P(A \cap B) = P(A) P(B) $
+		\end{definition}
+		\begin{example}
+			Схема Бернулли: доказать независимость: $ \mbox{(первая монета — орлом)} \independent \mbox{(последняя монета — решкой)} $
+		\end{example}
+		\begin{proof}[Решение]
+			\[ w = (i_{1}, \dots, i_{n}) ,\ i_{j} \in \{0; 1\} \] 
+			\[ P(w) = p^{\sum_{i=1}^{n}{i_{j}}} \cdot q^{n - \sum_{i=1}^{n}{i_{j}}},\ p + q = 1 \]
+			\[ P(A) = \sum_{w \in A:\ w_{1} = 1}{P(w)} = \sum_{(i_{1}, \dots, i_{n}),\ i_{1} = 1}{p^{1 + \sum_{i=2}^{n}{i_{j}}} \cdot q^{n - 1 - \sum_{j=2}^{n}{i_{j}}}} = p \sum_{k=0}^{n-1}{{{n-1}\choose{k}} p^{k} q^{n-k-1}}\]
+			\[= p (p + q)^{n-1} = p\]
+			Аналогично, $ P(B) = q $.\\
+			Следовательно, $ P(A \cap B) = p \cdot q \implies A \independent B $ 
+		\end{proof}
+		\begin{definition}
+			События называются \textbf{попарно независимыми}, если \[ \forall i, j:\ P(A_{i} \cap A_{j}) = P(A_{i}) P(A_{j}) \]
+		\end{definition}
+		\begin{definition}
+			События называются \textbf{независимыми в совокупности}, если утверждение выше верно для произвольного конечного набора индексов.
+		\end{definition}
+		\begin{example}
+		\href{https://neerc.ifmo.ru/wiki/index.php?title=%D0%9D%D0%B5%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D1%8B%D0%B5_%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F}{Тетраэдр Бернштейна}
+		\end{example}
+		\begin{example}
+			Есть и более простой пример: рассмотрим три монеты и события '1 и 2 упали одной стороной', '2 и 3 упали одной стороной', '1 и 3 упали одной стороной'. Очевидно, они попарно независимы, но не независимы в совокупности, т.к. одновременное выполнение любых двух эквивалентно одновременному выполнению всех трёх.
+		\end{example}
+	\section{Случайные величины. Независимость случайных величин. Распределение. Примеры. Математическое ожидание, дисперсия, ковариация, корреляция. Свойства}
+		\begin{definition}
+			Если $ \Omega $ конечно, то \textbf{случайной величиной} называют функцию $\xi: \Omega \mapsto \mathbb{R} $.
+		\end{definition}
+		\begin{definition}
+			Случайная величина $ \xi $ называется \textbf{дискретной}, если $ |\mbox{Im}(\xi)| \le \aleph_{0} $.
+		\end{definition}
+		\begin{definition}
+			Если $ \xi $ — дискретная случайная величина, $ \mbox{Im}(\xi) = \{a_{i}\} $, то $ \{p_{i}\} $ называют \textbf{распределением случайной величины}: 
+			\[ p_{i} := P(\xi = a_{i}) = P(\{w \in \Omega\ |\ \xi(w) = a_{i} \}) \]
+		\end{definition}
+		\noindent\textbf{Проблемы}:
+		\begin{enumerate}
+			\item Если $ \mbox{Im} \xi $ более чем счётно, как задать распределение?
+			\item Как оценивать вероятности вида $ P(\xi \ge \alpha) $?
+		\end{enumerate}
+		\begin{definition}
+			Дискретные случайные величины $ \xi $ и $ \eta $ называются \textbf{независимыми}, если $ \forall a_{i} \in \mbox{Im}(\xi),\ b_{j} \in \mbox{Im}(\eta): \prob(\xi = a_{i},\ \eta = b_{j}) = \prob(\xi = a_{i}) \prob(\eta = b_{j}) $.
+		\end{definition}
+		\begin{definition}
+			В дискретном случае, \textbf{математическим ожиданием} называется сумма: 
+			\[\E[\xi] := \sum_{\omega \in \Omega}{\xi(\omega) \cdot P(\omega)} \]
+			В терминах индикаторов можно дать ещё одно полезное определение случайной величины:\\
+			\[ \xi: \Omega \to X,\ \xi(\omega) := \sum_{i} a_{i} I_{A_{i}}(\omega),\ A_{i} := \{\omega \in \Omega\ |\ \xi(\omega) = a_{i} \} \]
+			Оно особенно естественное, если смотреть на матожидание как на интеграл Лебега, т.к. та же самая формула по определению и получается для интеграла Лебега простой случайной величины.
+		\end{definition}
+		\begin{preposition}(Свойства математического ожидания)
+			\begin{enumerate}
+				\item $ \E[a \xi + b \eta] = a\E\xi + b \E\eta$
+				\item $ \E\xi = \sum_{a_{i} \in \mbox{Im}(\xi)}{a_{i} \prob(\xi = a_{i})} $
+				\item $ \eta := \phi(\xi) \implies \E[\eta] = \sum_{i}{\phi(a_{i}) \prob(\xi = a_{i})} $
+				\item $ \xi \ge 0 \implies \E\xi \ge 0 $
+				\item $ \xi \le \eta \implies \E \xi  \le \E \eta  $
+				\item $ |\E \xi| \le \E |\xi| $
+				\item $ \xi \independent \eta \implies \E[\xi \eta] = \E\xi \cdot \E\eta$
+			\end{enumerate}
+		\end{preposition}
+		\begin{proof} $ $\\
+			\begin{enumerate}
+				\item 
+				$
+					\E[a\xi + b\eta] = \sum_{w\in\Omega}{(a\xi(\omega) + b\eta(\omega))\prob(\omega)} = a\sum_{w\in\Omega}{\xi(\omega)\prob(\omega)} + b\sum_{w\in\Omega}{\eta(\omega)\prob(\omega)} = a\E\xi + b\E\eta
+				$
+				\item 
+				\[ 
+					\E\xi = \sum_{\omega \in \Omega}{\xi(\omega) \cdot \prob(\omega)} = \sum_{a_{i} \in \mbox{Im}(\xi)}{\sum_{\omega \in \Omega:\ \xi(\omega) = a_{i}}{\xi(\omega) \cdot \prob(\omega)}} = \]
+				\[
+					= \sum_{a_{i} \in \mbox{Im}(\xi)}{a_{i} \sum_{\omega \in \Omega:\ \xi(\omega) = a_{i}}{ \prob(\omega)} } = \sum_{a_{i} \in \mbox{Im}(\xi)}{a_{i} \cdot \prob(\xi = a_{i})} \]
+				\item Следует из 2.
+				\item Следует из определения.
+				\item $ \eta - \xi \ge 0 \implies \E(\eta - \xi) = \E\eta - \E\xi \ge 0$.
+				\item Следует из определения.
+				\item 
+				\[ 
+					\E[\xi\eta] = \sum_{\omega\in\Omega}{\xi(\omega)\eta(\omega)\prob(\omega)} = \sum_{i, j}{a_{i}b_{j}\prob(\xi = a_{i}, \eta = b_{j})} 
+				\]
+				\[
+					= \sum_{i, j}{a_{i}b_{j}\prob(\xi = a_{i})\prob(\eta = b_{j})} = \sum_{i}{a_{i}\prob(\xi = a_{i})}\sum_{j}{b_{j}\prob(\eta = b_{j})} = \E\xi \cdot \E\eta 
+				\]
+			\end{enumerate}
+		\end{proof}
+		\begin{definition}
+			$ \Var \xi := \E[\xi - \E\xi]^{2} $ — \textbf{дисперсия} случайной величины $ \xi $.
+		\end{definition}
+		\begin{definition}
+			$ \Cov(\xi, \eta) := \E[(\xi - \E\xi)(\eta - \E\eta)] $ — \textbf{ковариация} случайных величин $ \xi $ и $ \eta $. 
+		\end{definition}
+		\begin{preposition}[Свойства дисперсии\footnote{Здесь и далее доказательства предложений тривиально следуют из определений описываемых ими величин.}]$  $
+			\begin{enumerate}
+				\item $ \Var(\xi) = \E \xi^{2} - (\E \xi)^{2} $
+				\item $ \Var(\xi) \ge 0 $
+				\item $ \Var(\xi + c) = \Var(\xi) $ — инвариантность относительно сдвига.
+				\item $ \Var(c \xi) = c^{2}\ \Var(\xi) $
+				\item $ \Var(\xi + \eta) = \Var(\xi) + \Var(\eta) + 2\Cov(\xi, \eta) $
+			\end{enumerate}
+		\end{preposition}
+		\begin{preposition}[Свойства ковариации]$  $
+			\begin{enumerate}
+				\item $ \Cov(\xi, \eta) = \E[\xi \eta] - \E[\xi]\E[\eta] $
+				\item $ \Cov(\cdot, \cdot) $ — симметричная положительно полуопределённая билинейная  форма. Для неё, кроме прочего, верно неравенство Коши-Шварца: $ |\Cov(\xi, \eta)| \le \sqrt{\sigma^{2}(\xi) \sigma^{2}(\eta)} $. В частности, при таком подходе дисперсия выступает в роли скалярного квадрата, а стандартное отклонение — в роли нормы случайной величины как элемента линейного пространства. 
+				\item $ \xi \independent \eta \implies \Cov(\xi, \eta) = 0 $. Обратное, вообще говоря, неверно.
+			\end{enumerate}
+		\end{preposition}
+		\begin{definition}
+			$ \Corr(\xi, \eta) := \frac{\Cov(\xi, \eta)}{\sigma(\xi) \sigma(\eta)} \left (= \frac{(\xi, \eta)}{||\xi|| ||\eta||}\right ) $ — \textbf{корреляция} случайных величин $ \xi $ и $ \eta $. 
+		\end{definition}
+	\section{Схема испытаний Бернулли. Предельные теоремы: Пуассона и Муавра-Лапласа.}
+	\begin{theorem}[Муавра-Лапласа, \href{https://goo.gl/azXZGx}{De Moivre-Laplace theorem}\footnote{"Normal distribution may be used as an approximation to the binomial distribution"}]$  $\\
+		Рассмотрим схему испытаний Бернулли с $ p \in (0, 1) $:\\
+		\textbf{Формулировка 1:}\\
+		\begin{gather*}
+			P_{n}(k) := \begin{cases} 
+					{{n}\choose{k}} p^{k} q^{n-k}, & k \in \Natural\\
+					0, & \text{иначе}
+				\end{cases},\quad
+			\ P_{n}(a, b] := \sum\limits_{a < x \le b} P_{n}(np + x\sqrt{npq})
+		\end{gather*}
+		Тогда 
+		\[ \sup\limits_{-\infty \le a < b \le +\infty }  \left| P_{n}(a, b] - \frac{1}{\sqrt{2\pi}} \int_{a}^{b} e^{-\frac{x^{2}}{2}} dx \right| \to 0 \]
+		Или 
+		\begin{gather*} 
+			\sup\limits_{-\infty \le a < b \le +\infty }  \left| P_{n}\left\{ a < \frac{S_{n} - \E S_{n}}{\sqrt{\Var S_{n}}} \right\} - \frac{1}{\sqrt{2\pi}} \int_{a}^{b} e^{-\frac{x^{2}}{2}} dx \right| \to 0\\
+			\\
+			S_{n} := \xi_{1} + \dots + \xi_{n},\quad \xi_{i} := \mathbf{I}_{\{ \omega \in \Omega: \omega[i] = 1 \}}
+		\end{gather*}
+		\textbf{Формулировка 2:}\\
+		\[ {{n}\choose{k}} p^{k} q^{n-k} \simeq \frac{1}{\sqrt{2 \pi npq}} e^{-\frac{(k - np)^{2}}{2npq}},\ p + q = 1,\ p, q > 0  \]
+	\end{theorem}
+	\begin{theorem}[Пуассона, \href{https://goo.gl/V5aRg3}{Poisson's limit theorem}\footnote{"Poisson distribution may be used as an approximation to the binomial distribution, under certain conditions."}]
+		В обозначениях предыдущей теоремы
+		\[
+			p = p(n) \to 0,\ n p(n) \to \lambda > 0 \implies P_{n}(k) \to \frac{\lambda^{k} e^{-\lambda}}{k!}
+		\]
+	\end{theorem}
+	\section{Системы множеств (полукольца, кольца, алгебры, сигма-алгебры). Примеры. Минимальное кольцо, содержащее полукольцо. Понятие наименьшего кольца, алгебры, сигма-алгебры, содержащей систему множеств.}
+	\begin{definition}
+		Система множеств $ S $ называется \textit{полукольцом}\footnote{никакой связи с полукольцом в смысле абстрактной алгебры, \href{https://math.stackexchange.com/questions/1864972/relation-between-semiring-of-sets-and-semiring-in-abstract-algebra}{обсуждение на stackexchange}}, если:
+		\begin{enumerate}
+			\item $ \emptyset \in S $
+			\item $ \forall A, B \in S: A \cap B \in S $
+			\item $ \forall A, A' \in S (A' \subseteq A \implies \exists A_{1}, \dots, A_{n} \in S: A' \sqcup_{i=1}^{n} A_{i} = A) $.
+		\end{enumerate}
+		Если при этом $ \exists E \in S\ \forall A \in S: A \subseteq E $, то $ S $ называют \textbf{полукольцом с единицей}.
+	\end{definition}
+	\begin{definition}
+		Непустая система множеств $ R $ называется \textbf{кольцом}, если: 
+		\[ \forall A, B \in R:\ A \cap B,\ A \triangle B \in S \]
+		 Кольцо с единицей называется \textbf{алгеброй} множеств.\\ 
+		 Алгебра, замкнутая относительно дополнения и счётного объединения, называется \textbf{$ \sigma $-алгеброй}.\\
+		 Замена в последнем определении объединения на пересечение даёт \textbf{$ \delta $-алгебру}.
+	\end{definition}
+	\begin{preposition}
+		Кольцо множеств является полукольцом. Более того, $ \forall A, B \in R: A \cup B \in R $.
+	\end{preposition}
+	\begin{preposition}
+		Пересечение любого семейства колец является кольцом.
+	\end{preposition}
+	\begin{preposition}
+		 Пересечение любого семейства $ \sigma $-алгебр с одной единицей является $ \sigma $-алгеброй.
+	\end{preposition}
+	\begin{definition}
+		Минимальная $ \sigma $-алгебра, содержащая все открытые $ A \subseteq \Real^{n} $ — \textbf{Борелевская}.
+	\end{definition}
+	\begin{lemma}
+		Пусть $ A, A_{1}, \dots, A_{n} \in S,\ \bigsqcup_{i=1}^{n}{A_{i}} \subseteq A $, тогда $ \exists A_{n+1}, \dots, A_{s} \in S: A = \bigsqcup_{i=1}^{s}{A_{i}} $.\footnote{первое доказательство, которое приходит на ум, не проходит из-за убогости полуколец: т.к. в них ничего нельзя с уверенностью сказать даже про дизъюнктное объединение, приходится выдумывать доказательства по индукции... Тем не менее, полукольца нужны, потому что они формализуют процесс построения меры Лебега на борелевских множествах в $ \mathbb{R}^{n} $ и позволяют обобщить его на нетривиальные пространства.}   
+	\end{lemma}
+	\begin{proof}
+		Воспользуемся индукцией по $ n $.\\
+		\textit{База}: при $ n = 1 $ утверждение следует из определения полукольца.\\
+		\textit{Шаг}: $ n > 1 $. Пусть $ A = (\bigsqcup_{i=1}^{n-1}{A_{i}}) \sqcup (\bigsqcup_{j=1}^{s}{B_{j}}) $.\\
+		$ A_{n} \subseteq A,\ A_{n} \in S,\ \forall i < n: A_{i} \cap A_{n} = \emptyset $.\\ 
+		По определению полукольца, $ \exists C_{1}, \dots, C_{l} \in S: A = A_{n} \sqcup (\bigsqcup_{k=1}^{l}{C_{k}}) $.\\
+		$ A \setminus \bigsqcup_{i=1}^{n}{A_{i}} = (\bigsqcup_{j=1}^{s}{B_{j}}) \setminus A_{n} = (\bigsqcup_{j=1}^{s}{B_{j}}) \cap (A \setminus A_{n}) = (\bigsqcup_{j=1}^{s}{B_{j}}) \cap (\bigsqcup_{k=1}^{l}{C_{k}}) $.\\
+		Введём обозначения: $ D_{j, k} := B_{j} \cap C_{k} $.\\
+		Тогда $ A = (\bigsqcup_{i=1}^{n}{A_{i}}) \sqcup (\bigsqcup_{j, k} D_{j, k}) $
+	\end{proof}
+	\begin{lemma}
+		Если $ A_{1}, \dots, A_{n} \in S $, то найдутся попарно непересекающиеся $ B_{1}, \dots, B_{s} \in S $, такие что каждое $ A_{i} $ представляется в виде объединения каких-то из $ B_{j} $.
+	\end{lemma}
+	\begin{proof}
+		Проведём доказательство индукцией по $ n $.\\
+		\textit{База}, $ n = 1 $: следует из определения полукольца.\\
+		\textit{Шаг}, $ n > 1 $: пусть $ B_{1}, \dots, B_{l} $ — искомые множества для $ A_{1}, \dots, A_{n-1} $.\\
+		Пересечём $ A_{n} $ с каждым из $ B_{j} $ и применим предыдущую лемму.\\
+		Введём обозначения $ C_{j} := B_{j} \cap A_{n} $.\\
+		По лемме 8.4, $ A_{n} := (\bigsqcup_{j=1}^{l} C_{j}) \sqcup (\bigsqcup_{k=1}^{m} D_{k}),\ D_{k} \in S $.\\ 
+		Далее, по определению полукольца, $ B_{j} := C_{j} \sqcup (\bigsqcup_{k=1}^{m_{j}}{E_{j, k}}),\ E_{j, k} \in S $.\\
+		Полученные множества $ \{C_{j}\}, \{D_{k}\}, \{E_{j, k}\} $ — искомые для $ A_{1}, \dots, A_{n} $.
+	\end{proof}
+	\begin{theorem}[О минимальном кольце $ R(S) $, содержащем полукольцо $ S $]$  $\\
+		Минимальное продолжение полукольца $ S $ до кольца $ R(S) := \{\bigsqcup_{i=1}^{n} A_{i}\ |\ A_{i} \in S \} $.
+	\end{theorem}
+	\begin{proof}
+		Введём обозначение $ K(S) := \{\bigsqcup_{i=1}^{n} A_{i}\ |\ A_{i} \in S \} $.\\ 
+		Докажем, что $ K(S) $ — кольцо.\\
+		Рассмотрим $ A := \bigsqcup_{i=1}^{n}{A_{i}},\ B : = \bigsqcup_{j=1}^{m}{B_{j}} $.\\
+		Введём обозначение $ C_{i,j} := A_{i} \cap B_{j} $. По построению $ C_{i,j} \in S $.\\
+		Тогда $ A \cap B = \bigsqcup_{i=1}^{n}\bigsqcup_{j=1}^{m}{C_{i,j}} \in K(S) $.\\
+		По лемме 8.4, 
+ 		$ \begin{cases} 
+			 A_{i} = (\bigsqcup_{j=1}^{m}{C_{i, j}}) \sqcup (\bigsqcup_{k=1}^{s}D_{i, k})  &  1 \le i \le n \\
+			 B_{j} = (\bigsqcup_{i=1}^{n}{C_{i, j}}) \sqcup (\bigsqcup_{k=1}^{l}E_{k, j})  &  1 \le j \le m 
+		\end{cases} $\\
+		Отсюда $ A \triangle B = (\bigsqcup_{k=1}^{s}D_{i, k}) \sqcup (\bigsqcup_{k=1}^{l}E_{k, j}) \in K(S) $.\\
+		Очевидно, всякое кольцо, продолжающее $ S $, содержит $ K(S) $.\\
+		Значит, $ R(S) := K(S) $ — минимальное продолжение полукольца $ S $ до кольца.
+	\end{proof}
+	\begin{theorem}
+		Для всякой системы множеств $ X $ существует минимальное кольцо $ R(X) $.
+	\end{theorem}
+	\begin{proof}
+		Введём обозначения $ U := \bigcup_{\lambda \in \Lambda}{X_{\lambda}},\ X :=  \{X_{\lambda}\}_{\lambda \in \Lambda} $.\\
+		Пусть $ \mathcal{R} := \{R_{\beta}(X)\}_{\beta \in \Gamma} $ — совокупность всех колец, содержащих $ X $ и содержащихся в $ 2^{U} $.\\ Положим $ R(X) := \cap_{\beta \in \Gamma}R_{\beta}(X) $. По предложению 7.2., $ R(X) $ — кольцо.\\
+		Его минимальность очевидна по построению.\footnote{требование лежать в булеане продиктовано возможностью построения колец сколь угодно большой мощности, что приводит к теоретико-множественным парадоксам при попытке определить $ \mathcal{R} $.}
+	\end{proof}
+	\section{Меры на полукольцах. Классическая мера Лебега на полукольце промежутков и ее сигма-аддитивность.}
+	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
+		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
+	\end{lemma}
+	\begin{proof}
+		Если $ A, A_{1}, \dots, A_{n} \in S $ и:
+		\begin{itemize}
+			\item $ A \in \bigcup_{i=1}^{n}{A_{i}} $, то $ m(A) \le \sum_{i=1}^{n}{m(A_{i})} $.\\ 
+			Применим лемму 8.5. к множествам $ A, A_{1}, \dots, A_{n} $. Получим набор непересекающихся множеств $ B_{j} $ из $ S $, для которых верна оценка $ \sum_{i=1}^{n}{m(A_{i})} \ge \sum_{j=1}^{m}{m(B_{j})}  \ge m(A) $.
+			\item $ \bigcup_{i=1}^{n}{A_{i}} \subseteq A $, то $ \sum_{i=1}^{n}{m(A_{i})} \le m(A) $. Следует из лемм 8.5 и 8.4.
+		\end{itemize}
+	\end{proof}
+	\begin{corollary}
+		Если $ m $ — мера на полукольце $ S $ и $ A, A_{1} \dots \in S,\ \bigsqcup_{i=1}^{\infty}{A_{i}} \subseteq A $, то $ m(A) \ge \sum_{i=1}^{\infty}{m(A_{i})} $. 
+	\end{corollary}
+	\begin{definition}
+		\textbf{Классической мерой Лебега на полукольце промежутков} называют меру, сопоставляющую n-мерным брусам $ \times_{i=1}^{n} \{a_{i}, b_{i}\} $ объём $ \prod_{i=1}^{n}{(b_{i} - a_{i})} $.
+	\end{definition}
+	\begin{theorem}
+		Определённая таким образом функция — $ \sigma $-аддитивная мера.
+	\end{theorem}
+	\begin{proof}$  $\\
+		Неотрицательность очевидна, потому докажем вначале конечную, а затем и $ \sigma $-аддитивность.\\
+		$ \bullet $ \textbf{Конечная аддитивность}:\\
+		Воспользуемся индукцией по размерности $ n $ пространства.\\
+		\textit{База}, $ n = 1 $: очевидно.\\
+		\textit{Шаг}, $ n > 1 $: \textit{полезно представлять себе написанное ниже как решение методом сканирующей гиперплоскости задачи об объёме объединения $ n $-мерных брусов в том простом случае, когда они попарно не пересекаются (в предположении, что для размерности $ n-1 $ мы умеем её решать). Идея очень проста: в качестве событий примем проекции брусов на $ n $-ую координатную ось (грубо говоря, нарежем объемлющий брус на слои), и для каждого слоя будем прибавлять к ответу объём среза брусов, попадающих в этот слой (т.к. "высота" фиксирована, для вычисления "площади основания" объединения брусов слоя как раз понадобится предположение индукции). Интуитивно очевидно, что по завершении процедуры получится предстать искомый объём в виде суммы слагаемых, из которых группировкой можно составить объём каждого из брусов разбиения, чего и хотелось. Всё, что написано дальше — формализация этой идеи.}\\
+		Здесь и далее для обозначения произвольного промежутка $ I \subset \mathbb{R} $ с концами $ a, b $ будем использовать запись $ \lfloor a, b \rceil $ (если $ a, b \in \Real^{n} $, то запись $ \lfloor a, b \rceil $ описывает вид компонент).\\
+		Рассмотрим брус $ \lfloor a, b \rceil := \lfloor a^{1}, b^{1} \rceil \times \dots \times \lfloor a^{n}, b^{n} \rceil = \lfloor a_{1}, b_{1} \rceil \sqcup \dots \sqcup \lfloor a_{k}, b_{k} \rceil \subset [a, b] $.\\
+		"Нарежем" его на слои по $ n $-ой координате, рассмотрев проекцию брусов $ \lfloor a_{i}, b_{i} \rceil $.\\
+		Ими порождается разбиение $ a^{n} = c_{0} < c_{1} < \dots < c_{l} = b^{n} $.\\ 
+		Для слоёв введём обозначение $ L_{s} := \lfloor a^{1}, b^{1} \rceil \times \dots \times \lfloor a^{n-1}, b^{n-1} \rceil \times (c_{s-1}, c_{s}) $.\\
+		Для каждого слоя определим, какие из брусов $ \lfloor a_{i}, b_{i} \rceil $ попадают в него.\\
+		Введём обозначения $ E_{s, j} := \begin{cases} \lfloor a_{j}^{1}, b_{j}^{1} \rceil \times \dots \times \lfloor a_{j}^{n-1}, b_{j}^{n-1} \rceil & \mbox{если } (c_{s-1}, c_{s}) \subseteq \lfloor a_{j}^{n}, b_{j}^{n} \rceil\\ \emptyset & \mbox{иначе}  \end{cases} $.\\
+		Тогда основание $ s $-го слоя запишется так: $ L_{s} := \bigsqcup_{j=1}^{k}{E_{s, j}} $.\\
+		Тогда: 
+		\begin{gather*}
+			m\lfloor a, b \rceil = \prod_{i=1}^{n}(b^{i} - a^{i}) = \sum_{s=1}^{l}{m(L_{s})(c_{s} - c_{s-1})} = \sum_{s=1}^{l}{\left (\sum_{j=1}^{k}{m(E_{s, j})}\right )(c_{s} - c_{s-1})} =\\= \sum_{s=1}^{l}{\left (\sum_{\substack{j=1,\\(c_{s-1}, c_{s}) \subset \lfloor a_{j}^{n}, b_{j}^{n} \rceil}}^{k}{\prod_{i=1}^{n-1}(b_{j}^{i} - a_{j}^{i})}\right )(c_{s} - c_{s-1})} = \sum_{j=1}^{k}{\left ({\prod_{i=1}^{n-1}(b_{j}^{i} - a_{j}^{i})}\sum_{\substack{s=1,\\(c_{s-1}, c_{s}) \subset \lfloor a_{j}^{n}, b_{j}^{n} \rceil}}^{l}{(c_{s} - c_{s-1})}\right )} =\\= \sum_{j=1}^{k}{{\prod_{i=1}^{n}(b_{j}^{i} - a_{j}^{i})}} = \sum_{j=1}^{k}{m\lfloor a_{j}, b_{j} \rceil} 
+		\end{gather*}
+		$ \bullet $ \textbf{$ \sigma $-аддитивность}:\footnote{Доказательство немотивированное. Непонятно, с чего бы выбирать именно такие брусы. Нужно найти другое.}\\
+		Пусть $ \lfloor a, b \rceil := \bigsqcup_{i=1}^{\infty}{\lfloor a_{i}, b_{i} \rceil \subset \Real^{n}} $.\\
+		Для любого $ \varepsilon > 0 $ выберем $ [\alpha, \beta] \subseteq \lfloor a, b \rceil:\ m[\alpha, \beta] > m\lfloor a, b \rceil - \frac{\eps}{2} $, а также семейство: \[ \{(\alpha_{i}, \beta_{i})\}_{i=1}^{\infty}:\ \lfloor a_{i}, b_{i} \rceil \subseteq (\alpha_{i}, \beta_{i}),\ m(\alpha_{i}, \beta_{i}) < m\lfloor a_{i}, b_{i} \rceil + \frac{\eps}{2^{i+1}} \]
+		Видно, что $ \lfloor \alpha, \beta \rceil \subseteq \bigcup_{i=1}^{\infty}{(\alpha_{i}, \beta_{i})} $.\\
+		Пусть $ \{(\alpha_{i_{k}}, \beta_{i_{k}})\}_{k=1}^{s} $ — конечное подпокрытие $ [\alpha, \beta] $.\\ 
+		Тогда: 
+		\begin{gather*}
+			 m\lfloor a, b \rceil < m[\alpha, \beta] + \frac{\eps}{2} \le \sum_{k=1}^{s}{m(\alpha_{i_{k}}, \beta_{i_{k}})} + \frac{\eps}{2} < \sum_{k=1}^{s}{\left (m\lfloor a_{i_{k}}, b_{i_{k}}\rceil + \frac{\eps}{2^{i_{k} + 1}}\right )} + \frac{\eps}{2} <\\< \sum_{k=1}^{\infty}{\left (m\lfloor a_{i}, b_{i} \rceil + \frac{\eps}{2^{i + 1}}\right )}  +  \frac{\eps}{2}  =  \sum_{k=1}^{\infty}{m\lfloor a_{i}, b_{i} \rceil }  +  \eps 
+		\end{gather*}
+		В силу произвольности $ \eps $, $ m\lfloor a, b \rceil \le \sum_{k=1}^{\infty}{m\lfloor a_{i}, b_{i} \rceil } $.\\
+		Обратное неравенство получается из следствия леммы 9.1.\\
+		Значит, $ m\lfloor a, b \rceil = \sum_{k=1}^{\infty}{m\lfloor a_{i}, b_{i} \rceil } $.
+	\end{proof}
+	\section{Продолжение меры с полукольца на минимальное кольцо. Наследование сигма-аддитивности при продолжении меры. Внешние меры Лебега и Жордана. Мера Лебега. Свойства. Сигма-алгебра измеримых множеств. Сигма-аддитивность меры Лебега на сигма-алгебре измеримых множеств.}
+	\begin{theorem}
+		Пусть $ m $ — мера на полукольце $ S $.\\ 
+		Тогда существует её единственное продолжение $ \nu $ на кольцо $ R(S) $, задаваемое формулой:
+		\[ \nu\left (\bigsqcup_{i=1}^{n}{A_{i}}\right ) := \sum_{i=1}^{n}{m(A_{i})} \]
+	\end{theorem}
+	\begin{proof}
+		Для начала, проверим корректность определения $ \nu $.\\
+		Пусть $ A := \bigsqcup_{i=1}^{n}{A_{i}} = \bigsqcup_{j=1}^{m}{B_{j}} $. Положим $ C_{i, j} := A_{i} \cap B_{j} $, тогда: 
+		\begin{gather*}
+			\nu(A) = \sum_{i=1}^{n}{m(A_{i})} =   \sum_{i=1}^{n}{\sum_{j=1}^{m}{m(C_{i, j})}} = \sum_{j=1}^{m}{\sum_{i=1}^{n}{m(C_{i, j})}} = \sum_{j=1}^{m}{m(B_{j})}
+		\end{gather*}
+		Далее, докажем, что $ \nu $ — мера.\\
+		Её неотрицательность очевидна.\\
+		Докажем аддитивность: пусть $ A, A_{1}, \dots, A_{n} \in R(S) $ и $ A = \bigsqcup_{i=1}^{n}{A_{i}} $.\\
+		По определению $ R(S) $ имеем:
+	 \[ A = \bigsqcup_{i=1}^{n}{A_{i}} = \bigsqcup_{i=1}^{n}{\bigsqcup_{j=1}^{m_{i}}{A_{i, j}}} \in R(S),\ A_{i, j} \in S \implies \nu(A) = \sum_{i=1}^{n}{\nu(A_{i})} \]
+	\end{proof}
+	\begin{theorem}
+		 Если $ m $ — $ \sigma $-аддитивна на $ S $, то $ \nu $ — $ \sigma $ аддитивна на $ R(S) $.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A, A_{1}, \dots \in R(S),\ A := \bigsqcup_{i=1}^{\infty}{A_{i}} $.\\
+		По определению $ R(S) $ имеем $ A = \bigsqcup_{i=1}^{n}{B_{i}},\ A_{i} = \bigsqcup_{j=1}^{m_{i}}{B_{i, j}} $, где $ B_{i}, B_{i, j} \in S $.\\
+		Положим $ C_{i, j, k} := B_{i} \cap B_{j, k} $. Тогда: 
+		\[ \nu(A) = \sum_{i=1}^{n}{m(B_{i})} = \sum_{i=1}^{n}{\sum_{j=1}^{\infty}{\sum_{k=1}^{m_{j}}{m(C_{i, j, k})}}} = \sum_{j=1}^{\infty}{\sum_{k=1}^{m_{j}}{\sum_{i=1}^{n}{m(C_{i, j, k})}}} = \sum_{j=1}^{\infty}{\sum_{k=1}^{m_{j}}{m(B_{j, k})}} = \sum_{j=1}^{\infty}{\nu(A_{j})} \]
+		где второе равенство возможно в силу $ \sigma $-аддитивности $ m $ на $ S $.
+	\end{proof}
+	\begin{corollary}$  $\\
+		Если $ \nu $ — $ \sigma $-аддитивная мера на кольце $ R $ и $ A, A_{1}, \dots \in R,\ A \in \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \nu(A) \le \sum_{i=1}^{\infty}{\nu(A_{i})} $.
+	\end{corollary}
+	\noindent Условимся далее, что на полукольце $ S $ с единицей $ E $ задана $ \sigma $-аддитивная мера $ m $, а $ \nu $ — её продолжение на $ R(S) $. Покажем, как продолжить $ \nu $ до $ \mu $ — $ \sigma $-аддитивной меры на $ \sigma(S) $.
+	\begin{definition}
+		\textbf{Внешняя мера Жордана}:
+		\[ \forall A \subset E,\ \mu^{*}(A) := \inf_{\substack{A_{1}, \dots, A_{n} \in S\\A\subset\bigcup_{i=1}^{n}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
+	\end{definition}
+	\begin{definition}
+		\textbf{Внешняя мера Лебега}:
+		\[ \forall A \subset E,\ \mu_{J}^{*}(A) := \inf_{\substack{A_{1}, A_{2}, \dots \in S\\A\subset\bigcup_{i=1}^{\infty}{A_{i}}}}{\sum_{i=1}^{n}{m(A_{i})}} \]
+	\end{definition}
+	\begin{theorem}[О $ \sigma $-полуаддитивности внешней меры Лебега]$  $\\
+		Если $ A, A_{1}, A_{2}, \dots E $ и $ A \subset \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \mu^{*}(A) \le \sum_{i=1}^{\infty}{\mu^{*}(A_{i})} $
+	\end{theorem}
+	\begin{proof}
+		По определению инфимума, 
+		\[ \forall \eps > 0\ \forall i\ \exists \{A_{i, j}\}_{j=1}^{\infty},\ A_{i, j} \in S: A_{i} \subseteq \bigcup_{j=1}^{\infty}{A_{i, j}},\ \sum_{j=1}^{\infty}{m(A_{i, j})} < \mu^{*}(A_{i}) + \frac{\eps}{2^{i+1}} \]
+		Ясно, что $ A \subseteq \bigcup_{i=1}^{\infty}{\bigcup_{j=1}^{\infty}{A_{i, j}}} $. По счётной аддитивности меры $ m $, 
+		\[ \mu^{*}(A) \le m\left (\bigcup_{i=1}^{\infty}{\bigcup_{j=1}^{\infty}{A_{i, j}}}\right ) = \sum_{i=1}^{\infty}{\sum_{j=1}^{\infty}{m(A_{i, j})}} < \sum_{i=1}^{\infty}{\mu^{*}(A_{i})} + \eps \]
+		В силу произвольности $ \eps $, $ \mu^{*}(A) = \sum_{i=1}^{\infty}{\mu^{*}(A_{i})} $.
+	\end{proof}
+	\begin{corollary}
+		$ \forall A, B \subseteq E:\ |\mu^{*}(A) - \mu^{*}(B)| \le \mu^{*}(A \triangle B) $
+	\end{corollary}
+	\begin{proof}
+		Пусть для определённости $ \mu^{*}(A) \ge \mu^{*}(B) $, тогда $ A \subseteq B \cup (A \triangle B) $.\\ 
+		По полуаддитивности, $ \mu^{*}(A) \le \mu^{*}(B) + \mu^{*}(A \triangle B) $.
+	\end{proof}
+	\begin{definition}[Критерий измеримости по Лебегу]$  $\\
+		$ A \subseteq E $ \textbf{измеримо по Лебегу}, если: 
+		\[ \forall \eps > 0\ \exists A_{\eps} \in R(S): \mu^{*}(A \triangle A_{\eps}) < \eps \] 
+		Совокупность всех измеримых подмножеств $ E $ обозначим через $ M $. 
+	\end{definition}
+	\begin{lemma}
+		$ M $ — алгебра.
+	\end{lemma}
+	\begin{proof}
+		$ E \in M $, т.к. $ \mu^{*}(E) = m(E) $.\\ 
+		Пусть $ A, B \in M $. Нужно показать, что $ A \triangle B,\ A \cap B \in M $.\\
+		Для данного $ \eps > 0 $ выберем $ A_{\eps/2}, B_{\eps/2} $ из определения измеримости по Лебегу. Тогда:\\ 
+		\[ 
+			\begin{cases}
+				(A \cap B) \triangle (A_{\eps/2} \cap B_{\eps/2}) &\subseteq (A \triangle A_{\eps/2}) \cup (B \triangle B_{\eps/2}),\\
+				(A \triangle B) \triangle (A_{\eps/2} \triangle B_{\eps/2}) &\subseteq (A \triangle A_{\eps/2}) \cup (B \triangle B_{\eps/2})
+			\end{cases} \implies 
+			\begin{cases}
+				\mu^{*}((A \cap B) \triangle (A_{\eps/2} \cap B_{\eps/2})) &< \eps,\\
+				\mu^{*}((A \triangle B) \triangle (A_{\eps/2} \triangle B_{\eps/2})) &< \eps
+			\end{cases}
+		\]
+		Следовательно, $ A \triangle B,\ A \cap B \in M $
+	\end{proof}
+	\begin{lemma}
+		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ M $ измеримых множеств аддитивно.
+	\end{lemma}
+	\begin{proof}$  $\\
+		Достаточно показать, что $ \mu^{*}(A) = \mu^{*}(B) + \mu^{*}(C) $ при $ B, C \in M $ и $ A := B \sqcup C $.\\
+		$ M $ — алгебра, значит, $ A \in M $. $ \mu^{*} $ монотонна, значит, $ \mu^{*}(A) \le \mu^{*}(B) + \mu^{*}(C) $.\\
+		Осталось доказать, что $ \mu^{*}(A) \ge \mu^{*}(B) + \mu^{*}(C) $.\\
+		Выберем $ B_{\eps}, C_{\eps} \in R(S) $ из определения измеримости по Лебегу.\\
+		Докажем, что имеет место следующая цепочка неравенств:
+		\begin{gather}
+			\mu(A) \ge \mu(B_{\eps} \cup C_{\eps}) - \mu(A \triangle (B_{\eps} \cup C_{\eps})) =\\
+			= (\mu(B_{\eps}) + \mu(C_{\eps}) - \mu(B_{\eps} \cap C_{\eps})) - \mu(A \triangle (B_{\eps} \cup C_{\eps})) >\\
+			(\mu(B) + \mu(C) - 2\eps - \mu(B_{\eps} \cap C_{\eps})) - \mu(A \triangle (B_{\eps} \cup C_{\eps})) >\\
+			(\mu(B) + \mu(C) - 4\eps) - \mu(A \triangle (B_{\eps} \cup C_{\eps})) >\\
+			\mu(B) + \mu(C) - 6\eps
+		\end{gather}
+		\begin{enumerate}[(1)]
+			\item По следствию из теоремы 10.3: $ \mu^{*}(A) - \mu^{*}(B_{\eps} \cup C_{\eps}) \ge -\mu^{*}(A \triangle (B_{\eps} \cup C_{\eps})) $
+			\item Формула включений-исключений для меры $ \nu $ на $ R(S) $.
+			\item По следствию из теоремы 10.3: $ \mu^{*}(B_{\eps}) - \mu^{*}{B} \ge -\mu^{*}(B \triangle B_{\eps}) > -\eps $
+			\item Т.к. $ B \cap C = \emptyset $, имеем $ B_{\eps} \cap C_{\eps} \subseteq (B_{\eps} \setminus B) \cup (C_{\eps} \setminus C) \subseteq (B_{\eps} \triangle B) \cup (C_{\eps} \triangle C) $, откуда $ \mu^{*}(B_{\eps} \cap C_{\eps}) < 2\eps $.
+			\item Поскольку $ A \triangle (B_{\eps} \cup C_{\eps}) \subseteq (B \triangle B_{\eps}) \cup (C \triangle C_{\eps}) $, имеем $ \mu^{*}(A \triangle (B_{\eps} \cup C_{\eps})) < 2\eps $.
+		\end{enumerate}
+	\end{proof}
+	\begin{theorem}
+		$ M $ — $ \sigma $-алгебра.\footnote{В учебнике Дьяченко-Ульянова доказан только первый случай. В общем случае ниоткуда не следует, что единица кольца имеет конечную меру. Очевидный пример — $ R(S) $, где $ S $ — полукольцо промежутков вещественной прямой. Тем не менее, своя логика в таком построении курса есть: мера Лебега в $ \Real^{n} $ сигма-конечна, потому достаточно уметь оперировать мерой Лебега на брусах, где единица кольца как раз имеет конечную меру. }
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A_{1}, A_{2}, \dots \in M $  и $ A := \bigcup_{i=1}^{\infty}{A_{i}} $.\\
+		Перейдём к дизъюнктному объединению: $ B_{i} := A_{i} \setminus \left (\bigcup_{j<i}{A_{j}}\right ),\ A = \bigsqcup_{i=1}^{\infty}{B_{i}} $.\\
+		Рассмотрим два возможных случая:
+		\begin{enumerate}
+			\item Пусть $ \mu^{*}(A) < \infty $.\\ 
+			Тогда ряд $ \sum_{i=1}^{\infty}{\mu(B_{i})} $ сходится, т.к. $ \forall k: \sum_{i=1}^{k}{\mu(B_{i})}  \le \mu^{*}(A) $.\\
+			Найдём такой номер $ N $, что хвост $ \sum_{i=N+1}^{\infty}{\mu(B_{i})} < \eps $.\\ 
+			Найдём $ C_{\eps} \in R(S): \mu\left (C_{\eps} \triangle \bigsqcup_{i=1}^{N}{B_{i}} \right ) < \eps $.\\
+			Поскольку $ A \triangle C_{\eps} \subseteq \left (C_{\eps} \triangle \bigsqcup_{i=1}^{N}{B_{i}} \right ) \cup \left (\bigsqcup_{i=N+1}^{\infty}B_{i}\right ) $.\footnote{Достаточно понять, что $ (A \sqcup B) \triangle C \subseteq (A \triangle C) \cup B $, нарисовав картинку.}\\
+			Значит, $ \mu^{*}(A \triangle C_{\eps}) < 2\eps $, откуда следует, что $ A \in M $.
+			\item Пусть $ \mu^{*}(A) = \infty $.\footnote{И доказательство, которое дали на семинаре, проходит только в случае $ \sigma $-конечности меры Лебега на $ X $}.
+		\end{enumerate}
+	\end{proof}
+	\begin{theorem}
+		Сужение $ \mu $ внешней меры Лебега $ \mu^{*} $ на класс $ M $ измеримых множеств $ \sigma $-аддитивно.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A := \bigsqcup_{i=1}^{\infty}{A_{i}} \in M $.\\
+		По $ \sigma $-полуаддитвности, $ \mu(A) \le \sum_{i=1}^{\infty}{\mu(A_{i})} $.\\
+		В силу аддитивности $ \mu $, $ \forall n: \mu(A) \ge \mu\left (\bigsqcup_{i=1}^{n}{A_{i}}\right )  \ge \sum_{i=1}^{n}{\mu(A_{i})} $.\\ 
+		Переходя к пределу, получим, что $ \mu(A) \ge \sum_{i=1}^{\infty}{\mu(A_{i})} $.\\
+		Значит, $ \mu(A) = \sum_{i=1}^{\infty}{\mu(A_{i})} $.
+	\end{proof}
+	\begin{theorem}[Критерий измеримости по Каратеодори, \href{https://goo.gl/RH4wbo}{Carathéodory's criterion}]$  $\\
+		Пусть $ \mu^{*}: 2^{X} \to [0, +\infty] $ — внешняя мера\footnote{Равна нулю на $ \emptyset $, монотонна и счётно полуаддитивна.} на $ X $. Тогда\footnote{$ \mathcal{M}(\mu) \subseteq 2^{X} $ — множество измеримых относительно $ \mu $ подмножеств $ X $.}
+		\[ \forall E \in 2^{X}: E \in \mathcal{M}(\mu) \iff \forall A \in 2^{X}: \mu^{*}(A) = \mu^{*}(A \cap E) + \mu^{*}(A \setminus E) \]
+	\end{theorem}
+	\begin{proof}
+		Докажем эквивалентность критериев Лебега и Каратеодори.
+		\begin{itemize}
+			\item \textbf{Каратеодори $ \implies  $ Лебег}:\\
+				Пусть $ \forall A \in 2^{X}: \mu(A) = \mu(A \cap E) + \mu(A \setminus E) $.\\
+				Покажем, что $ \forall \eps > 0\ \exists E_{\eps} \in 2^{X}: \mu^{*}(E \triangle E_{\eps}) < \eps $
+			\item \textbf{Лебег $ \implies  $ Каратеодори}:
+		\end{itemize}
+	\end{proof}
+	\section{Полнота и непрерывность мер. Теоремы о связи непрерывности и сигма-аддитивности.}
+	\begin{definition}
+		Пусть $ \mu $ — конечная мера на кольце $ R $.\\ 
+		Пусть также для всех $ \{A_{i}\}_{i=1}^{\infty} $, где $ A_{i} \in R,\ A_{i+1} \subseteq A_{i} $ и $ A := \bigcap_{i=1}^{\infty}{A_{i}} $ верно $ \mu(A) = \lim_{i\to\infty}{\mu(A_{i})} $.\\
+		Тогда говорят, что мера $ \mu $ \textbf{непрерывна}.
+	\end{definition}
+	\begin{theorem}[Критерий непрерывности меры]$  $\\
+		Конечная мера $ \mu $ на кольце непрерывна тогда и только тогда, когда она $ \sigma $-аддитивна.
+	\end{theorem}
+	\begin{proof}$  $
+		\begin{itemize}
+			\item \textit{$ \sigma $-аддитивна $ \implies $ непрерывна.\\}
+			Пусть $ \mu $ $ \sigma $-аддитивна. Положим $ B_{i} := A_{i} \setminus A_{i+1} $, тогда $ A_{1} \setminus A = \bigsqcup\limits_{i=1}^{\infty}{B_{i}} $.\\
+			Тогда $ \mu(A_{1} \setminus A) = \mu(A_{1}) - \mu(A) = \sum\limits_{i=1}^{\infty}{\mu(B_{i})} = \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{n-1}{(\mu(A_{i}) - \mu(A_{i+1}))}} = \mu(A_{1}) - \lim\limits_{n\to\infty}{\mu(A_{n})} $.\\
+			Значит, $ \mu(A) = \lim\limits_{n\to\infty}{\mu(A_{n})} $. 
+			\item \textit{Непрерывна $ \implies $ $ \sigma $-аддитивна.}\\ 
+			Пусть $ \mu $ непрерывна и $ C := \bigsqcup\limits_{i=1}^{\infty}{C_{i}} \in R,\ C_{i} \in R $.\\ 
+			Положим $ D_{n} := \bigsqcup\limits_{i=n}^{\infty}{C_{i}} = C \setminus \bigsqcup\limits_{i=1}^{n-1}{C_{i}} \in R $.\\
+			Тогда $ D_{i+1} \subseteq D_{i} $ и $ \bigcap\limits_{i=1}^{\infty}{D_{i}} = \emptyset $.\\ 
+			По непрерывности $ \mu $, $ \lim\limits_{n\to\infty}{\mu(D_{n})} = 0 $.\\
+			Значит, $ \mu(C) - \lim\limits_{n\to\infty}{\mu\left (\bigsqcup\limits_{i=1}^{n-1}{C_{i}}\right )} = \mu(C) - \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{n-1}{\mu(C_{i})}} = 0 $.\\
+			То есть, $ \mu(C) = \sum\limits_{i=1}^{\infty}{\mu(C_{i})} $.
+		\end{itemize}
+	\end{proof}
+	\begin{definition}
+		Заданная на кольце $ R(X) \subseteq 2^{X} $ мера $ \mu $ называется \textbf{полной}, если \[ \forall A \in R(X): \mu(A) = 0 \implies \forall B \subset A (\mu(B) = 0) \]
+		Иными словами, все подмножества множества меры нуль измеримы и также имеют меру нуль.
+	\end{definition}
+	\section{Мера Бореля. Меры Лебега-Стилтьеса на прямой и их сигма-аддитивность.}
+	\begin{definition}
+		\textbf{Мера Бореля} — сужение меры Лебега на семейство борелевских подмножеств бруса $ [a, b] \subset \Real^{n} $.
+		Как и мера Лебега, она $ \sigma $-аддитивна, однако её область определения уже в силу существования измеримых по Лебегу неборелевских множеств. В частности, мера Бореля необязательно полна. Пополнение меры Бореля — ещё один способ конструкции меры Лебега. 
+	\end{definition}
+	\begin{definition}
+		Пусть $ \phi: \Real \to \Real $ — неубывающая непрерывная слева ограниченная функция. Далее, пусть $ S := \{[a, b)\ |\ a < b,\ a, b \in \overline{\Real} \} $ — полукольцо с единицей. Определим на $ S $ меру $ m([a, b)) := \phi(b) - \phi(a) $, лебеговское продолжение которой называется \textbf{мерой Лебега-Стилтьеса}.
+	\end{definition}
+	\begin{theorem}
+		Определённая таким образом мера $ m $ $ \sigma $-аддитивна на $ S $.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ [a, b) = \bigsqcup\limits_{i=1}^{\infty}{[a_{i}, b_{i})},\ a, b \in \Real $.\\
+		Пользуясь непрерывностью слева, выберем такие $ c < b,\ a_{i} < c_{i} < b_{i} $, что: 
+		\begin{gather*} 
+			[a, c] \subset \bigcup\limits_{i=1}^{\infty}{(c_{i}, b_{i})},\quad \phi(b)-\phi(c) < \frac{\eps}{2},\quad \phi(b_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}}
+		\end{gather*}
+		Из полученного открытого покрытия выберем конечное подпокрытие $ \{ (c_{i_{k}}, b_{i_{k}})\}_{k=1}^{n} $.\\
+		Приведём все промежутки к полуоткрытым справа интервалам, получим: $ [a, c) \subset \bigcup_{k=1}^{n}{ [c_{i_{k}}, b_{i_{k}} )} $.\\
+		\begin{gather*}
+		 m([a, b)) < m([a, c)) + \frac{\eps}{2} \le \sum\limits_{k=1}^{n}{m([c_{i_{k}}, b_{i_{k}})}) + \frac{\eps}{2} <\\< \sum_{k=1}^{n}{\left (m([a_{i}, b_{i})) + \frac{\eps}{2^{i_{k}+1}}\right )} + \frac{\eps}{2} 
+		 < \sum_{i=1}^{\infty}{m([a_{i}, b_{i}))} + \eps
+		\end{gather*}\footnote{
+			\begin{gather*} 
+				\phi(b_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}} \Leftrightarrow \phi(b_{i}) < \phi(c_{i}) + \frac{\eps}{2^{i+1}}\Leftrightarrow\\\Leftrightarrow \phi(b_{i}) - \phi_{a_{i}} < (\phi(c_{i}) - \phi_{a_{i}}) + \frac{\eps}{2^{i+1}} \Leftrightarrow m([a_{i}, b_{i})) < m([a_{i}, c_{i})) + \frac{\eps}{2^{i+1}} 
+			\end{gather*}
+		}
+		Значит, $ m([a, b)) \le \sum_{i=1}^{\infty}{m([a_{i}, b_{i}))} $.\\
+		Если $ a = -\infty $ и $ (-\infty, b) := \bigsqcup\limits_{i=1}^{\infty}{A_{i}} $, то:
+		\begin{gather*} 
+			\mu((-\infty, b)) = \mu\left (\lim\limits_{n\to\infty}{[-n, b)}\right ) = \mu\left (\lim\limits_{n\to\infty}{\bigsqcup\limits_{i=1}^{\infty} A_{i} \cap [-n, b)}\right ) \le\\
+			\le  \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{\infty}\mu(A_{k} \cap [-n, b))} \le \sum\limits_{n=1}^{\infty}\mu(A_{i})
+		\end{gather*}
+		где переход с первой строки на вторую допустим по доказанному для случая $ a, b \in \Real $.\\
+		Доказательство для случая $ b = +\infty $ аналогично.\\
+		Обратное неравенство во всех случаях следует из монотонности меры $ m $ (лемма 9.1.).
+	\end{proof}
+	\section{Сигма-конечные меры.}
+	\textbf{Мотивировка.} $ \sigma $-конечные меры обладают рядом полезных свойств:
+	\begin{itemize}
+		\item Для них единственно Лебегово прододолжение меры.
+		\item На их основе можно задать вероятностную меру на той же $ \sigma $-алгебре.
+		\item Для них работает теорема Фубини, без которой вычисления превращаются в ад.
+		\item В их терминах формулируется теорема Радона-Никодима, вводится плотность вероятности.
+	\end{itemize}
+	Подробнее об этом можно прочесть в англоязычной Википедии.
+	\begin{definition}
+		$ \sigma $-аддитивная мера $ \mu $, определённая на $ \sigma $-алгебре $ \Sigma \subseteq 2^{X} $ называется \textbf{$ \sigma $-конечной}, если $ X = \bigsqcup_{i=1}^{\infty}{A_{i}},\ \forall i: \mu(A_{i}) \in \Real $ ("The measure $ \mu $ is called $ \sigma $-finite if X is the countable union of measurable sets with finite measure. A set in a measure space is said to have $ \sigma $-finite measure if it is a countable union of measurable sets with finite measure" — \href{https://en.wikipedia.org/wiki/%CE%A3-finite_measure}{$ \sigma $-finite measure, Wikipedia}).\\
+		Более конструктивно процесс построения $ \sigma $-конечной меры можно описать так\footnote{Ульянов-Дьяченко, стр.28}:\\
+		Пусть на полукольце $ S \subseteq 2^{X} $ задана $ \sigma $-аддитивная мера $ m $, причём $ X = \bigcup\limits_{i=1}^{n}{A_{i}},\ A_{i} \in S $.\\
+		Продлим её до $ \sigma $-аддитивной меры $ \nu $ на кольце $ R(S) $. Теперь можно представить $ X $ в виде $ \bigsqcup_{i=1}^{n}{B_{i}} $, где $ B_{i} := A_{i} \setminus \bigcup_{j=1}^{i-1}{A_{j}} \in R(S) $. Тогда $ \forall i: R_{i} := R(S) \cap B_{i} $ — кольцо с единицей $ B_{i} $.\\
+		На каждом из $ R_{i} $ продолжим сужение $ \nu $ до $ \sigma $-аддитивной меры $ \mu_{i} $ на $ \sigma $-алгебре $ \Sigma_{i} $.
+	\end{definition}
+	\begin{definition}
+		Множество $ Y \subseteq X $ называется \textit{измеримым}, если $ \forall i: Y \cap A_{i} \in \Sigma_{i} $.\\
+		При этом: \[ \mu(A) := \sum_{i=1}^{\infty}{\mu_{i}(A \cap B_{i})} \]
+	\end{definition}
+	\begin{theorem}
+		Совокупность $ M $ измеримых подмножеств $ X $ образуется $ \sigma $-алгебру.
+	\end{theorem}
+	\begin{proof}
+		Заметим, что $ X \in M $.\\
+		Далее, пусть $ C, D \in M $. По определению, $ \forall i: C \cap B_{i},\ D \cap B_{i} \in M_{i} $.\\
+		Значит, 
+		\[\forall i \in \Natural:  
+		\begin{cases} 
+			(C \cap D) \cap B_{i} &= (C \cap B_{i}) \cap (D \cap B_{i}) \in M_{i},\\
+			(C \triangle D) \cap B_{i} &= (C \cap B_{i}) \triangle (D \cap B_{i}) \in M_{i}
+		\end{cases} \implies 
+		\begin{cases}
+			C \cap D &= \bigsqcup\limits_{i=1}^{\infty}{(C \cap D) \cap B_{i}} \in M,\\
+			C \triangle D &= \bigsqcup\limits_{i=1}^{\infty}{(C \triangle D) \cap B_{i}} \in M
+		\end{cases} \]
+	 Для счётного объединения множеств из $ M $ доказательство аналогично.
+	\end{proof}
+	\begin{theorem}
+		Мера $ \mu $ $ \sigma $-аддитивна.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A := \bigsqcup\limits_{i=1}^{\infty}{A_{i}},\ A_{i} \in M $. Тогда, по $ \sigma $-аддитивности $ \mu_{i} $:
+		\begin{gather*}
+			\mu(A) = \sum_{i=1}^{\infty}\mu_{i}(A \cap B_{i}) = \sum_{i=1}^{\infty}\mu_{i}\left (\bigsqcup\limits_{j=1}^{\infty}{(A_{j} \cap B_{i})}\right ) =\\= \sum_{i=1}^{\infty}\sum\limits_{j=1}^{\infty}{\mu_{i}(A_{j} \cap B_{i})} = \sum_{j=1}^{\infty}\sum\limits_{i=1}^{\infty}{\mu_{i}(A_{j} \cap B_{i})} = \sum_{j=1}^{\infty}{\mu(A_{j})}
+		\end{gather*}
+	\end{proof}
+	\begin{lemma}
+		Рассмотрим два различных представления $ X $: $ \bigsqcup_{i=1}^{\infty}{B_{i}} $ и $ \bigsqcup_{i=1}^{\infty}{B'_{i}} $.\\
+		Пусть $ \mu, \mu' $ — порождаемые ими $ \sigma $-конечные меры.\\ 
+		Пусть для некоторых $ i, j $ множество $ C_{i, j} := B_{i} \cap B'_{j} \neq \emptyset $.\\ 
+		Тогда если $ A \subseteq C_{i, j} $ и $ A \in M $, то $ A \in M' $, причём $ \mu'(A) = \mu(A) $.  
+	\end{lemma}
+	\begin{proof}
+		На $ C_{i, j} $ и $ \mu $, и $ \mu' $ совпадают как продолжение меры $ \nu $ с кольца $ R(S) \cap C_{i, j} $.\footnote{\href{https://goo.gl/DLPJQ1}{Caratheodory's extension theorem}: лебегово продолжение $ \sigma $-конечной на кольце меры единственно.}
+	\end{proof}
+	\begin{theorem}
+		Мера $ \mu $ корректно определена.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A \in M $, тогда $ \forall C_{i, j} \neq \emptyset: A \cap C_{i, j} \in M $.\\ 
+		При этом
+		$ \mu(A) = \sum\limits_{i=1}^{\infty}{\mu(A \cap B_{i})} = \sum\limits_{i=1}^{\infty}{\sum_{j=1}^{\infty}{\mu(A \cap C_{i, j})}} $.\\
+		По лемме 13.3, $ A \cap C_{i, j} \in M' $ и $ \mu(A \cap C_{i, j}) = \mu'(A \cap C_{i, j}) $.\\
+		Тогда $ A \in M' $ и $ \mu'(A) =  \sum\limits_{i=1}^{\infty}{\sum\limits_{j=1}^{\infty}{\mu'(A \cap C_{i, j})}} = \mu(A) $.
+	\end{proof}
+	\section{Неизмеримые множества. Теорема о структуре измеримых множеств.}
+	\begin{theorem}
+		Всякое множество ненулевой меры Лебега имеет неизмеримое подмножество.\footnote{For $ \Real^{n} $ case various proofs can be found in the Internet. All of them rely upon translation-invariance of Lebesgue measure. Thereby, the question arises: can this be proven from the first principles, in the most general setting?}
+	\end{theorem}
+	\begin{theorem}[О структуре измеримых множеств]$  $\\
+		Пусть $ \mu $ — $ \sigma $-конечная мера Лебега на $ \sigma $-алгебре $ M $, полученная продолжением $ \sigma $-аддитивной меры с полукольца $ S $, $ A \in M $, $ \mu(A) < \infty $. Тогда $ A = \bigcap\limits_{i=1}^{\infty}{\bigcup\limits_{j=1}^{\infty}{A_{i, j}} \setminus A_{0}},\ A_{0} \in M,\ \mu(A_{0}) = 0 $.\footnote{А где в доказательстве $ A_{0} $? Оно нужно для доказательства следствия, т.к. в $ \Real^{n} $ элементарное множество отличается от открытого на множество лебеговой меры нуль, а из элементарных уже можно получить все открытые.}\\
+		Множества $ A_{i, j} $  все лежат в $ R(S) $ и образуют возрастающий флаг $ A_{i, j} \subseteq A_{i, j+1} $.\\
+		Если же положить $ B_{i} := \bigcup\limits_{j=1}^{\infty}{A_{i, j}} $, то получим убывающий флаг $ B_{i+1} \subseteq B_{i}  $, причём $ \mu(B_{1}) < \infty $.
+	\end{theorem}
+	\begin{proof}$  $\\
+		Пользуясь определением меры Лебега, выберем и обозначим через $ C_{i} $ $ \frac{1}{i} $-близкое покрытие $ A $: 
+		\[ C_{i} := \bigcup\limits_{j=1}^{\infty}{D_{i, j}},\ \mu(C_{i} \setminus A) < \frac{1}{i},\ D_{i, j}\ \in S \]
+		Видно, что $ A = \bigcap\limits_{i=1}^{\infty}{\bigcup\limits_{j=1}^{\infty}{D_{i, j}}} $, но не выполняется условие $ D_{i, j} \subseteq D_{i, j+1} $.\\
+		Определим потому далее $ B_{1} := C_{1},\ B_{i+1} := B_{i} \cap C_{i+1} $.\\ 
+		Несложно показать по индукции, что $ B_{i} = \bigcup\limits_{l=1}^{\infty}{E_{i, l}},\ E_{i, l} \in S $.\\
+		Также $ \mu(B_{1}) < \infty,\ \mu\left (\bigcap\limits_{i=1}^{\infty}{B_{i} \setminus A}\right ) = 0 $.\\
+		Тогда достаточно положить $ A_{i, j} := \bigcup\limits_{l=1}^{j}{E_{i, l}} \in R(S) $.
+	\end{proof}
+	\textit{В переводе на человеческий, любое измеримое относительно такой меры множество является пересечением не более чем счётного семейства представителей $ \sigma $-алгебры, возможно, без некоторого множества нулевой меры. Полезно рассмотреть частный случай $ \Real^{n} $:}
+	\begin{corollary}
+		Пусть $ \mu $ — классическая мера Лебега на $ \Real^{n} $ и множество $ A $ измеримо п Лебегу. Тогда справедливы представления:
+		\[
+			A = \bigcap\limits_{i=1}^{\infty}{G_{i}\setminus P_{i}}\quad \mbox{и} \quad A = \bigcup\limits_{j=1}^{\infty}{F_{j} \cup P_{2}}
+		\]
+		где $ \{G_{i}\} $ — убывающий флаг открытых множеств,\\ 
+		$ \{F_{j}\} $ — возрастающий флаг замкнутых множеств,\\
+		 $ \mu(P_{1}) = \mu(P_{2}) = 0 $. 
+	\end{corollary}
+	\begin{theorem}[О структуре открытых множеств]$  $\\
+		Открытое множество в $ \Real $ — объединение не более чем счётного числа интервалов.
+	\end{theorem}
+	\begin{proof}
+		Пусть $ A $ ­— некоторое открытое множество.\\
+		Разобьём его на компоненты связности — счётное семейство непересекающихся интервалов.\\
+		Формально — введём отношение эквивалентности: $ x \sim y \iff [x, y] \subset A $.\\
+		Покажем, что каждый класс $ K $ является интервалом.\\
+		Прямолинейная связность очевидна по построению.\\
+		Пусть $ a := \inf K,\ b := \sup K $, причём $ a, b \in \Real $.\footnote{Случай бесконечной крайней точки тривиален.} Покажем, что $ a, b \not \in A $.\\
+		Если, к примеру, $ a \in A $, то $ \exists \delta > 0: (a - \delta, a + \delta) \subset A $.\\ 
+		Положим $ \delta' := \min(\delta, (b - a)/2) $, тогда $ [a - \delta', a + \delta'] \subset A $.\\
+		Известно, что $ a + \delta' \in K $. Но тогда $ K $ можно расширить, что противоречит его выбору.
+	\end{proof}
+	\begin{corollary}$  $\\
+		Открытое подмножество в $ \Real $ — объединение не более чем счётного числа компактов.
+	\end{corollary}
+	\begin{proof}
+		$ (a, b) = \bigcup\limits_{n=1}^{\infty}{ [a + \frac{1}{n}, b - \frac{1}{n}] } $, остальные случаи — аналогично.
+	\end{proof}
+	\section{Измеримые функции. Их свойства. Измеримые функции и предельный переход.}
+	\begin{definition}
+		Тройка $ (X, \Sigma, \mu) $, где $ \Sigma $ — $ \sigma $-алгебра с единицей $ X $, $ \mu: \Sigma \to \Real $ — $ \sigma $-аддитивная мера, называется \textbf{измеримым пространством}. Если $ \mu(X) < \infty $, то его называют \textit{конечным}, а если мера $ \mu $ $ \sigma $-конечна, то $ \sigma $-\textit{конечным}.
+	\end{definition}
+	\begin{definition}
+		$ f: \Sigma \to \Real $ — \textbf{измеримая функция}, если $ \forall c \in \Real: f^{-1}((c, +\infty]) \in \Sigma $.\footnote{Более корректно следующее определение: измерима та функция, прообраз каждого борелевского множества относительно которой лежит в $ \sigma $-алгебре. Тем не менее, такое определение проверять технически проще, и далее будет доказано, что они эквивалентны, т.к. борелевская $ \sigma $-алгебра подмножеств $ \Real $ порождается открытыми лучами.}
+	\end{definition}
+	\begin{definition}
+		Предикат $ P(x) $ верен \textbf{почти всюду}, если $ \mu(\{x: \neg P(x) \}) = 0 $.
+	\end{definition}
+	\begin{lemma}
+		Если $ f $ измерима на $ (X, \Sigma, \mu)  $, то $ \forall a, b \in \overline{\Real}: f^{-1}((a, b)) \in \Sigma $.
+	\end{lemma}
+	\begin{proof}$  $\\
+		\[ f^{-1}(+\infty) := \bigcap\limits_{n=1}^{\infty}{f^{-1}([n, +\infty))} \in \Sigma, \quad\quad
+		 f^{-1}(-\infty) := X \setminus \bigcup\limits_{n=1}^{\infty}{f^{-1}([-n, +\infty))} \in \Sigma \]
+		откуда тривиально следует, что $ \forall a, b \in \overline{\Real}: f^{-1}((a, b)) \in \Sigma $:\\
+		\[ f^{-1}([c, +\infty]) := \bigcap\limits_{n=1}^{\infty}{f^{-1}\left ( \left (c-\frac{1}{n}, +\infty\right ]\right )} \in \Sigma \quad\quad f^{-1}((a, b)) := f^{-1}((a, +\infty]) \setminus f^{-1}([b; +\infty]) \in \Sigma \]
+	\end{proof}
+	\begin{theorem}
+		Если $ f $ измерима на $ (X, \Sigma, \mu) $ и $ B \in \mathcal{B}(\Real) $, то $ f^{-1}(B) \in \Sigma $.
+	\end{theorem}
+	\begin{proof}$  $\\
+		Введём обозначение $ \Theta := \{A \subset \Real\ |\ f^{-1}(A) \in \Sigma \} $ и покажем, что $ \mathcal{B}(\Real) \subset \Theta $.\\
+		По теореме 15.3 $ \Theta $ содержит все открытые подмножества $ \Real $.\\ 
+		Взятие обратного отображения перестановочно c $ \bigcup_{i},\ \bigcap_{i},\ \setminus,\ \triangle $, потому $ \Theta $ — $ \sigma $-алгебра.\\
+		Тогда $ \mathcal{B}(\Real) \subset \Theta $ по определению.
+	\end{proof}
+	\begin{theorem}[О композиции непрерывной и измеримой]$  $\\
+		 Пусть $ f $ измерима и ограничена на $ (X, \Sigma, \mu) $, причём $ f(X) \subseteq G \subset \Real $, где $ G $ открыто, а $ g \in C(G) $.\\
+		 Тогда $ g \circ f $ измерима на $ (X, \Sigma, \mu) $.
+	\end{theorem}
+	\begin{proof}
+		\[ \forall c \in \Real: (g \circ f)^{-1}((c, +\infty]) = f^{-1}(g^{-1}((c, +\infty])) = f^{-1}(g^{-1}((c, +\infty))) \in \Sigma \]
+		Последнее равенство следует из конечности $ g \circ f $, принадлежность $ \Sigma $ — из теоремы 15.2.
+	\end{proof}
+	\begin{theorem}[О замкнутости класса измеримых относительно арифметических операций]$  $\\
+		Если $ f, g $ — измеримы и конечны на $ (X, \Sigma, \mu) $, то $ \alpha f + \beta g,\ f \cdot g,\ \frac{f}{g} \mbox{ (при } g \neq 0) $ также измеримы.
+	\end{theorem}
+	\begin{proof}$  $
+		\begin{enumerate}[(1)]
+			\item $ \forall \alpha \in \Real: \alpha f,\ f + \alpha $ измеримы по теореме 15.3.\\
+						Далее, для всякой пары измеримых $ h_{1}, h_{2} $: 
+						\[ \{x \in X\ |\  h_{1}(x) > h_{2}(x) \} := \bigcup\limits_{n=1}^{\infty}{\left ( h^{-1}_{1}((q_{n}, +\infty]) \cap h^{-1}_{2}([-\infty, q_{n}])\right ) } \in \Sigma \]
+						для некоторой нумерации $ \Rational = \{q_{n}\}_{n=1}^{\infty} $, откуда: \[ (\alpha f + \beta g)^{-1}((c, +\infty]) = \{x \in X\ |\ \alpha f(x) > c - \beta g(x) \} \in \Sigma \]
+						значит, $ \alpha f + \beta g $ — измерима.
+			\item $ (x + y)^{2} $ измерима по теореме 15.3., значит, $ f \cdot g = \frac{1}{4}((f + g)^{2} - (f - g)^{2}) $ — измерима по (1).
+			\item $ \frac{f}{g} = f \cdot \frac{1}{g} $, где $ \frac{1}{x} $ непрерывна при $ x \neq 0 $, тогда по (2) $ \frac{f}{g} $ — ­измерима.
+		\end{enumerate}
+	\end{proof}
+	\begin{theorem}
+		Если $ \{f_{n}(x)\}_{n=1}^{\infty} $ — последовательность измеримых функций на пространстве $ (X, \Sigma, \mu) $, то функции $ \varphi(x) := \sup\limits_{n}f_{n}(x),\ \psi(x) := \overline{\lim\limits_{n\to\infty}}{f_{n}(x)} = \inf\limits_{n}{\sup\limits_{m \ge n} f_{m}(x)} $ — также измеримы.\footnote{Для $ \inf $ доказательство аналогично.}
+	\end{theorem}
+	\begin{proof}$  $
+		\begin{itemize}
+			\item $ \varphi^{-1}((c, +\infty]) = \bigcup\limits_{n=1}^{\infty}{f^{-1}_{n}((c, +\infty])} \in \Sigma $\footnote{Если для данного $ x $ существует какое-то $ n $, такое что $ f_{n}(x) > c $, то $ \sup\limits_{n}f_{n}(x) > c $ и подавно.}
+			\item $ \psi^{-1}((c, +\infty]) = \bigcup\limits_{k=1}^{\infty}{ \bigcap\limits_{n=1}^{\infty}{\phi_{n}^{-1}((c + \frac{1}{k}, +\infty]) }} \in \Sigma,\ \phi_{n} := \sup\limits_{m \ge n}{ f_{m}  } $.\footnote{Т.к. в определении верхнего предела фигурирует инфимум, отделение от $ c $ добавочным слагаемым $ \frac{1}{k} $ необходимо, т.к. без него не выйдет отфильтровать случай $ \psi(x) = c $.}
+		\end{itemize}
+	\end{proof}
+	\begin{corollary}$  $\\
+		В тех же условиях функция $ F(x) := \lim\limits_{n\to\infty}f_{n}(x) $ измерима на области определения.\footnote{Т.к. для существования предела необходимо существование и совпадение верхнего и нижнего частичных пределов, которые измеримы по доказанной теореме.}
+	\end{corollary}
+	\begin{theorem}
+			Если $ f, g $ измеримы на $ (X, \Sigma, \mu) $, то $ |f|,\ \min \{f, g\},\ \max \{f, g\} $ также измеримы.
+	\end{theorem}
+	\begin{proof}$  $
+		\begin{itemize}
+			\item $ \{\min\{f, g\} > c\} = \{f > c\} \cap \{g > c\} $
+			\item $ \{\max\{f, g\} > c\} = \{f > c\} \cup \{g > c\} $
+			\item $ |f| = \max\{f, 0\} - \min\{f, 0\} $
+		\end{itemize}
+	\end{proof}
+	\section{Множество Кантора и кривая Кантора. Теорема о существовании композиции измеримой от непрерывной, не являющейся измеримой функцией.}
+	\begin{definition}
+		\textbf{Множество Кантора} $ \mathcal{C} $ — подмножество $ [0, 1] $, полученное в ходе следующего процесса: отрезок разбивается на три части, центральный интервал выбрасывается, с оставшимися частями рекурсивно делается то же самое.\\
+		В формальной записи процедура построения Канторова множества записывается так:\\
+		Через $ J^{i}_{j},\ 1 \le j \le 2^{i} $ обозначим $ j $-ый по порядку отрезок после $ i $-ой итерации, $ J^{0}_{1} := [0, 1] $.\\
+		Через $ I^{i}_{k},\ 1 \le k \le 2^{i-1} $ обозначим интервалы, удаляемые на $ i $-м шагe. Мера каждого — $ \frac{1}{3^{i}} $.\\
+		Пусть $ G := \bigsqcup\limits_{n=1}^{\infty}\bigsqcup\limits_{k=1}^{2^{n-1}}{I^{n}_{k}} $, тогда $ \cantor := [0, 1] \setminus G = \bigcap\limits_{n=0}^{\infty}\bigsqcup\limits_{k=1}^{2^{n}}{J^{n}_{k}} $.
+	\end{definition}
+	\begin{preposition}[Основные свойства Канторова множества]$  $\\
+		$ \cantor $ замкнуто, нигде не плотно, имеет мощность континуума и Лебегову меру ноль.
+	\end{preposition}
+	\begin{proof}
+		Первые три свойства тривиальны, докажем четвёртое\footnote{Заметим при этом, что нетрудно по той же процедуре построить т.н. \textbf{fat cantor set} — множество, обладающее свойствами 1-3, но имеющее ненулевую меру Лебега: достаточно каждый раз выбрасывать менее трети интервала.}.\\
+		\[ \mu(\cantor) = 1 - \mu(G),\ \mu(G) = \sum_{n=1}^{\infty}{ \sum_{k=1}^{2^{n-1}}{ \mu(I^{n}_{k}) } } = \sum_{n=1}^{\infty}{ \frac{2^{n-1}}{3^{n}}  } = \frac{1}{3} \frac{1}{1-\frac{2}{3}} = 1 \]
+	\end{proof}
+	\begin{definition}$  $\\
+		\textbf{Кривая Кантора} — построенная на основе Канторова множества функция $ \mathbf{c}: [0, 1] \to [0, 1] $, заданная индуктивно по следующему правилу:\\
+		Пусть $ \mathbf{c}_{0}(0) = 0,\ \mathbf{c}_{0}(1) = 1 $.\\
+		Далее, пусть $ J^{i}_{j} = [a, b]  $, а $ J^{i+1}_{2j-1} = [a, c],\ J^{i+1}_{2j} = [d, b],\ a < c < d < b $.\\
+		Тогда $ \mathbf{c}_{i+1}(a) := \mathbf{c}_{i}(a),\ \mathbf{c}_{i+1}(b) := \mathbf{c}_{i}(b),\ \mathbf{c}_{i + 1}(c) = \mathbf{c}_{i+1}(d) := (\mathbf{c}(a) + \mathbf{c}(b))/2 $.\\
+		Когда $ \mathbf{c} $ уже определена на концах всех $ J^{i}_{j} $, она доопределяется: $ \mathbf{c}(x) := \lim\limits_{n\to\infty}{\sup\limits_{y \le x} \mathbf{c}_{n}(y)} $.
+	\end{definition}
+	\begin{preposition}[Основные свойства Канторовой лестницы]$  $\\
+		$ \mathbf{c} $ монотонно неубывает и непрерывна на $ [0, 1] $, а $ \mathbf{c}'(x) = 0 $ почти всюду на $ [0, 1] $.
+	\end{preposition}
+	\begin{theorem}
+		Существует измеримое по Лебегу неборелевское множество.
+	\end{theorem}
+	\begin{proof}
+		Рассмотрим гомеоморфизм $ f: [0, 1] \to [0, 1],\ f(x) := \frac{1}{2}(\mathbf{c}(x) + x) $.\\
+		Заметим, что: 
+		\begin{gather*} 
+			\mu(f(I^{i}_{j})) = \mu(f(a_{i, j}, b_{i, j})) = \frac{1}{2}(\mathbf{c}(b_{i, j}) + b_{i, j}) - \frac{1}{2}(\mathbf{c}(a_{i, j}) +  a_{i, j}) =\\= \frac{1}{2}(b_{i,  j} - a_{i, j}) = \frac{1}{2} |I^{i}_{j}| 
+		\end{gather*}
+		Значит, $ \mu(f(G)) = \mu(f([0, 1] \setminus \cantor)) = \frac{1}{2} $, потому: 
+		\begin{gather*} 
+			\mu(f([0, 1] \setminus \cantor)) = \mu(f([0, 1]) \setminus f(\cantor)) = \mu(f([0, 1])) - \mu(f(\cantor)) = \mu([0, 1]) - \mu(f(\cantor)) = \frac{1}{2}\\
+			\implies  \mu(f(\cantor)) = \frac{1}{2} 
+		\end{gather*}
+		По теореме 14.1. $ f(\cantor) $ содержит неизмеримое подмножество $ F $.\\
+		Значит, $ H := f^{-1}(F) \not \in \borel([0, 1]) $, т.к. иначе обязательно $ f(H) \in \borel([0, 1]) $, ведь $ f $ — гомеоморфизм.\\
+		Тем не менее, $ H $ измеримо по Лебегу как подмножество множества меры нуль.
+	\end{proof}
+	\begin{corollary}
+		Мера Бореля может быть неполна.
+	\end{corollary}
+	\section{Сходимость по мере и почти всюду. Их свойства (критерий Коши сходимости по мере, арифметические, связь сходимостей, Теорема Рисса).}\footnote{Убийственный по объёму билет...}
+		Здесь и далее пусть $ \{f_{n}(x)\}_{n=1}^{\infty},\ f(x) $ — измеримые и конечные на $ (X, \Sigma, \mu) $ функции \footnote{Хотя бы для того, чтобы выражения вида $ |f_{n}(x) - f(x)| $ имели смысл}.
+		\begin{definition}
+			$ \{f_{n}(x)\}_{n=1}^{\infty} $ \textbf{сходится по мере} к $ f(x) $ ($ f_{n}(x) \xrightarrow{\mu} f(x) $), если:\
+			\[ \lim\limits_{n\to\infty}{\mu(\{x \in X\ |\ |f_{n}(x) - f(x)| > \eps\})} = 0 \]
+		\end{definition}
+		\noindent Докажем, что свойства предела по мере во многом похожи на свойства поточечного предела последовательности (единственность, коммутирование с арифметическими операциями). Более того, поточечная сходимость влечёт сходимость по мере, а обратное, вообще говоря, неверно. 
+		\begin{definition}
+			Функции $ f, g $ называют \textbf{эквивалентными}, если они равны почти всюду.
+		\end{definition}
+		\begin{theorem}[О единственности предела по мере]$  $\\
+			Предел посл-ти функций сходящихся по мере, единственен с точностью до эквивалентности.
+		\end{theorem}
+		\begin{proof}
+			Пусть $ f_{n}(x) \xrightarrow{\mu} f(x),\ f_{n}(x) \xrightarrow{\mu} g(x) $. Тогда\footnote{Полезно нарисовать картинку.}:
+			\[ \{x \in X\ |\ |f(x) - g(x)| > \eps \} \subseteq \{x \in X\ |\ |f(x) - f_{n}(x)| >  \eps/2 \} \cup \{x \in X\ |\ |g(x) - f_{n}(x)| > \eps/2 \} \]
+			Значит, $ \mu(\{x \in X\ |\ |f(x) - g(x)| > 0 \}) = 0  $.
+		\end{proof}
+		\begin{theorem}[Предел по мере коммутирует со сложением]$  $\\
+			Если $ f_{n} \xrightarrow{\mu} f,\ g_{n} \xrightarrow{\mu} g $, то $ f_{n} + g_{n} \xrightarrow{\mu} f + g $.
+		\end{theorem}
+		\begin{proof}
+			Аналогично предыдущему\footnote{Только мне совсем не кажется очевидным это включение... Оно точно верно?},
+			\begin{gather*} 
+				\{x \in X\ |\ |(f(x) + g(x)) - (f_{n}(x) + g_{n}(x))| > \eps \} \subseteq\\\subseteq \{x \in X\ |\ |f(x) - f_{n}(x)| >  \eps/2 \} \cup \{x \in X\ |\ |g(x) - g_{n}(x)| > \eps/2 \}
+			\end{gather*}
+		\end{proof}
+		\begin{theorem}[Теорема о пределе композиции]$  $\\
+			Если $ \mu(X) < \infty $, $ G \subset \Real $ открыто, $ g \in C(G) $ и $ f_{n} \xrightarrow{\mu} f$, причём $ f_{n}, f: X \to G $, то $ g \circ f_{n} \xrightarrow{\mu} g \circ f $.
+		\end{theorem}
+		\begin{proof}\footnote{Доказательство очень техническое, тяжело парсится. Стоит найти другое. Здесь было бы очень уместно добавить иллюстрацию, на которой будут указаны все участвующие в доказательстве множества.}$  $\\
+			Выберем $ \eps > 0,\ \gamma > 0 $.\\
+			По следствию из теоремы 14.3., $ G = \bigcup\limits_{n=1}^{\infty}{K_{n}} $, где $ K_{n} $ — компакты, причём $ K_{i} \subset K_{i+1}\dots $.\footnote{Вложенность нужна для того, чтобы воспользоваться непрерывностью меры Лебега.}\\
+			Рассмотрим $ E_{n} := f^{-1}(K_{n}) $. По определению $ \{K_{n}\} $ имеем $ E_{i} \subseteq E_{i+1}  $ и $ X = \bigcup\limits_{n=1}^{\infty}{ E_{n} } $.\\
+			По непрерывности меры Лебега, $ \exists r: \mu(A) := \mu\left (X \setminus \bigcup\limits_{n=1}^{r} E_{n}\right ) < \frac{\gamma}{2} $.\\
+			Пусть $ \rho := d\left (K := \bigcup\limits_{n=1}^{r} K_{n},\ \Real \setminus G\right ) $.\\
+			Определим компакт $ K' := \{y \in \Real\ |\ \min\limits_{x \in K} |x - y| \le \rho/2 \} \subset G $.\\
+			По равномерной непрерывности $ g $ на $ K' $: 
+			\[ \exists \delta > 0\ \forall x, y \in K': |x - y| < \delta \implies |g(x) - g(y)| < \eps \]
+			По определению сходимости по мере,
+			\[ f_{n} \xrightarrow{\mu} f \implies \exists N\ \forall n > N: \mu(B_{n}) := \mu(\{ x \in X\ |\ |f_{n}(x) - f(x)| \ge \min(\rho/2, \delta)+ \}) < \gamma/2 \]
+			Тогда $ \mu(A \cup B_{n}) < \gamma $, а 
+			\[ \forall x \in X \setminus (A \cup B_{n}): f(x) \in K \subset K',\ f_{n}(x) \in K',\ |f_{n}(x) - f(x)| < \delta \] откуда $ |g(f_{n}(x)) - g(f(x))| < \eps $.
+		\end{proof}
+		\begin{corollary}
+			Если $ \mu(X) < \infty $ и $ f_{n} \xrightarrow{\mu} f $, то $ f^{2}_{n} \to f^{2} $, а при $ f, f_{n} \neq 0 $ и $ \frac{1}{f_{n}} \xrightarrow{\mu} \frac{1}{f} $.\\
+			\textbf{Замечание:} условием конечности меры нельзя пренебречь.\\
+			Контрпример: $ f_{n}(x) := x + \frac{1}{n},\ X = \Real $. Тогда 
+			\[ \exists \eps > 0: \lim\limits_{n\to\infty}\{ x \in \Real: |f^{2}_{n}(x) - f^{2}(x)| > \eps \} = \lim\limits_{n\to\infty}\left \{ x \in \Real: \left |\frac{2x}{n} + \frac{1}{n^2}\right | > \eps \right \} \neq 0 \]
+			В самом деле, $ \{ x \in \Real: |f^{2}_{n}(x) - f^{2}(x)| > \eps \} = \left (\frac{n \eps}{2} - \frac{1}{n}, +\infty\right ] $.
+		\end{corollary}
+		\begin{corollary}
+			Если $ \mu(X) < \infty $ и $ f_{n} \xrightarrow{\mu} f, g_{n} \xrightarrow{\mu} g $, то $ f_{n} \cdot g_{n} \xrightarrow{\mu} f \cdot g $
+		\end{corollary}
+		\begin{proof}
+			\begin{gather*}
+				f_{n}(x) g_{n}(x) = \frac{1}{2}((f_{n}(x) + g_{n}(x))^{2} - f^{2}_{n}(x) - g^{2}_{n}(x))\\
+				f(x) g(x) = \frac{1}{2}((f(x) + g(x))^{2} - f^{2}(x) - g^{2}(x))
+			\end{gather*}
+			Значит, $ \lim\limits_{n\to\infty}\mu(\{x \in X: |f(x)g(x) - f_{n}(x)g_{n}(x)| > \eps \}) = 0 $ по т. 17.2, 17.3 и следствию 17.1.
+		\end{proof}
+		\begin{corollary}
+			Если $ \mu(X) < \infty $ и $ f_{n} \xrightarrow{\mu} f,\ g_{n} \xrightarrow{\mu} g $, причём $ \forall x \in X: g_{n}(x),\ g(x) \neq 0 $, то $ \frac{f_{n}}{g_{n}} \xrightarrow{\mu} \frac{f}{g} $.
+		\end{corollary}
+		\begin{theorem}[Критерий Коши сходимости по мере]$  $\\
+			\begin{gather*}
+				\{f_{n}(x)\}_{n}^{\infty} \xrightarrow{\mu} f(x) \iff \forall \eps > 0, \gamma > 0\ \exists N\ \forall n, m \ge N: \mu(\{ x \in X: |f_{n}(x) - f_{m}(x)| > \eps \}) < \gamma\\
+				\mbox{где } f, f_{n} \mbox{ измеримы и конечны на } X
+			\end{gather*}
+		\end{theorem}
+		\begin{proof}$  $\\
+			Для удобства записи введём обозначение $ \Delta_{X}(f, g, \eps) := \{ x \in X: |f(x) - g(x)| > \eps \} $
+			\begin{itemize}
+				\item \textbf{Необходимость:} $ f_{n} \xrightarrow{\mu} f \implies $ условие Коши
+					\begin{gather*}
+						f_{n} \xrightarrow{\mu} f \implies \forall \eps > 0\ \exists N\ \forall n \ge N: \mu(\Delta_{X}(f_{n}, f, \eps/2)) < \gamma/2\\
+						\mbox{Тогда } \forall n, m \ge N: \mu(\Delta_{x}(f_{n}, f_{m}, \eps)) \le \mu(\Delta_{X}(f_{n}, f, \eps/2)) + \mu(\Delta_{X}(f_{m}, f, \eps/2)) < \gamma\\
+						\mbox{Т.к. } \Delta_{X}(f_{n}, f_{m}, \eps) \subseteq \Delta_{X}(f_{n}, f, \eps/2) \cup \Delta_{X}(f_{m}, f, \eps/2) \} 
+					\end{gather*}
+				\item \textbf{Достаточность:} условие Коши $ \implies f_{n} \xrightarrow{\mu} f $\footnote{И снова неочевидные построение. Для чего выбираются именно такие множества $ A_{i} $, что это даёт?}\\
+				\textbf{Часть 1:} \textit{Убедимся, что предельная функция $ f $ измерима почти всюду. Рассмотрим множество всех тех точек $ x_{0} $, в которых последовательность $ \{f_{n}(x_{0})\}_{n=1}^{\infty} $ фундаментальна, и доопределим её нулём во всех остальных. Тогда $ f $ будет измерима на $ X $.}\\
+				
+				Рассмотрим подпосл-ть функций $ \{f_{n_{i}}\}_{n=1}^{\infty} $ и посл-ть множеств $ A_{i} $, такие что: 
+				\[ A_{i} := \Delta_{X}(f_{n_{i+1}}, f_{n_{i}}, 2^{-i}),\ \mu(A_{i}) < 2^{-i} \]
+				Положим $ A := \bigcap\limits_{m=1}^{\infty}{\bigcup\limits_{i=m}^{\infty}}{A_{i}} $\footnote{Словами: $ A $ — все такие точки, в которых соседние члены последовательности различаются более чем на некоторый эпсилон. Иными словами, все такие точки, в которых последовательность нефундаментальна.}. По построению, $ \mu(A) = 0 $.\\
+				Если же $ x_{0} \in X \setminus A $, то $ \{f_{n_{i}}(x_{0})\}_{n=1}^{\infty} $ фундаментальна, а значит $ \exists \lim\limits_{i\to\infty}{f_{n_{i}}(x_{0})} =: f(x_{0}) $.\\
+				По следствию 15.1. определённая таким образом $ f(x) $ измерима на $ X \setminus A $.\\ 
+				Доопределив её нулём на $ A $ получим измеримость на $ X $.\\\\
+				\textbf{Часть 2:} \textit{Докажем сходимость по мере. Из определения $ f(x) $ следует, что элементами последовательности $ \{f_{n_{i}}(x_{0})\}_{i=1}^{\infty} $ при $ x_{0} \in X \setminus A $ можно сколь угодно хорошо приблизить $ f(x_{0}) $, откуда получается первая часть оценки: $ \mu(\Delta_{X}(f_{n_{i}}, f, \eps/2)) < \gamma/2 $. Из фундаментальности последовательности $ \{f_{n_{i}}(x_{0})\}_{i=1}^{\infty} $ следует вторая часть оценки: $ \mu(\Delta_{X}(f_{n}, f_{r}, \eps/2)) < \gamma/2 $, откуда по неравенству треугольника имеем $ \mu(\Delta_{X}(f_{n}, f, \eps)) < \gamma $.\\Таким образом, от $ f_{n_{i}} \xrightarrow{\mu} f $ осуществляется переход к $ f_{n} \xrightarrow{\mu} f $.}\\ 
+				
+				Покажем теперь, что $ f_{n} \xrightarrow{\mu} f $ на $ X $.\\
+				В первую очередь, если $ x \not \in  \bigcup\limits_{i=m+1}^{\infty}{A_{i}} $, то:
+				\[ i, j \ge m + 1,\ i < j \implies|f_{n_{j}}(x) - f_{n_{i}}(x)| \le \sum_{k=i}^{j-1}{ |f_{n_{k+1}}(x) - f_{n_{k}} x| } < \sum_{r=m+1}^{\infty}{2^{-r}} = 2^{-m} \]
+				Отсюда для фиксированных $ \eps > 0, \gamma > 0 $ можно подобрать такое $ N $, что:
+				\[
+				n, r \ge N \implies \mu(\Delta_{X}(f_{n}, f_{r}, \eps/2)) < \gamma/2
+				\]
+				Отсюда также $ |f(x) - f_{n_{i}}(x)| = \left |\lim\limits_{j\to\infty}f_{n_{j}}(x) - f_{n_{i}}(x)\right | = \lim\limits_{j\to\infty}|f_{n_{j}}(x) - f_{n_{i}}(x)| < 2^{-m} $.\\ 
+				Потому при $ i \ge m + 1 $ имеем:
+				\[
+					\mu(\Delta_{X}(f_{n_{i}}, f, 2^{-m})) = \lim_{j\to\infty}\mu(\Delta_{X}(f_{n_{i}}, f_{n_{j}}, 2^{-m})) \le \sum\limits_{r=m+1}^{\infty}{\mu(A_{r})} < 2^{-m}
+				\]
+				Выберем такое $ m $, что $ 2^{-m} < \min(\eps/2, \gamma/2) $, и $ n_{i} > N $ с $ i \ge m+1 $. Тогда:
+				\[
+					n \ge N \implies \mu(\Delta_{X}(f_{n}, f, \eps)) < \mu(\Delta_{x}(f_{n}, f_{n_{i}}, \eps/2)) + \mu(\Delta_{X}(f_{n_{i}}, f, \eps/2)) < \gamma
+				\]
+				Тогда по определению $ f_{n} \xrightarrow{\mu} f $, что и требовалось.
+			\end{itemize}
+		\end{proof}
+		\noindent Как и ранее, пусть $ f_{n}, f $ — измеримые конечные функции на измеримом пространстве $ (X, \Sigma, \mu) $.
+		\begin{definition}
+			$ \{f_{n}(x)\}_{n=1}^{\infty} $ сходится к $ f $\footnote{В случае полноты меры $ \mu $ можно не требовать заранее измеримости функции $ f $.} \textbf{почти всюду} ($ f_{n} \xrightarrow{\text{п.вс.}} f $), если: \[ \mu(\{x \in X: f_{n}(x) \not \rightarrow f(x) \}) = 0 \]
+		\end{definition}
+		\begin{lemma}[О структуре множества точек расходимости]$  $\\
+			Пусть $ E \subseteq X $ — множество, на котором $ f_{n} \rightarrow f $, тогда:
+			\[ X \setminus E = \bigcup\limits_{m=1}^{\infty}\bigcap\limits_{n=1}^{\infty}\bigcup\limits_{k=n}^{\infty}\left \{x \in X: |f_{k}(x) - f(x)| > \frac{1}{m} \right \} \]
+		\end{lemma}
+		\begin{proof} По определению поточечной сходимости\footnote{For those rusty in analysis: \[ f_{n} \rightarrow f \iff \forall \eps > 0\ \forall x \in X\ \exists N\ \forall n \ge N:\ |f_{n}(x) - f(x)| < \eps  \]}, 
+			\[ x \in X \setminus E \implies f_{n} \not \rightarrow f \implies \exists \eps := \frac{1}{m}\ \forall n\ \exists k > n: |f_{k}(x) - f(x)| > \eps \]
+			Формальная запись этого условия даёт утверждение теоремы.
+		\end{proof}
+		\begin{theorem}[Критерий сходимости почти всюду]$  $\\
+			Пусть $ \mu(X) < \infty $\footnote{Пример $ f_{n} := I([-n, n]) $ показывает, что без требования конечности пространства теорема и её следствие неверны, а именно: $ f_{n} \xrightarrow{\text{п. вс.}} 1 $, но $ \forall n\ \forall \eps: 0 < \eps < 1 \implies \mu\left( \bigcup\limits_{k=n}^{\infty}\{x \in X: |f_{k}(x) - f(x)| > \eps \} \right) = +\infty $, и $ f_{n} \not \xrightarrow{\mu} 1 $.}, тогда: 
+			\[ 
+				f_{n} \xrightarrow{\text{п. вс.}} f(x) \iff \forall \eps > 0: \lim\limits_{n\to\infty}\mu\left( \bigcup\limits_{k=n}^{\infty}\{x \in X: |f_{k}(x) - f(x)| > \eps \} \right) = 0
+			\]
+		\end{theorem}
+		\begin{proof}$  $\\
+			Введём обозначения $ H_{k, m} := \left \{x \in X: |f_{k}(x) - f(x)| > \frac{1}{m} \right \} $.\\
+			Достаточно доказать, что:
+			\[ 
+				f_{n} \xrightarrow{\text{п. вс.}} f(x) \iff \forall m: \lim\limits_{n\to\infty}\mu\left( \bigcup\limits_{k=n}^{\infty} H_{k, m} \right) = 0
+			\]
+			В обозначениях леммы 17.1.: $ f_{n} \xrightarrow{\text{п. вс.}} f(x) \iff \mu(X \setminus E) = 0  $.\\ 
+			Тогда
+			$
+				\mu\left(\bigcup\limits_{m=1}^{\infty}\bigcap\limits_{n=1}^{\infty} \bigcup\limits_{k=n}^{\infty} H_{k, m} \right) = 0 $, откуда следует, что $ \forall m:  \mu\left(\bigcap\limits_{n=1}^{\infty} \bigcup\limits_{k=n}^{\infty} H_{k, m} \right) = 0
+			$\\
+			Определим для произвольного $ m $ последовательность $ G_{n} := \bigcup\limits_{k=n}^{\infty}H_{k, m} $.\\
+			Тогда $ \forall i: G_{i+1} \subseteq G_{i} $ и можно воспользоваться непрерывностью меры $ \mu $:\\
+			\[
+				\lim\limits_{n\to\infty}\mu(G_{n}) = \mu\left( \bigcap\limits_{n=1}^{\infty}G_{n} \right) \implies \lim\limits_{n\to\infty}\mu\left( \bigcup\limits_{k=n}^{\infty} H_{k, m} \right) = \mu\left(\bigcap\limits_{n=1}^{\infty} \bigcup\limits_{k=n}^{\infty} H_{k, m} \right) = 0
+			\]
+		\end{proof}
+		\begin{corollary}
+			$ \mu(X) < \infty,\ f_{n} \xrightarrow{\text{п. вс.}} f \implies f_{n} \xrightarrow{\mu} f $
+		\end{corollary}
+		\begin{preposition}[Пример Рисса]$  $\\
+			Существует последовательность, сходящаяся по мере на $ [0, 1] $, но не сходящаяся почти всюду.
+		\end{preposition}
+		\begin{proof}
+			\[ \phi_{n, k} := I\left (\left[ \frac{k}{2^{n}}, \frac{k+1}{2^{n}} \right]\right ),\ n \in \Natural,\ k = 0, 1, \dots, 2^{n}-1 \]
+			Поскольку $ \forall m \in \Natural\ \exists! n_{m}, k_{m} < 2^{n_{m}} \in \Natural: m = 2^{n_{m}} + k_{m} $, положим $ f_{m} := \phi_{n_{m}, k_{m}} $.\\
+			Тогда:
+			\[ \lim\limits_{m\to\infty}\mu(\{ x \in [0, 1]: |f_{m}(x)| > 0 \}) = \lim\limits_{m\to\infty}\frac{1}{2^{n_{m}}} = 0 \]
+			Откуда следует $ f_{m} \xrightarrow{\mu} 0 $.\\
+			В то же время $ \forall x_{0} \in [0, 1] $ бесконечно много членов последовательности $ \{f_{m}(x_{0})\}_{m=1}^{\infty} $ равно 0 и бесконечно много членов равно 1, откуда следует, что сходимости нет ни в одной точке.
+		\end{proof}
+		\begin{theorem}[Рисса]$  $\\
+			Пусть $ f_{n} \xrightarrow{\mu} f $ на $ \sigma $-конечном измеримом пространстве $ (X, \Sigma, \mu) $.\\ 
+			Тогда существует подпоследовательность $ f_{n_{i}} \xrightarrow{п.в.} f $.
+		\end{theorem}
+		\begin{proof}$  $\\
+			\textbf{Часть 1: Предположим вначале, что $ \mu(X) < \infty $.}\\
+			Положим $ n_{0} := 1 $ и выберем $ n_{k} $ так, чтобы $ \mu\left (\Delta_{X}\left (f_{n_{k}}, f, \frac{1}{k}\right )\right ) < \frac{1}{2^{k}} $.\\
+			Докажем, что $ f_{n_{k}} \xrightarrow{\text{п.в.}} f $.\\
+			При заданных $ \eps > 0, \delta > 0 $ можно подобрать $ m_{0} $ так, чтобы $ \frac{1}{m_{0}} < \eps $ и $ \frac{1}{2^{m_{0} - 1}} < \delta $.\\
+			Тогда
+			\begin{gather*}
+				\forall m > m_{0}: \mu\left (\bigcup\limits_{k=m}^{\infty} \Delta_{X}(f_{n_{k}}, f, \eps)\right ) \le \mu\left (\bigcup\limits_{k=m}^{\infty} \Delta_{X}\left (f_{n_{k}}, f, \frac{1}{k}\right )\right ) \le \sum_{k=m}^{\infty}\frac{1}{2^{k}} = \frac{1}{2^{m-1}} < \delta
+			\end{gather*}
+			и сходимость почти всюду следует из теоремы 17.5.\\
+			\textbf{Часть 2: Пусть теперь $ \mu(X) = \infty $:}\\
+			По условию $ X = \bigsqcup\limits_{n=1}^{\infty}B_{i},\ \mu(B_{i}) < \infty $, откуда получаем, что $ f_{n} \xrightarrow{\mu} f \implies f_{n} \xrightarrow[B_{i}]{\mu} f $.\\
+			По части 1, можно выделить подпоследовательности $ f_{n(k, i)} \xrightarrow[B_{i}]{\text{п.в.}} f $.\\
+			Объединим их в единую подпоследовательность $ \{f_{n_{j}}\}_{j=1}^{\infty} $ и покажем, что $ f_{n_{j}} \xrightarrow{п.в.} f $.\\
+			Пусть $ F_{i} := \{x \in X: f_{n(k, i)}(x) \not \rightarrow f(x) \}$, тогда: 
+			\[ \mu\left ( \{x \in X: f_{n_{j}}(x) \not \rightarrow f(x) \} \right ) = \mu\left (\bigcup\limits_{n=1}^{\infty} F_{i}\right ) = \sum_{i=1}^{\infty} \mu(F_{i}) = 0 \]
+		\end{proof}
+	\section{Теоремы Егорова и Лузина.}
+	\begin{theorem}[Егорова\footnote{Сходящаяся на множестве конечной меры последовательность функций сходится на нём равномерно за вычетом множества пренебрежимо малой меры.}]$  $\\
+		 Если $ \mu(X) < \infty $\footnote{Для сигма-конечных пространств теорема Егорова не имеет места.} и последовательность функций $ f_{n}(x) \to f(x) $ почти всюду на $ X $, то: 
+		 \[ \forall \eps > 0\ \exists \mbox{ измеримое } E_{\eps} \subseteq X: \mu(X \setminus E_{\eps}) < \eps \land \{f_{n}(x)\} \darrow[E_{\eps}] f(x) \]
+	\end{theorem}
+	\begin{proof}\footnote{Почему-то самое адекватное доказательство расписано \href{https://goo.gl/vnKrR3}{на Википедии}}\\
+		\begin{itemize}
+			\item \textbf{Дьяченко-Ульянов}:\\
+				По критерию сходимости почти всюду (т. 17.5.), для всякого $ m $ найдётся такое $ n_{m} $, что
+				\[
+					\mu\left ( G_{m} :=  \bigcup\limits_{k=n_{m}}^{\infty} \left \{ |f_{k} - f| > \frac{1}{m} \right \}  \right ) \le \frac{\eps}{2^{m}}
+				\]
+				\textit{Неформально говоря, $ G_{m} $ — множество точек, мешающих равномерной сходимости, т.е. всех таких точек, на которых $ f_{k} $ при достаточно больших $ k $ отклоняется от $ f $ более чем на $  \frac{1}{m} $. Вся идея доказательства заключается в том, что, в силу доказанных ранее утверждений, мы можем все плохие множества сделать сколь угодно малыми в совокупности.}\\
+				Положим далее $ E_{\eps} := X \setminus \bigcup\limits_{m=1}^{\infty} G_{m}  $.\\
+				\begin{gather*} \bigcup\limits_{m=1}^{\infty} G_{m} = \bigcup\limits_{m=1}^{\infty} \bigcup\limits_{k=n_{m}}^{\infty} \Delta_{X}\left (f_{k}, f, \frac{1}{m}\right ) \implies\\ X \setminus \bigcup\limits_{m=1}^{\infty} G_{m} = \bigcap\limits_{m=1}^{\infty} X \setminus G_{m} =  \bigcap\limits_{m=1}^{\infty}\bigcap\limits_{k=n_{m}}^{\infty} X \setminus \left \{ |f_{k} - f| > \frac{1}{m}  \right \} \end{gather*}
+				Таким образом, в $ E_{\eps} $ отфильтровываются точки, которые мешают равномерной сходимости.\\
+				\[ \mu(X \setminus E_{\eps}) = \mu\left (\bigcup\limits_{m=1}^{\infty}G_{m}\right ) \le \sum\limits_{m=1}^{\infty}\mu(G_{m}) < \sum\limits_{m=1}^{\infty}\frac{\eps}{2^{m}} < \eps \]
+				Пусть теперь задано некоторое $ \gamma > 0 $. Можно подобрать $ m $ так, чтобы $ \frac{1}{m} < \gamma $.\\
+				Тогда при $ k > n_{m} $:
+				\[ \forall x \in E_{\eps}: |f_{k}(x) - f(x)| \le \frac{1}{m} < \gamma \]
+				Т.к. все точки, для которых $ |f_{k}(x) - f(x)| > \frac{1}{m} $, были отброшены при построении $ E_{\eps} $.
+			\item \textbf{Википедия}:\\
+				Положим $ E_{n, k} := \bigcup\limits_{m \ge n}\left \{ |f_{m}(x) - f(x)|\ge \frac{1}{k} \right \} $. Заметим, что $ E_{n+1, k} \subseteq E_{n, k} $.\\
+				Ясно, что если $ f_{n}(x_{0}) \to f(x_{0}) $, то $ x_{0} $ не может лежать во всех $ E_{n, k} $ для некоторого $ k $.\\
+				В силу сходимости почти всюду, $ \forall k:\ \mu\left (\bigcap\limits_{n\in\Natural} E_{n, k}\right ) = 0 $\footnote{См. доказательство критерия сходимости почти всюду.}\\
+				$ \mu(X) < \infty $, значит, можно воспользоваться непрерывностью $ \mu $: $ \forall k\ \exists n_{k}:\ \mu(E_{n_{k}, k}) \le \frac{\eps}{2^{k}} $.\\
+				В точках $ x_{0} $ таких множеств последовательность $ f_{n}(x_{0}) $ слишком медленно подходит к $ f(x_{0}) $.\\
+				Обозначим множество всех плохих точек как $ B := \bigcup\limits_{k \in \Natural} E_{n_{k}, k} $.\\
+				По построению видно, что на $ E_{\eps} := X \setminus B $ сходимость равномерная.\\
+				При этом $ \mu(X \setminus E_{\eps}) \le \sum_{k \in \Natural} \mu(E_{n_{k}}, k) < \sum_{k \in \Natural} \frac{\eps}{2^{k}} = \eps $.
+			\end{itemize}
+	\end{proof}
+	\begin{theorem}[Лузина\footnote{Ограниченная измеримая по Лебегу функция  на отрезке сколь угодно хорошо приближается непрерывными.\\ Стоит отметить, что теорема Лузина является важным приложением теоремы Егорова: она устанавливает взаимосвязь понятий непрерывности и измеримости на брусах в $ \Real^{n} $.}]$  $\\
+		Пусть $ f $ ограничена и измерима относительно классической меры Лебега на $ [a, b] \subset \Real^{n} $. 
+		Тогда:
+		\[ \forall \eps > 0\ \exists g \in C([a, b]):\ \mu(\{x \in [a, b]\ |\ f(x) \neq g(x) \}) < \eps \]
+	\end{theorem}
+	\section{Интеграл Лебега для конечно-простых функций и его свойства. Определение интеграла Лебега в общем случае. Основные свойства интеграла Лебега.}
+		\begin{definition}
+			Измеримая на $ \sigma $-конечном пространстве $ (X, \Sigma, \mu) $ функция $ f: \Sigma \to \Real $ называется \textbf{простой}, если $ |\mbox{Im} f| \le \infty $ и $ \forall y \in \mbox{Im} f: \mu(\{f = y\}) < \infty $. Иными словами, 
+			\begin{gather*}
+				f(x) = \sum_{k=1}^{n} c_{k} \mathbf{I}_{E_{k}}(x),\quad E_{k} \in \Sigma,\ X = \bigsqcup\limits_{k=1}^{n} E_{k}\\
+				c_{1} \le \dots \le c_{n},\quad c_{k} \neq 0 \implies \mu(E_{k}) < \infty
+			\end{gather*}
+		\end{definition}
+		\begin{definition}
+			\textbf{Интеграл Лебега для конечно-простых функций}:
+			\[ \int_{X} f d\mu := \sum_{k=1}^{n} c_{k} \mu(E_{k})  \]
+		\end{definition}
+		\begin{lemma}
+			Определение корректно, т.е. не зависит от разбиения $ X $.
+		\end{lemma}
+		\begin{proof}
+			Пусть $ X = \bigsqcup\limits_{i=1}^{n} E_{i} = \bigsqcup\limits_{j=1}^{m} D_{j} $ и $ f \circ \mathbf{I}_{E_{i}} \equiv c_{i},\ f \circ \mathbf{I}_{D_{j}} \equiv d_{j} $.\\ 
+			Положим $ C_{i, j} := E_{i} \cap D_{j} $. Тогда 
+			\[ \int_{X} f d\mu = \sum\limits_{i=1}^{n} c_{i} \mu(E_{i})  = \sum\limits_{i=1}^{n} c_{i} \sum\limits_{j=1}^{m} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \sum\limits_{i=1}^{n} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \mu(D_{j}) \]
+		\end{proof}
+		\begin{theorem}[Линейность интеграла Лебега]$  $\\
+			\[ f, g \text{ — простые на } X \implies \forall \alpha, \beta \in \Real: \int_{X} (\alpha f + \beta g) d\mu = \alpha \int_{X} f d\mu + \beta \int_{X} g d\mu \] 
+		\end{theorem}
+		\begin{proof}
+			Пусть $ f(x) := \sum\limits_{i=1}^{n} c_{i} \mathbf{I}_{E_{i}},\ g(x) := \sum\limits_{j=1}^{m} d_{j} \mathbf{I}_{D_{j}}  $.\\
+			Тогда $ \alpha f + \beta g := \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} (\alpha c_{i} + \beta d_{j} ) \mathbf{I}_{E_{i} \cap D_{j}} $ — также простая функция.\\
+			Потому 
+			\begin{gather*} \int_{X} (\alpha f + \beta g) d\mu = \sum\limits_{i=1}^{n} \sum\limits_{j=1}^{m} (\alpha c_{i} + \beta d_{j} ) \mu(E_{i} \cap D_{j}) = \alpha \sum\limits_{i=1}^{n} c_{i} \sum\limits_{j=1}^{m} \mu(E_{i} \cap D_{j}) + \beta \sum\limits_{j=1}^{m} d_{j} \sum\limits_{i=1}^{n}  \mu(E_{i} \cap D_{j}) =\\= \alpha \sum\limits_{i=1}^{n} c_{i} \mu(E_{i}) + \beta \sum\limits_{j=1}^{m} d_{j} \mu(D_{j}) = \alpha \int_{X} f d\mu + \beta \int_{X} g d \mu \end{gather*}
+		\end{proof}
+		\begin{preposition}
+			$ f \ge 0 $  — простая $ \implies \int_{X} f d\mu \ge 0 $.
+		\end{preposition}
+		\begin{corollary}
+			$ f, g $ — простые и $ f \ge g \implies \int_{X} f d\mu \ge \int_{X} g d\mu $. 
+		\end{corollary}
+		\begin{preposition}
+			$ \left | \int_{X} f d\mu \right | \le \int_{X} |f| d\mu $.
+		\end{preposition}
+		\begin{preposition}
+			$ X = A \sqcup B \implies \int_{X} f d\mu = \int_{A} f d\mu + \int_{B} f d\mu  $
+		\end{preposition}
+		\begin{theorem}
+			Пусть $ (X, \Sigma, \mu) $ — $ \sigma $-конечное измеримое пространство и $ E \in M $.\\
+			Тогда если $ g_{n}: E \to \Real^{+} $ — неубывающая последовательность простых функций и\\ $ g: E \to \Real^{+},\ g(x) := \sum\limits_{i=1}^{n} a_{i} \mathbf{I}_{E_{i}}(x) $ — также простая, причём $ \forall x_{0} \in E: \lim\limits_{n \to \infty} g_{n}(x_{0}) \ge g(x_{0}) $, то 
+			\[ \lim\limits_{n \to \infty} \int_{E} g_{n}(x) d\mu \ge \int_{E} g(x) d\mu \]
+		\end{theorem}
+		\begin{proof}
+			В случае бесконечного предела неравенство очевидно.\\
+			Пусть предел конечен. Для произвольного $ \eps > 0 $ определим множества $ F_{n} := \{ g_{n} < g - \eps \} $.\\
+			В силу монотонности, $ F_{n+1} \subseteq F_{n}  $, причём $ \mu(F_{1}) \le \mu(E) < \infty $.\\ 
+			Далее, $ \bigcap\limits_{n=1}^{\infty} F_{n} = \emptyset $, поскольку $ \forall x_{0} \in E: \lim\limits_{n \to \infty} g_{n}(x_{0}) \ge g(x_{0}) $.\\
+			Тогда по непрерывности меры заключаем, что $ \mu(F_{n}) \to 0 $.\\
+			Отсюда следует цепочка оценок:
+			\begin{gather*}
+				\int_{E} g d\mu = \int_{F_{n}} g d\mu + \int_{E \setminus F_{n}} g d\mu \le \int_{F_{n}} g d\mu + \int_{E} (g_{n} + \eps) d\mu =\\= \sum\limits_{i=1}^{n} a_{i} \mu(F_{n} \cap E_{i}) + \int_{F} g_{n}(x) d\mu + \eps \mu(E) \le a_{n} \mu(F_{n}) + \lim\limits_{n\to\infty}\int_{E} g_{n} d\mu + \eps \mu(E).
+			\end{gather*}
+			Переходя к пределу по $ n $ и пользуясь произвольностью в выборе $ \eps $, окончательно получаем:
+			\[ \int_{E} g d\mu \le \lim\limits_{n\to\infty}\int_{E} g_{n} d\mu \]
+		\end{proof}
+		\begin{definition}
+			Пусть $ (X, \Sigma, \mu) $ — $ \sigma $-конечное измеримое пространство, $ E \in M $, $ f: E \to \Real^{+} $ — простая функция. Пусть также $ \mbox{SF}(f) := \{h: E \to \Real^{+}:  h\text{ — простая и } \forall x \in E: h(x) \le f(x) \} $.\\
+			Тогда \[ \int_{E} f d\mu := \sup\limits_{h \in \mbox{SF}(f)} \int_{E} h d\mu \]
+			Если этот интеграл конечен, то говорят, что $ f $ \textbf{интегрируема по Лебегу} на $ E $ ($ f \in L(E)$).
+		\end{definition}
+		\begin{definition}
+			Пусть $ f $ измерима на $ E $. Тогда говорят, что $ f $ интегрируема на Лебегу на $ E $, если $ f_{+}, f_{-} \in L(E) $, где $ f_{+}(x) := \max \{f(x), 0\},\ f_{-}(x) := \max \{-f(x), 0\} $ и полагают: 
+			\[ \int_{E} f d\mu = \int_{E} f_{+}d\mu - \int_{E} f_{-} d\mu \].
+		\end{definition}
+		\begin{corollary}
+			$ f \in L(E) \iff |f| \in L(E) $ для простых $ f $.\footnote{Здесь наглядно демонстрируется фундаментальное отличие интеграла Лебега от интеграла Римана. В частности, по этой же причине $ \sin(x)/x $ интегрируемо на $ \Real $ в несобственном смысле по Риману, но не по Лебегу. Оно отражает, что процесс несобственного интегрирования следует рассматривать обособленно, т.к. на любом отрезке всякая интегрируемая по Риману функция будет интегрируема по Лебегу (хотя обратное неверно).}
+		\end{corollary}
+		\begin{corollary}
+			Из данных определений следует, что если $ E, A \in \Sigma,\ A \subset E, f $ — измерима на $ E $, то $ f \in L(A) \iff f(x) \mbox{I}_{A} \in L(E) $ и тогда $ \int_{A} f d\mu = \int_{E} (f \circ \mbox{I}_{A}) d\mu  $
+		\end{corollary}
+		\begin{preposition}
+			Если $ g_{n}: E \to \Real^{+} $ — такая неубывающая последовательность простых функций, что $ \lim\limits_{n \to \infty} g_{n}(x) = g(x) $, то\footnote{Основная ценность интеграла Лебега — обилие предельных теорем. В частности, с их помощью устанавливается, что пространство интегрируемых по Лебегу функций полно, что неверно для интегрируемых по Риману. Этот факт имеет фундаментальное значение для построения теории Фурье и оснований квантовой механики.} 
+			\[
+				\lim\limits_{n\to\infty} \int_{E} g_{n}(x) d\mu = \int_{E} g(x) d\mu
+			\]
+		\end{preposition}
+		\begin{proof}
+			Существование и измеримость $ g(x) $ следует из теоремы $ 15.4 $.\\
+			Из определения интеграла ясно, что 
+			\[ \lim\limits_{n\to\infty} \int_{E} g_{n} d\mu \le \int_{E} g d\mu \]
+			Обратно, если $ h \in \mbox{SF}(g) $, то начиная с некоторого $ n $ верно $ g_{n} \ge h $, откуда по т. 19.2 имеем: 
+			\[ \lim\limits_{n\to\infty} \int_{E} g_{n} d\mu \ge \int_{E} h d\mu \]
+			Переходя к $ \sup\limits_{h \in \mbox{SF}(f)} $, получаем искомое равенство.
+		\end{proof}
+		\begin{lemma}
+			Пусть $ f(x): E \to \Real^{+} $ — измеримая функция. Тогда $ \exists \{f_{n}\}\uparrow:\ f_{n} \xrightarrow{E} f $.
+		\end{lemma}
+		\begin{proof}
+			В силу $ \sigma $-конечности $ X $, можно получить представление вида 
+			\[ 
+				E = \bigsqcup\limits_{n=1}^{\infty} E_{n},\ \mu(E_{n}) < \infty
+			\]
+			Положим\footnote{Важно хотя бы раз нарисовать эту конструкцию.} 
+			\[ f_{m}(x) := 
+				\begin{cases} 
+					\frac{k-1}{2^{m}}, & \text{если } \frac{k-1}{2^{m}} \le f(x) < \frac{k}{2^{m}} \text{ и } x \in \bigsqcup\limits_{j=1}^{m} E_{j}\\
+					2^{m}, & \text{если } f(x) \ge 2^{m} \text{ и } x \in \bigsqcup\limits_{j=1}^{m} E_{j}\\
+					0, & \text{если } x \not \in \bigsqcup\limits_{j=1}^{m} E_{j}\\
+				\end{cases} 
+			\]
+			или, в более краткой записи
+			\begin{gather*}
+				f_{m}(x) := \sup \left \{ \frac{k}{2^{m}}: k \in \Natural,\ \frac{k}{2^{m}} \le \min(f(x), 2^{m}) \right \}\\
+				f_{m} := 2^{m} \mathbf{I}_{f^{-1}([2^{m}, +\infty))} + \sum\limits_{k=1}^{2^{2m}-1} \frac{k}{2^{m}} \mathbf{I}_{f^{-1}\left (\left [\frac{k}{2^{m}}, \frac{k+1}{2^{m}}\right )\right )}
+			\end{gather*}
+			Докажем, что определённая таким образом последовательность удовлетворяет условию теоремы.
+			\begin{itemize}
+				\item $ \{f_{n}\} \uparrow $:
+					\begin{enumerate}
+						\item Пусть $ f_{m}(x_{0}) = 0 $, тогда $ f_{m+1}(x_{0}) \ge 0 = f_{m}(x_{0}) $.
+						\item Если $ f_{m}(x_{0}) = 2^{m} $, то $ f(x) \ge 2^{m} $ и точно $ f_{m+1}(x_{0}) \ge 2^{m} = f_{m}(x_{0}) $.
+						\item Если $ f_{m}(x_{0}) = \frac{k}{2^{m}} $, то $ f(x_{0}) \in \left[ \frac{k}{2^{m}}, \frac{k+1}{2^{m}} \right) = \left[ \frac{2k}{2^{m+1}}, \frac{2(k+1)}{2^{m+1}} \right) $, значит либо $ f_{m+1}(x_{0}) = \frac{2k}{2^{m+1}} = f_{m}(x_{0}) $, либо $ f_{m+1}(x_{0}) = \frac{2k+1}{2^{m+1}} > f_{m}(x_{0}) $.
+					\end{enumerate}
+				\item $ f_{n} \xrightarrow{E} f $:\\
+				Если $ f(x_{0}) < +\infty $ (иначе тривиально), тогда $ \exists m_{0}: f(x_{0}) \in \bigsqcup\limits_{n=1}^{m_{0}} E_{n},\ f(x_{0}) < 2^{m_{0}} $.\\ 
+				Потому $ \forall n \ge m_{0} $ имеем $ |f_{n}(x_{0}) - f(x_{0})| \le 2^{-n} $.
+			\end{itemize}
+		\end{proof}
+		\begin{theorem}[Аддитивность интеграла Лебега от неотрицательных функций]$  $\\
+			Если $ f, g: E \to \Real^{+} $ — неотрицательные измеримые функции, то
+			\[ \int_{E}(f + g) d\mu = \int_{E} f d\mu + \int_{E} g d\mu \]
+			Далее, если $ E = A \sqcup B $, то \[ \int_{E} f d\mu = \int_{A} f d\mu + \int_{B} f d\mu \]
+		\end{theorem}
+		\begin{proof}
+			Пусть $ f_{n} \uparrow f,\ g_{n} \uparrow g $ — последовательности простых функций из леммы 19.2. Тогда несложно проверить, что $ (f_{n} + g_{n}) \uparrow (f + g) $.\\
+			Используя линейность интеграла Лебега от простых функций и предложение 19.4 о предельном переходе под знаком интеграла, получим\footnote{Возможность перехода с первой строки на вторую обусловлена тем, что интегрируются простые функции и всё сводится к предельному переходу в числовой сумме. В общем случае это не должно быть верно.}: 
+			\begin{gather*}
+				\int_{E} (f + g) d\mu = \lim_{n\to\infty} \int_{E} (f_{n} + g_{n}) d\mu =\\=
+				\lim\limits_{n\to\infty} \int_{E} f_{n} d\mu + \lim\limits_{n\to\infty} \int_{E} g_{n} d\mu = \int_{E} f d\mu + \int_{E} g d\mu
+			\end{gather*}
+			Также используя аналогичное свойство для интеграла Лебега от простых функций и предложение 19.4. получим, что:
+			\begin{gather*}
+				\int_{E} f d\mu =    \lim_{n\to\infty} \int_{E} f_{n} d\mu =\\=
+				\lim\limits_{n\to\infty} \int_{A} f_{n} d\mu + \lim\limits_{n\to\infty} \int_{B} f_{n} d\mu = \int_{A} f d\mu + \int_{B} f d\mu
+			\end{gather*}
+		\end{proof}
+		\begin{theorem}[Свойства класса интегрируемых функций]$  $\\
+			На $ \sigma $-конечном измеримом пространстве:
+			\begin{enumerate}
+				\item Измеримые функции интегрируемы на множествах меры нуль, и их интеграл равен нулю.
+				\item Если мера полна\footnote{Если от этого условия отказаться, то придётся потребовать измеримости обеих функций}, то интегралы эквивалентных функций равны.
+				\item Интегрируемая функция принимает бесконечные значения только на множестве меры нуль. 
+			\end{enumerate} 
+		\end{theorem}
+		\begin{proof}$  $
+			\begin{enumerate}[(1)]
+				\item Очевидно из определения.
+				\item Достаточно доказать для неотрицательных функций $ f, g: E \to \Real^{+} $. Заметим, что в случае полноты меры все эквивалентные функции либо измеримы, либо неизмеримы одновременно.\\
+				Пусть $ E' := \{ f = g \} $, тогда $ \mu(E \setminus E') = 0 $ и, пользуясь пунктом (1),
+				\[
+					\int_{E} g d\mu = \int_{E'} g d\mu + \int_{E \setminus E'} g d\mu = \int_{E'} g d\mu = \int_{E'} f d\mu = \int_{E'} f d\mu + \int_{E \setminus E'} f d\mu = \int_{E} f d\mu
+				\] 
+				\item И снова достаточно доказать для $ f: E \to \Real^{+},\ f \in L(E),\ E \in \Sigma $.\\
+				Положим $ E_{\infty} := \{ f = \infty \} $ и выберем $ F_{\infty} \in \Sigma,\ F_{\infty} \subset E_{\infty},\ \mu(F_{\infty}) < \infty $.\\
+				Рассмотрим последовательность функций из $ \mbox{SF}(f) $: $ h_{n} := n \mathbf{I}_{F_{\infty}} $.\\
+				По определению интеграла Лебега\footnote{Пользуясь соглашением $ \infty \cdot 0 = 0 $}, 
+				\[ +\infty > \int_{E} f d\mu \ge \sup\limits_{n} \int_{E} h_{n} d\mu = \sup\limits_{n} n \mathbf{I}_{F_{\infty}} = +\infty \cdot \mu(F_{\infty}) \]
+				Значит, если возможно выбрать $ F_{\infty} $ таким, что $ \mu(F_{\infty}) > 0 $, то не может быть, что $ f \in L(E) $.\\
+				Значит, $ \mu(E_{\infty}) = 0 $.
+			\end{enumerate}
+		\end{proof}
+		\begin{preposition}
+			Если $ f \in L(E) $, то $ \forall \alpha \in \Real: \alpha f \in L(E),\ \int_{E} \alpha f d\mu = \alpha \int_{E} f d\mu $
+		\end{preposition}
+		\begin{proof}
+			Измеримость $ \alpha f $ была доказана ранее.\\
+			Рассмотрим случаи:
+			\begin{itemize}
+				\item $ \alpha = 0 $: Тогда и $ \int_{E} \alpha f d\mu = 0 $, независимо от $ \mu(E) $.
+				\item $ \alpha > 0 $: Для простых функций — тривиально.\\
+				Иначе положим $ f = f_{+} - f_{-} $ и покажем, что $ \int_{E} \alpha f_{+} d\mu = \alpha \int_{E} f_{+} d\mu $.\\
+				\[ 
+					\int_{E} f_{+}\ d\mu = \sup\limits_{h \in Q_{f_{+}}} \int_{E} h d\mu = \frac{1}{\alpha} \sup\limits_{h \in Q_{f_{+}}} \int_{E} \alpha h d\mu = \frac{1}{\alpha} \int_{E} \alpha f_{+} d\mu.
+				\]
+				Для $ f_{-} $ — аналогично.
+				\item $ \alpha < 0 $: Аналогично. 
+			\end{itemize}
+		\end{proof}
+		\begin{theorem}[Линейность интеграла Лебега]
+			\[ f, g \in L(E) \implies f + g \in L(E),\ \int_{E} (f + g) d\mu = \int_{E} f d\mu + \int_{E} g d\mu \]
+		\end{theorem}
+		\begin{proof}
+			И вновь достаточно провести доказательство для знакопостоянных функций.\\
+			Для удобства, предположим вначале, что $ f \ge 0, g \le 0 $.\\ 
+			Разделим множество значений на $ E_{+} := \{ f + g \ge 0 \} $ и $ E_{-} := \{ f + g < 0 \} $.\\
+			По теореме 19.3. $ \int_{E} (f + g) d\mu = \int_{E_{+}} (f + g) d\mu + \int_{E_{-}} (f + g) d\mu $.\\
+			Вычислим по отдельности $ \int_{E_{+}} (f + g) d\mu,\ \int_{E_{-}} (f + g) d\mu $.\\
+			По теореме 19.3. и утверждению 19.5. получаем, что 
+			\begin{gather*}
+				\int_{E_{+}} f d \mu = \int_{E_{+}} (f + g) d\mu + \int_{E_{+}} -g d\mu = \int_{E_{+}} (f + g) d\mu - \int_{E_{+}} g d\mu\\
+				-\int_{E_{-}} g d \mu = \int_{E_{-}} (-f - g) d\mu + \int_{E_{-}} f d\mu = -\int_{E_{-}} (f + g) d\mu - \int_{E_{-}} f d\mu
+			\end{gather*}
+			Откуда видно, что $ \int_{E} (f + g) d\mu = \int_{E} f d\mu + \int_{E} g d\mu $.\\
+			Случай $ f \le 0, g \ge 0 $ рассматривается аналогично.\\
+			Случаи $ f \ge 0,\ g \ge 0 $ и $ f \le 0,\ g \le 0 $ разобраны в теореме 19.3.
+		\end{proof}
+		\begin{corollary}
+			\[ f, g \in L(E) \implies \forall \alpha, \beta \in \Real: \alpha f + \beta g \in L(E),\ \int_{E} (\alpha f + \beta g) d\mu = \alpha \int_{E} f d\mu + \beta \int_{E} g d\mu \]
+		\end{corollary}
+		\begin{corollary}
+			$ f \in L(E) \iff |f| \in L(E) $
+		\end{corollary}
+		\begin{proof}$  $
+			\begin{itemize}
+				\item $ f \in L(E) \implies |f| \in L(E) $:
+				По определению, $ f \in L(E) \iff f_{+},\ f_{-} \in L(E) $.\\
+				Поскольку $ |f| = f_{+} + f_{-} $, по линейности получаем $ f \in L(E) \implies |f| \in L(E) $.
+				\item $ |f| \in L(E) \implies f \in L(E) $: 
+				Аналогично.
+			\end{itemize}
+		\end{proof}
+		\begin{corollary}
+			$ \left | \int_{E} f d\mu \right | \le \int_{E} |f| d\mu $
+		\end{corollary}
+		\begin{theorem}
+			Пусть $ f, g $ измеримы на $ E $, $ f \in L(E),\ |g| \le |f| $, тогда 
+			\[ g \in L(E),\ \int_{E} |g| d\mu \le \int_{E} |f| d\mu \]
+			В частности, интеграл Лебега от неотрицательной функции неотрицателен.
+		\end{theorem}
+		\begin{proof}$  $\\
+			Согласно следствию 19.5 достаточно провести рассуждения для неотрицательных $ f, g $.\\
+			\[ h \in \mbox{SF}(g) \implies f \ge h \implies \int_{E} h d\mu \le \sup\limits_{\substack{q \in \mbox{SF}(f)\\ q \ge h}}\int_{E} q d\mu = \int_{E} f d\mu \implies \sup\limits_{h \in \mbox{SF}(g)}\int_{E} h d\mu = \int_{E} g d\mu \le \int_{E} f d\mu \]
+		\end{proof}
+		\begin{corollary}[Ограниченная функция интегрируема на множестве конечной меры]$  $\\
+			Если $ \mu(E) < \infty, f $ — измерима на $ E $ и $ \exists C \in \Real^{+}: |f| \le C $, то  
+			\[ f(x) \in L(E),\ \left| \int_{E} f d\mu \right| \le \int_{E} |f| d\mu \le C \mu(E) \]
+		\end{corollary}
+		\begin{corollary}
+			\[ f, g \in L(E),\ g \le f \implies \int_{E} g d\mu \le \int_{E} f d\mu \]
+		\end{corollary}
+		\begin{preposition}[Интеграл Лебега как предел интегральных сумм\footnote{Именно так в случае множества конечной меры его определял его сам А. Лебег.}]$  $\\
+			Пусть $ \mu(E) < \infty,\ f $ — измерима на $ E $, причём $ -\infty < A < f(x) < B < +\infty $. Пусть также $ T $ — разбиение $ [A, B]: A = t_{0} < t_{1} < \dots < y_{n} = B $. Тогда
+			\begin{gather*} 
+				\Delta_{i} := [t_{i-1}, t_{i}),\ \lambda(T) := \max\limits_{1 \le i \le n} {(t_{i} - t_{i-1})},\ F_{T} := \sum\limits_{i=1}^{n} t_{i} \cdot \mu( \{f \in \Delta_{i} \} ), \implies\\\implies \lim\limits_{\lambda(T) \to 0} F_{T} := \int_{E} f d\mu 
+			\end{gather*}
+		\end{preposition}
+		\begin{proof}
+			Введём простую функцию, интегралом которой будет $ F_{T} $: 
+			\[ 
+				f_{T}  := \sum\limits_{i=1}^{n} y_{i} \mathbf{I}_{\Delta_{i}},\ F_{T} = \int_{E} f_{T} d\mu 
+			\] 
+			В силу неравенства $ |f_{T} - f| \le \lambda(T) $ получаем 
+			\begin{gather*}
+				\left | F_{T} - \int_{E} f d\mu \right | = \left | \int_{E} (f_{t} - f) d\mu \right | \le \int_{E} |f_{t} - f| d\mu \le \lambda(T) \cdot \mu(E) \to 0 \implies\\\implies \lim\limits_{\lambda(T) \to 0} F_{T} = \int_{E} f d\mu
+			\end{gather*}
+		\end{proof}
+	\section{Теоремы о предельном переходе под знаком интеграла Лебега (теорема Б.Леви, лемма Фату, теорема Лебега).}
+	Будем далее полагать, что $ (X, \Sigma, \mu) $ — $ \sigma $-конечное измеримое пространство, $ E \in \Sigma $.
+	\begin{theorem}[Беппо-Леви, \href{https://goo.gl/M28P1b}{Monotone convergence theorem}]$  $\\
+		Пусть $ f_{n} $ измеримы на $ E $, причём $ 0 \le f_{1},\ f_{n} \uparrow  $. Тогда 
+		\[
+			f := \lim\limits_{n\to\infty} f_{n} \implies \int_{E} f d\mu = \lim\limits_{n\to\infty} \int_{E} f_{n} d\mu
+		\]
+	\end{theorem}
+	\begin{proof}	
+		Определим вспомогательную последовательность $ g_{1} := f_{1},\ g_{n} := f_{n} - f_{n-1} $.\\
+		Видно, что все $ g_{n} \ge 0 $ и измеримы. Приблизим каждую из них последовательностью $ \psi_{m, n} \uparrow g_{n} $  простых функций из доказательства леммы 19.2.\\
+		Определим $ F_{m} := \sum\limits_{n=1}^{m} \psi_{m, n} $, тогда $ F_{m+1} - F_{m} = \sum\limits_{n=1}^{m}(\psi_{m+1, n} - \psi_{m, n}) + \psi_{m+1, m+1} \ge 0 $.\\
+		Кроме того, 
+		\begin{gather*} 
+			\forall m: F_{m} \le \sum\limits_{n=1}^{m} g_{n} = f_{m} \le f\\
+			\forall N: \lim\limits_{m\to\infty} F_{m} \ge \sum\limits_{n=1}^{N} \lim\limits_{m\to\infty} \psi_{m, n} = \sum\limits_{n=1}^{N} g_{n} = f_{N}
+		\end{gather*}
+		Отсюда следует, что $ \lim\limits_{m\to\infty} F_{m} = f $, т.к. $ F_{m} \uparrow f $.\\
+		Т.к. предельный переход и интегрирование по Лебегу перестановочны в случае простых функций с сохранением равенства и неравенств (утверждение 19.4), имеем $ \lim\limits_{m\to\infty} \int_{E} F_{m} d\mu = \int_{E} f d\mu $.\\
+		В то же время, по монотонности интеграла Лебега получаем, что
+		\[
+			\forall m: 0 \le F_{m} \le f_{m} \le f \implies \int_{E} F_{m} d\mu \le \int_{E} f_{m} d\mu \le \int_{E} f d\mu
+		\]
+		Переходя к пределу по $ m $, по теореме о зажатой функции получаем, что
+		\[
+			\lim\limits_{m\to\infty} \int_{E} f_{m} d\mu = \int_{E} f d\mu
+		\]
+	\end{proof}
+	\begin{corollary}
+		Пусть $ f_{n} \uparrow,\ f_{n} \in L(E) $ и  $ \exists C > 0: \sup\limits_{n} \int_{E} f_{n} d\mu \le C $, тогда
+		\[ f := \lim\limits_{n\to\infty} f_{n} \in L(E),\ \int_{E} f d\mu = \lim\limits_{n\to\infty} \int_{E} f_{n} d\mu \]
+	\end{corollary}
+	\begin{proof}
+		Последовательность $ \psi_{n} := f_{n} - f_{1} $ удовлетворяет условию т. Беппо-Леви.\\
+		Потому для $ \psi := \lim\limits_{n\to\infty} \psi_{n} = f - f_{1} $ верно
+		\[  
+			\int_{E} \psi d\mu = \int_{E} \lim\limits_{n\to\infty} \psi_{n} d\mu = \lim\limits_{n\to\infty} \int_{E} \psi_{n} d\mu = \lim\limits_{n\to\infty} \int_{E} f_{n} d\mu - \int_{E} f_{1} d\mu
+		\]
+		Интегрируемость $ \psi $ следует из условия, потому $ f = \psi + f_{1} \in L(E) $. Навешиванием интеграла и использованием установленного выше равенства получаем искомое.
+	\end{proof}
+	\begin{corollary}
+		Пусть $ f_{n} $ — последовательность измеримых неотрицательных функций.\\
+		Тогда 
+		\[
+			f := \sum\limits_{n=1}^{\infty} f_{n} \implies \int_{E} f d\mu = \sum\limits_{n=1}^{\infty} \int_{E} f_{n} d\mu
+		\]
+	\end{corollary}
+	\begin{proof}
+		Введём последовательность $ \psi_{n} := \sum_{k=1}^{n} f_{k},\ f = \lim\limits_{n\to\infty}\psi_{n} $. По т. Беппо-Леви
+		\[
+			\int_{E} f d\mu = \lim\limits_{n\to\infty} \int_{E} \psi_{n} d\mu = \lim\limits_{n\to\infty} \sum\limits_{k=1}^{n} \int_{E} f_{k} d\mu = \sum\limits_{n=1}^{\infty} \int_{E} f_{n} d\mu
+		\]
+	\end{proof}
+	\begin{corollary}
+		\[ f \in L(E),\ E := \bigsqcup\limits_{n=1}^{\infty} E_{n},\ \forall n: E_{n} \in \Sigma \implies \forall n: f \in L(E_{n}),\ \int_{E} f d\mu = \sum\limits_{n=1}^{\infty} \int_{E_{n}} f d\mu \]
+	\end{corollary}
+	\begin{proof}
+		Достаточно рассмотреть случай $ f \ge 0 $.\\
+		Очевидно, что $ \forall n: |f \circ \mathbf{I}_{E_{n}}| \le f $, откуда $ f \in L(E_{n}) $.\\
+		Кроме того, $ f = \sum\limits_{n=1}^{\infty} f \circ \mathbf{I}_{E_{n}} $.\\
+		Тогда по следствию 20.2. имеем $ \int_{E} f d\mu = \sum\limits_{n=1}^{\infty} \int_{E_{n}} f d\mu $.
+	\end{proof}
+	\begin{lemma}[Фату, \href{https://goo.gl/cRrc9V}{Fatou's lemma}]$  $\\
+		Пусть $ \mu $ полна\footnote{Здесь и далее это условие важно для того, чтобы утверждение оставалось верно почти всюду.}, а $ f_{n} $ — последовательность измеримых неотрицательных функций. Тогда\footnote{For those rusty in analysis: 
+			\begin{gather*} 
+				\liminf\limits_{n\to\infty} f_{n} := \lim\limits_{n\to\infty}\inf\limits_{k \ge n} f_{k} = \sup\limits_{n} \inf\limits_{k \ge n} f_{k} \\ 
+				\limsup\limits_{n\to\infty} f_{n} := \lim\limits_{n\to\infty}\sup\limits_{k \ge n} f_{k} = \inf\limits_{n} \sup_{k \ge n} f_{k}
+			\end{gather*}
+		}
+		\[ f_{n} \xrightarrow{\text{п.в.}} f \implies \int_{E} f d\mu \le \liminf\limits_{n\to\infty}\int_{E} f_{n} d\mu \]
+		В англоязычной литературе \textit{теоремой} Фату принято называть следующий результат:
+		\[ 
+			\int_{E} \liminf\limits_{n\to\infty} f_{n} d\mu \le \liminf\limits_{n\to\infty} \int_{E} f_{n} d\mu \le \limsup\limits_{n\to\infty} \int_{E} f_{n} d\mu \le \int_{E} \limsup\limits_{n\to\infty} f_{n} d\mu
+		\]
+	\end{lemma}
+	\begin{proof}
+		Положим $ g_{n} := \inf\limits_{k \ge n} f_{k} $, тогда $ g_{n} \le f_{n},\ g_{n} \uparrow f $ и 
+		\[ 
+			\forall x \in E'\
+			 (\mu(E \setminus E') = 0): \lim\limits_{n\to\infty} g_{n} = \liminf\limits_{n\to\infty} f_{n} = f 
+		\]
+		Применяя теорему Беппо-Леви, получим:
+		\[
+			\int_{E'} f d\mu = \int_{E'} \lim\limits_{n\to\infty} g_{n} d\mu = \lim\limits_{n\to\infty}\int_{E'} g_{n}d\mu = \liminf\limits_{n\to\infty}\int_{E'} g_{n}d\mu \le \liminf\limits_{n\to\infty}\int_{E'} f_{n}d\mu
+		\]
+	\end{proof}
+	\begin{remark}
+		Неравенство нельзя заменить на равенство. Контрпример — $ f_{n} := n \cdot \mathbf{I}_{\left (0, \frac{1}{n}\right )} $.
+	\end{remark}
+	\begin{proof}
+	\end{proof}
+	\begin{theorem}[Лебега, \href{https://en.wikipedia.org/wiki/Dominated_convergence_theorem}{Dominated convergence theorem}]$  $\\
+		Пусть $ \mu $ полна, $ f_{n},\ f_{n} \xrightarrow{\text{п.в.}} f $ — такая посл-ть измеримых, что $ \exists F \in L(E)\ \forall n: |f_{n}| \le F $. Тогда
+		\[ 
+			f(x) \in L(E),\ \int_{E} f d\mu = \lim\limits_{n\to\infty} \int_{E} f_{n} d\mu
+		\]
+	\end{theorem}
+	\begin{proof}
+		Во первых, $ f_{n} \in L(E) $ т.к. интегрируема их мажоранта.\\
+		В силу полноты меры, $ f $ измерима и $ f \in L(E) $ (т.к. мажорируется интегрируемой $ F $).\\
+		Рассмотрим последовательности функций $ \varphi_{n} := F + f_{n},\ \psi_{n} := F - f_{n} $.\\
+		Все они неотрицательны, интегрируемы и п.в. на $ E $ имеем $ \lim\limits_{n\to\infty} \varphi_{n} = F + f,\ \lim\limits_{n\to\infty} \psi_{n} = F - f $.\\
+		По лемме Фату,
+		\[  
+			\int_{E} F d\mu + \int_{E} f d\mu = \int_{E} (F + f) d\mu \le \liminf\limits_{n\to\infty}\int_{E}(F + f_{n}) d\mu = \int_{E} F d\mu + \liminf\limits_{n\to\infty} \int_{E} f_{n} d\mu 
+		\]
+		Аналогично для $ F - f $:
+		\[  
+			\int_{E} F d\mu - \int_{E} f d\mu = \int_{E} (F - f) d\mu \le \liminf\limits_{n\to\infty}\int_{E}(F - f_{n}) d\mu = \int_{E} F d\mu - \limsup\limits_{n\to\infty} \int_{E} f_{n} d\mu 
+		\]
+		Отсюда
+		\[
+			\limsup\limits_{n\to\infty} \int_{E} f_{n} d\mu \le \int_{E} f d\mu \le \liminf_{n\to\infty} \int_{E} f_{n} d\mu
+		\]
+		т.е. существует
+		\[
+			\lim\limits_{n\to\infty} \int_{E} f_{n} d\mu = \int_{E} f d\mu
+		\] 
+	\end{proof}
+	\section{Абсолютная непрерывность интеграла Лебега. Критерий интегрируемости по Лебегу на множестве конечной меры. Неравенство Чебышева.}
+	\begin{theorem}[Об абсолютной непрерывности интеграла Лебега]		
+		\begin{gather*} 
+			f \in L(E) \implies \forall \eps > 0\ \exists \delta > 0\ \forall A \in \Sigma:\\ 
+			A \subseteq E,\ \mu(A) < \delta \implies \int_{A} |f| d\mu < \eps 
+		\end{gather*}
+	\end{theorem}
+	\begin{proof}$  $\\
+		Из условия ясно, что достаточно рассмотреть случай неотрицательной $ f $.
+		Выберем 
+		\[ h \ge 0 \in \mbox{SF}(f),\ h = \sum\limits_{i=1}^{n}a_{i} X_{E_{i}}: 0 \le \int_{E} f d\mu - \int_{E} h d\mu < \frac{\eps}{2} \]
+		Возьмём $ \delta := \frac{\eps}{2 \left (\max\limits_{1 \le i \le n} a_{k} + 1\right )} $, тогда если $ A \in \Sigma,\ A \subset E,\ \mu(A) < \delta $, то 
+		\begin{gather*}
+			\int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} h d\mu \le\\\le \int_{A} f d\mu = \int_{E} f d\mu - \int_{E} h d\mu + \int_{E} \sum_{i=1}^{n} (a_{k} \cdot \mbox{I}_{E_{i} \cap A}) d\mu <\\< \frac{\eps}{2} + \sum_{i=1}^{n} a_{k} \mu(\mbox{I}_{E_{i} \cap A}) \le \frac{\eps}{2} + \max\limits_{1 \le i \le n} a_{i} \sum\limits_{k=1}^{n} \mu(E_{k} \cap A) \le \frac{\eps}{2} + \max\limits_{1 \le k \le n} a_{k} \cdot \mu(A) \le \eps
+		\end{gather*}
+	\end{proof}
+	\begin{theorem}[Критерий интегрируемости по Лебегу на множествах конечной меры]
+		Пусть $ \mu(E) < \infty $ и $ f $ измерима на $ E $. Тогда\footnote{Наглядный пример того, почему это работает — интегрируемость по Лебегу функции $ f(x) := x^{-\frac{1}{2}} $ на $ [0, 1] $ } 
+		\[ f \in L(E) \iff \sum\limits_{k=1}^{\infty} \mu(\{ |f| \ge k \}) < \infty \]
+		Например, ограниченная измеримая функция на мн-ве конечной меры интегрируема по Лебегу.
+	\end{theorem}
+	\begin{proof}
+		Достаточно доказать теорему для неотрицательных функций, т.к. $ f \in L(E) \iff |f| \in L(E) $.\\
+		Положим $ h := \sum\limits_{k=1}^{\infty} \mathbf{I}_{\{ |f| \ge k \}} $, тогда $ h \le f \le h+1 $, потому $ f \in L(E) \iff h \in L(E) $.\\
+		По счётной аддитивности интеграла Лебега
+		\[
+			\int_{E} h d\mu = \sum\limits_{k=1}^{\infty} \int_{E} \mathbf{I}_{\{ |f| \ge k \}} d\mu = \sum\limits_{k=1}^{\infty} \mu(\{ |f| \ge k \})
+		\]
+	\end{proof}
+	\begin{theorem}[Неравенство Чебышева]
+		\[ f \ge 0 \in L(E),\ E_{\lambda} := \{ f > \lambda \} \implies \mu(E_{\lambda}) \le \frac{1}{\lambda} \int_{E} f d\mu \]
+	\end{theorem}
+	\begin{proof}
+		По аддитивности интеграла Лебега
+		\[ \int_{E} f d\mu = \int_{E \setminus E_{\lambda}} f d\mu + \int_{E_{\lambda}} f d\mu \ge \int_{E_{\lambda}} f d\mu \ge \int_{E_{\lambda}|} \lambda d\mu = \lambda \cdot \mu(E_{\lambda}) \]
+	\end{proof}
+	\begin{corollary}
+		Если $ f \ge 0 $ измерима на $ E $ такова, что $ \int_{E} f d\mu = 0 $, то $ f = 0 $ п.в. на $ E $.
+	\end{corollary}
+	\begin{proof}
+		Из неравенства Чебышева имеем: $ \forall n: \mu(\{ f > \frac{1}{n} \}) = 0 $.\\
+		Поскольку $ \{ |f| > 0 \} = \bigcup\limits_{n=1}^{\infty} \{ f > \frac{1}{n} \} $, получаем
+		\[ \mu(\{ |f| \neq 0 \}) \le \sum\limits_{n=1}^{\infty} \mu\left (\left \{ |f| > \frac{1}{n} \right \}\right ) = 0 \]
+	\end{proof}
+	\section{Связь между интегралами Римана и Лебега на отрезке.}
+	\begin{theorem}
+		Всё, что интегрируемо по Риману на брусах в $ \Real^{n} $, интегрируемо по Лебегу и
+		\[ 
+			\mbox{R-}\int\limits_{[a, b]} f(x) dx = \mbox{L-}\int\limits_{[a, b]} f(x) d\mu 
+		\]
+	\end{theorem}
+	\begin{proof}$  $\\
+		Рассмотрим последовательность покоординатных разбиение бруса на $ 2^{r} $ частей равной длины\\
+		\begin{gather*}
+			t_{r, i} := a + \frac{i}{2^{r}}(b - a),\ 0 \le i \le 2^{r}\\
+			\Delta{r, i} := [t_{r, i-1}, t_{r, i}]
+		\end{gather*}
+		Рассмотрим все элементарные кубики, из которых составлено разбиение\footnote{$ \mathcal{R}_{n} := \{0, 1\dots, n\} $}
+		\[
+			\forall \mathbf{x} = (x_{1}, \dots, x_{n}) \in \mathcal{R}^{n}_{2^{r}} : E_{r, \mathbf{x}} := \Delta^{1}_{r, x_{1}} \times \dots \times \Delta^{n}_{r, x_{n}} 
+		\]
+		Выпишем простые-функции-аналоги верхней и нижней сумм Дарбу:
+		\begin{gather*}
+			m_{r, \mathbf{x}} := \inf\limits_{x \in E_{r, \mathbf{x}}} f(x),\quad
+			M_{r, \mathbf{x}} := \inf\limits_{x \in E_{r, \mathbf{x}}} f(x)\\
+			\underline{f}_{r} := \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} m_{r, \mathbf{x}} \cdot \mathbf{I}_{E_{r, \mathbf{x}}} \quad 
+			\overline{f}_{r} := \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} M_{r, \mathbf{x}} \cdot \mathbf{I}_{E_{r, \mathbf{x}}}
+		\end{gather*}
+		По критерию интегрируемости по Риману на брусе в терминах сумм Дарбу:
+		\begin{gather*}
+			\lim\limits_{r\to\infty}\mbox{L-}\int\limits_{[a, b]} \underline{f}_{r} d\mu = \lim\limits_{r\to\infty} \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} m_{r, \mathbf{x}}\ \mu(E_{r, \mathbf{x}}) = I = \lim\limits_{r\to\infty} \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} M_{r, \mathbf{x}}\ \mu(E_{r, \mathbf{x}}) = \lim\limits_{r\to\infty}\mbox{L-}\int\limits_{[a, b]} \overline{f}_{r} d\mu
+		\end{gather*}
+		По построению очевидно, что $ \underline{f}_{r} \le f \le \overline{f}_{r} $, причём $ \underline{f}_{r} \uparrow,\ \overline{f}_{r} \downarrow $.\\
+		Переходя к пределу по $ r $ получим
+		$
+			\lim\limits_{r\to\infty} \underline{f}_{r} =: \underline{f} \le f \le \overline{f} :=  \lim\limits_{r\to\infty} \overline{f}_{r}
+		$.\\
+		Поскольку $ \sup\limits_{r} \int_{E} \underline{f}_{r} \le \sup\limits_{r} \int_{E} \overline{f}_{r} \le I $, по следствию  20.1. имеем\footnote{Разве отсюда, в силу монотонности интеграла Лебега, всё не следует? Зачём всё, что дальше написано? Я уже молчу про то, что интегрируемость по Риману на брусе влечёт ограниченность на этом брусе, а по критерию всякая ограниченная функция на множестве конечной меры интегрируема по Лебегу.}
+		\[ \underline{f},\ \overline{f} \in L(E),\ \mbox{L-}\int\limits_{[a, b]} \underline{f} d\mu = I = \mbox{L-}\int\limits_{[a, b]} \overline{f} d\mu \]
+		Отсюда 
+		\[ 
+			\int\limits_{[a, b]} | \overline{f} - \underline{f} | d\mu = \int\limits_{[a, b]} (\overline{f} - \underline{f}) d\mu = 0
+		\]
+		По следствию 21.1. из неравенства Чебышева заключаем, что $ \mu \{\overline{f} - \underline{f} \neq 0 \} = 0 $.\\
+		Отсюда следует, что $ \underline{f} = f = \overline{f} $ почти всюду на $ [a, b] $. Значит\\
+		\[
+			\mbox{L-}\int\limits_{[a, b]} f d\mu = I
+		\]
+	\end{proof}
+  \part{Теория вероятности, ФИВТ, семестр 4}
+  \part{Математическая статистика, ФИВТ, семестр 5}
+  \part{Случайные процессы, ФИВТ, семестр 6}
+\end{document}  
