@@ -465,6 +465,15 @@
 	\begin{corollary}$  $\\
 		Если $ \nu $ — $ \sigma $-аддитивная мера на кольце $ R $ и $ A, A_{1}, \dots \in R,\ A \in \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \nu(A) \le \sum_{i=1}^{\infty}{\nu(A_{i})} $.
 	\end{corollary}
+	\begin{proof}
+		Стандартная конструкция: $ B_{1} := A \cap A_{1},\ B_{n} := (A \cap A_{n}) \setminus \bigcup\limits_{i=1}^{n-1} A_{i} $.\\
+		Все эти множества лежат в $ R(S) $ в силу замкнутости относительно пересечения, дополнения и конечного объединения.\\
+		Тогда 
+		\begin{gather*} 
+			A := \bigcup\limits_{n=1}^{\infty} B_{n}\\
+			\nu(A) = \sum\limits_{n=1}^{\infty} \nu(B_{n}) \le \sum\limits_{n=1}^{\infty} \nu(A_{n})
+		\end{gather*}
+	\end{proof}
 	\noindent Условимся далее, что на полукольце $ S $ с единицей $ E $ задана $ \sigma $-аддитивная мера $ m $, а $ \nu $ — её продолжение на $ R(S) $. Покажем, как продолжить $ \nu $ до $ \mu $ — $ \sigma $-аддитивной меры на $ \sigma(S) $.
 	\begin{definition}
 		\textbf{Внешняя мера Жордана}:
