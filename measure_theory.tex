@@ -299,7 +299,11 @@
 		 Замена в последнем определении объединения на пересечение даёт \textbf{$ \delta $-алгебру}.
 	\end{definition}
 	\begin{preposition}
-		Кольцо множеств является полукольцом. Более того, $ \forall A, B \in R: A \cup B \in R $.
+		Кольцо множеств является полукольцом. Более того, 
+		\[ \forall A, B \in R: A \cup B,\ A \setminus B \in R \]
+	\begin{proof}
+		Про полукольцо очевидно, а $ A \cup B = (A \triangle B) \triangle (A \cap B),\ A \setminus B = B \triangle (A \cup B) $.
+	\end{proof}
 	\end{preposition}
 	\begin{preposition}
 		Пересечение любого семейства колец является кольцом.
@@ -377,6 +381,7 @@
 		\item \textbf{Монотонность}: $ \forall A, B \in S: A \subseteq B \implies m(A) \le m(B) $
 		\item \textbf{Конечная аддитивность}: $ A = \bigsqcup\limits_{i=1}^{n} A_{i},\ A_{i} \in S \implies m(A) = \sum\limits_{i=1}^{n} m(A_{i}) $
 	\end{itemize}
+	В общем случае\footnote{читай "для произвольной системы множеств".} требуется неотрицательность, монотонность и конечная аддитивность.
 	\end{definition}
 	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
 		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
@@ -442,7 +447,7 @@
 			\nu(A) = \sum_{i=1}^{n}{m(A_{i})} =   \sum_{i=1}^{n}{\sum_{j=1}^{m}{m(C_{i, j})}} = \sum_{j=1}^{m}{\sum_{i=1}^{n}{m(C_{i, j})}} = \sum_{j=1}^{m}{m(B_{j})}
 		\end{gather*}
 		Далее, докажем, что $ \nu $ — мера.\\
-		Её неотрицательность очевидна.\\
+		Её неотрицательность и монотонность\footnote{По лемме 8.2.} очевидны.\\
 		Докажем аддитивность: пусть $ A, A_{1}, \dots, A_{n} \in R(S) $ и $ A = \bigsqcup_{i=1}^{n}{A_{i}} $.\\
 		По определению $ R(S) $ имеем:
 	 \[ A = \bigsqcup_{i=1}^{n}{A_{i}} = \bigsqcup_{i=1}^{n}{\bigsqcup_{j=1}^{m_{i}}{A_{i, j}}} \in R(S),\ A_{i, j} \in S \implies \nu(A) = \sum_{i=1}^{n}{\nu(A_{i})} \]
