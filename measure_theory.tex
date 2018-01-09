@@ -299,7 +299,11 @@
 		 Замена в последнем определении объединения на пересечение даёт \textbf{$ \delta $-алгебру}.
 	\end{definition}
 	\begin{preposition}
-		Кольцо множеств является полукольцом. Более того, $ \forall A, B \in R: A \cup B \in R $.
+		Кольцо множеств является полукольцом. Более того, 
+		\[ \forall A, B \in R: A \cup B,\ A \setminus B \in R \]
+	\begin{proof}
+		Про полукольцо очевидно, а $ A \cup B = (A \triangle B) \triangle (A \cap B),\ A \setminus B = B \triangle (A \cup B) $.
+	\end{proof}
 	\end{preposition}
 	\begin{preposition}
 		Пересечение любого семейства колец является кольцом.
@@ -377,6 +381,7 @@
 		\item \textbf{Монотонность}: $ \forall A, B \in S: A \subseteq B \implies m(A) \le m(B) $
 		\item \textbf{Конечная аддитивность}: $ A = \bigsqcup\limits_{i=1}^{n} A_{i},\ A_{i} \in S \implies m(A) = \sum\limits_{i=1}^{n} m(A_{i}) $
 	\end{itemize}
+	В общем случае\footnote{читай "для произвольной системы множеств".} требуется неотрицательность, монотонность и конечная аддитивность.
 	\end{definition}
 	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
 		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
@@ -442,7 +447,7 @@
 			\nu(A) = \sum_{i=1}^{n}{m(A_{i})} =   \sum_{i=1}^{n}{\sum_{j=1}^{m}{m(C_{i, j})}} = \sum_{j=1}^{m}{\sum_{i=1}^{n}{m(C_{i, j})}} = \sum_{j=1}^{m}{m(B_{j})}
 		\end{gather*}
 		Далее, докажем, что $ \nu $ — мера.\\
-		Её неотрицательность очевидна.\\
+		Её неотрицательность и монотонность\footnote{По лемме 8.2.} очевидны.\\
 		Докажем аддитивность: пусть $ A, A_{1}, \dots, A_{n} \in R(S) $ и $ A = \bigsqcup_{i=1}^{n}{A_{i}} $.\\
 		По определению $ R(S) $ имеем:
 	 \[ A = \bigsqcup_{i=1}^{n}{A_{i}} = \bigsqcup_{i=1}^{n}{\bigsqcup_{j=1}^{m_{i}}{A_{i, j}}} \in R(S),\ A_{i, j} \in S \implies \nu(A) = \sum_{i=1}^{n}{\nu(A_{i})} \]
@@ -602,9 +607,9 @@
 	\end{theorem}
 	\begin{proof}
 		Пусть $ [a, b) = \bigsqcup\limits_{i=1}^{\infty}{[a_{i}, b_{i})},\ a, b \in \Real $.\\
-		Пользуясь непрерывностью слева, выберем такие $ c < b,\ a_{i} < c_{i} < b_{i} $, что: 
+		Пользуясь непрерывностью слева, выберем такие $ c < b,\  c_{i} < a_{i} $, что: 
 		\begin{gather*} 
-			[a, c] \subset \bigcup\limits_{i=1}^{\infty}{(c_{i}, b_{i})},\quad \phi(b)-\phi(c) < \frac{\eps}{2},\quad \phi(b_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}}
+			[a, c] \subset \bigcup\limits_{i=1}^{\infty}{(c_{i}, b_{i})},\quad \phi(b)-\phi(c) < \frac{\eps}{2},\quad \phi(a_{i}) - \phi(c_{i}) < \frac{\eps}{2^{i+1}}
 		\end{gather*}
 		Из полученного открытого покрытия выберем конечное подпокрытие $ \{ (c_{i_{k}}, b_{i_{k}})\}_{k=1}^{n} $.\\
 		Приведём все промежутки к полуоткрытым справа интервалам, получим: $ [a, c) \subset \bigcup_{k=1}^{n}{ [c_{i_{k}}, b_{i_{k}} )} $.\\
@@ -619,8 +624,8 @@
 		Значит, $ m([a, b)) \le \sum_{i=1}^{\infty}{m([a_{i}, b_{i}))} $.\\
 		Если $ a = -\infty $ и $ (-\infty, b) := \bigsqcup\limits_{i=1}^{\infty}{A_{i}} $, то:
 		\begin{gather*} 
-			\mu((-\infty, b)) = \mu\left (\lim\limits_{n\to\infty}{[-n, b)}\right ) = \mu\left (\lim\limits_{n\to\infty}{\bigsqcup\limits_{i=1}^{\infty} A_{i} \cap [-n, b)}\right ) \le\\
-			\le  \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{\infty}\mu(A_{k} \cap [-n, b))} \le \sum\limits_{n=1}^{\infty}\mu(A_{i})
+			m((-\infty, b)) = m\left (\lim\limits_{n\to\infty}{[-n, b)}\right ) = m\left (\lim\limits_{n\to\infty}{\bigsqcup\limits_{i=1}^{\infty} A_{i} \cap [-n, b)}\right ) \le\\
+			\le  \lim\limits_{n\to\infty}{\sum\limits_{i=1}^{\infty}m(A_{k} \cap [-n, b))} \le \sum\limits_{n=1}^{\infty}m(A_{i})
 		\end{gather*}
 		где переход с первой строки на вторую допустим по доказанному для случая $ a, b \in \Real $.\\
 		Доказательство для случая $ b = +\infty $ аналогично.\\
@@ -643,8 +648,8 @@
 		На каждом из $ R_{i} $ продолжим сужение $ \nu $ до $ \sigma $-аддитивной меры $ \mu_{i} $ на $ \sigma $-алгебре $ \Sigma_{i} $.
 	\end{definition}
 	\begin{definition}
-		Множество $ Y \subseteq X $ называется \textit{измеримым}, если $ \forall i: Y \cap A_{i} \in \Sigma_{i} $.\\
-		При этом: \[ \mu(A) := \sum_{i=1}^{\infty}{\mu_{i}(A \cap B_{i})} \]
+		Множество $ A \subseteq X $ называется \textit{измеримым}, если $ \forall i: A \cap A_{i} \in \Sigma_{i} $.\\
+		При этом: \[ \mu(A) := \sum_{i=1}^{\infty}{\mu_{i}(A \cap A_{i})} \]
 	\end{definition}
 	\begin{theorem}
 		Совокупность $ M $ измеримых подмножеств $ X $ образуется $ \sigma $-алгебру.
@@ -1114,7 +1119,7 @@
 			Определение корректно, т.е. не зависит от разбиения $ X $.
 		\end{lemma}
 		\begin{proof}
-			Пусть $ X = \bigsqcup\limits_{i=1}^{n} E_{i} = \bigsqcup\limits_{j=1}^{m} D_{j} $ и $ f \circ \mathbf{I}_{E_{i}} \equiv c_{i},\ f \circ \mathbf{I}_{D_{j}} \equiv d_{j} $.\\ 
+			Пусть $ X = \bigsqcup\limits_{i=1}^{n} E_{i} = \bigsqcup\limits_{j=1}^{m} D_{j} $ и $ f \cdot \mathbf{I}_{E_{i}} \equiv c_{i},\ f \cdot \mathbf{I}_{D_{j}} \equiv d_{j} $.\\ 
 			Положим $ C_{i, j} := E_{i} \cap D_{j} $. Тогда 
 			\[ \int_{X} f d\mu = \sum\limits_{i=1}^{n} c_{i} \mu(E_{i})  = \sum\limits_{i=1}^{n} c_{i} \sum\limits_{j=1}^{m} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \sum\limits_{i=1}^{n} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \mu(D_{j}) \]
 		\end{proof}
@@ -1187,7 +1192,7 @@
 			Переходя к $ \sup\limits_{h \in \mbox{SF}(f)} $, получаем искомое равенство.
 		\end{proof}
 		\begin{lemma}
-			Пусть $ f(x): E \to \Real^{+} $ — измеримая функция. Тогда $ \exists \{f_{n}\}\uparrow:\ f_{n} \xrightarrow{E} f $.
+			Пусть $ f(x): E \to \Real^{+} $ — измеримая функция. Тогда $ \exists \{f_{n}\}\uparrow:\ f_{n} \xrightarrow{E} f $, где $ f_{n} \geq 0 $  — простые функции.
 		\end{lemma}
 		\begin{proof}
 			В силу $ \sigma $-конечности $ X $, можно получить представление вида 
@@ -1406,8 +1411,8 @@
 	\end{corollary}
 	\begin{proof}
 		Достаточно рассмотреть случай $ f \ge 0 $.\\
-		Очевидно, что $ \forall n: |f \circ \mathbf{I}_{E_{n}}| \le f $, откуда $ f \in L(E_{n}) $.\\
-		Кроме того, $ f = \sum\limits_{n=1}^{\infty} f \circ \mathbf{I}_{E_{n}} $.\\
+		Очевидно, что $ \forall n: |f \cdot \mathbf{I}_{E_{n}}| \le f $, откуда $ f \in L(E_{n}) $.\\
+		Кроме того, $ f = \sum\limits_{n=1}^{\infty} f \cdot \mathbf{I}_{E_{n}} $.\\
 		Тогда по следствию 20.2. имеем $ \int_{E} f d\mu = \sum\limits_{n=1}^{\infty} \int_{E_{n}} f d\mu $.
 	\end{proof}
 	\begin{lemma}[Фату, \href{https://goo.gl/cRrc9V}{Fatou's lemma}]$  $\\
