@@ -1119,7 +1119,7 @@
 			Определение корректно, т.е. не зависит от разбиения $ X $.
 		\end{lemma}
 		\begin{proof}
-			Пусть $ X = \bigsqcup\limits_{i=1}^{n} E_{i} = \bigsqcup\limits_{j=1}^{m} D_{j} $ и $ f \circ \mathbf{I}_{E_{i}} \equiv c_{i},\ f \circ \mathbf{I}_{D_{j}} \equiv d_{j} $.\\ 
+			Пусть $ X = \bigsqcup\limits_{i=1}^{n} E_{i} = \bigsqcup\limits_{j=1}^{m} D_{j} $ и $ f \cdot \mathbf{I}_{E_{i}} \equiv c_{i},\ f \cdot \mathbf{I}_{D_{j}} \equiv d_{j} $.\\ 
 			Положим $ C_{i, j} := E_{i} \cap D_{j} $. Тогда 
 			\[ \int_{X} f d\mu = \sum\limits_{i=1}^{n} c_{i} \mu(E_{i})  = \sum\limits_{i=1}^{n} c_{i} \sum\limits_{j=1}^{m} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \sum\limits_{i=1}^{n} \mu(C_{i, j}) = \sum\limits_{j=1}^{m} d_{j} \mu(D_{j}) \]
 		\end{proof}
@@ -1411,8 +1411,8 @@
 	\end{corollary}
 	\begin{proof}
 		Достаточно рассмотреть случай $ f \ge 0 $.\\
-		Очевидно, что $ \forall n: |f \circ \mathbf{I}_{E_{n}}| \le f $, откуда $ f \in L(E_{n}) $.\\
-		Кроме того, $ f = \sum\limits_{n=1}^{\infty} f \circ \mathbf{I}_{E_{n}} $.\\
+		Очевидно, что $ \forall n: |f \cdot \mathbf{I}_{E_{n}}| \le f $, откуда $ f \in L(E_{n}) $.\\
+		Кроме того, $ f = \sum\limits_{n=1}^{\infty} f \cdot \mathbf{I}_{E_{n}} $.\\
 		Тогда по следствию 20.2. имеем $ \int_{E} f d\mu = \sum\limits_{n=1}^{\infty} \int_{E_{n}} f d\mu $.
 	\end{proof}
 	\begin{lemma}[Фату, \href{https://goo.gl/cRrc9V}{Fatou's lemma}]$  $\\
