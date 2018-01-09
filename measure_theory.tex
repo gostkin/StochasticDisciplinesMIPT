@@ -331,7 +331,7 @@
 		\textit{Шаг}, $ n > 1 $: пусть $ B_{1}, \dots, B_{l} $ — искомые множества для $ A_{1}, \dots, A_{n-1} $.\\
 		Пересечём $ A_{n} $ с каждым из $ B_{j} $ и применим предыдущую лемму.\\
 		Введём обозначения $ C_{j} := B_{j} \cap A_{n} $.\\
-		По лемме 8.4, $ A_{n} := (\bigsqcup_{j=1}^{l} C_{j}) \sqcup (\bigsqcup_{k=1}^{m} D_{k}),\ D_{k} \in S $.\\ 
+		По лемме 8.1, $ A_{n} := (\bigsqcup_{j=1}^{l} C_{j}) \sqcup (\bigsqcup_{k=1}^{m} D_{k}),\ D_{k} \in S $.\\ 
 		Далее, по определению полукольца, $ B_{j} := C_{j} \sqcup (\bigsqcup_{k=1}^{m_{j}}{E_{j, k}}),\ E_{j, k} \in S $.\\
 		Полученные множества $ \{C_{j}\}, \{D_{k}\}, \{E_{j, k}\} $ — искомые для $ A_{1}, \dots, A_{n} $.
 	\end{proof}
@@ -344,7 +344,7 @@
 		Рассмотрим $ A := \bigsqcup_{i=1}^{n}{A_{i}},\ B : = \bigsqcup_{j=1}^{m}{B_{j}} $.\\
 		Введём обозначение $ C_{i,j} := A_{i} \cap B_{j} $. По построению $ C_{i,j} \in S $.\\
 		Тогда $ A \cap B = \bigsqcup_{i=1}^{n}\bigsqcup_{j=1}^{m}{C_{i,j}} \in K(S) $.\\
-		По лемме 8.4, 
+		По лемме 8.1, 
  		$ \begin{cases} 
 			 A_{i} = (\bigsqcup_{j=1}^{m}{C_{i, j}}) \sqcup (\bigsqcup_{k=1}^{s}D_{i, k})  &  1 \le i \le n \\
 			 B_{j} = (\bigsqcup_{i=1}^{n}{C_{i, j}}) \sqcup (\bigsqcup_{k=1}^{l}E_{k, j})  &  1 \le j \le m 
@@ -358,23 +358,26 @@
 	\end{theorem}
 	\begin{proof}
 		Введём обозначения $ U := \bigcup_{\lambda \in \Lambda}{X_{\lambda}},\ X :=  \{X_{\lambda}\}_{\lambda \in \Lambda} $.\\
-		Пусть $ \mathcal{R} := \{R_{\beta}(X)\}_{\beta \in \Gamma} $ — совокупность всех колец, содержащих $ X $ и содержащихся в $ 2^{U} $.\\ Положим $ R(X) := \cap_{\beta \in \Gamma}R_{\beta}(X) $. По предложению 7.2., $ R(X) $ — кольцо.\\
+		Пусть $ \mathcal{R} := \{R_{\beta}(X)\}_{\beta \in \Gamma} $ — совокупность всех колец, содержащих $ X $ и содержащихся в $ 2^{U} $.\\ Положим $ R(X) := \cap_{\beta \in \Gamma}R_{\beta}(X) $. По предложению 8.2., $ R(X) $ — кольцо.\\
 		Его минимальность очевидна по построению.\footnote{требование лежать в булеане продиктовано возможностью построения колец сколь угодно большой мощности, что приводит к теоретико-множественным парадоксам при попытке определить $ \mathcal{R} $.}
 	\end{proof}
 	\section{Меры на полукольцах. Классическая мера Лебега на полукольце промежутков и ее сигма-аддитивность.}
+	\begin{definition}
+	Мерой $m$ на полукольце множеств $S$ называется отображение: $S\rightarrow\left [0; +\infty\right)$ такое, что $\forall A, A_1, \ldots, A_n \in S: (A = \bigsqcup_{i=1}^{n} A_i\implies m(A) = \sum_{i=1}^{n}m(A_i))$. Если это же верно для $A, A_1, \ldots, A_n,\ldots$ для $A=\bigsqcup_{i=1}^{+\infty}A_i$, то мера называется $\sigma$-аддитивной.
+	\end{definition}
 	\begin{lemma}\footnote{её зачем-то разбивают на две части, но мне это кажется необоснованным}
 		Мера $ m $ на полукольце $ S $ монотонна, т.е. $ \forall A, B \in S: B \subseteq A \implies m(B) \le m(A) $
 	\end{lemma}
 	\begin{proof}
 		Если $ A, A_{1}, \dots, A_{n} \in S $ и:
 		\begin{itemize}
-			\item $ A \in \bigcup_{i=1}^{n}{A_{i}} $, то $ m(A) \le \sum_{i=1}^{n}{m(A_{i})} $.\\ 
-			Применим лемму 8.5. к множествам $ A, A_{1}, \dots, A_{n} $. Получим набор непересекающихся множеств $ B_{j} $ из $ S $, для которых верна оценка $ \sum_{i=1}^{n}{m(A_{i})} \ge \sum_{j=1}^{m}{m(B_{j})}  \ge m(A) $.
-			\item $ \bigcup_{i=1}^{n}{A_{i}} \subseteq A $, то $ \sum_{i=1}^{n}{m(A_{i})} \le m(A) $. Следует из лемм 8.5 и 8.4.
+			\item $ A \subseteq \bigcup_{i=1}^{n}{A_{i}} $, то $ m(A) \le \sum_{i=1}^{n}{m(A_{i})} $.\\ 
+			Применим лемму 8.2. к множествам $ A, A_{1}, \dots, A_{n} $. Получим набор непересекающихся множеств $ B_{j} $ из $ S $, для которых верна оценка $ \sum_{i=1}^{n}{m(A_{i})} \ge \sum_{j=1}^{m}{m(B_{j})}  \ge m(A) $.
+			\item $ \bigcup_{i=1}^{n}{A_{i}} \subseteq A $, то $ \sum_{i=1}^{n}{m(A_{i})} \le m(A) $. Следует из лемм 8.1 и 8.2.
 		\end{itemize}
 	\end{proof}
 	\begin{corollary}
-		Если $ m $ — мера на полукольце $ S $ и $ A, A_{1} \dots \in S,\ \bigsqcup_{i=1}^{\infty}{A_{i}} \subseteq A $, то $ m(A) \ge \sum_{i=1}^{\infty}{m(A_{i})} $. 
+		Если $ m $ — мера на полукольце $ S $ и $ A, A_{1}, \ldots \in S,\ \bigsqcup_{i=1}^{\infty}{A_{i}} \subseteq A $, то $ m(A) \ge \sum_{i=1}^{\infty}{m(A_{i})} $. 
 	\end{corollary}
 	\begin{definition}
 		\textbf{Классической мерой Лебега на полукольце промежутков} называют меру, сопоставляющую n-мерным брусам $ \times_{i=1}^{n} \{a_{i}, b_{i}\} $ объём $ \prod_{i=1}^{n}{(b_{i} - a_{i})} $.
