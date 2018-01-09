@@ -465,6 +465,15 @@
 	\begin{corollary}$  $\\
 		Если $ \nu $ — $ \sigma $-аддитивная мера на кольце $ R $ и $ A, A_{1}, \dots \in R,\ A \in \bigcup_{i=1}^{\infty}{A_{i}} $, то $ \nu(A) \le \sum_{i=1}^{\infty}{\nu(A_{i})} $.
 	\end{corollary}
+	\begin{proof}
+		Стандартная конструкция: $ B_{1} := A \cap A_{1},\ B_{n} := (A \cap A_{n}) \setminus \bigcup\limits_{i=1}^{n-1} A_{i} $.\\
+		Все эти множества лежат в $ R(S) $ в силу замкнутости относительно пересечения, дополнения и конечного объединения.\\
+		Тогда 
+		\begin{gather*} 
+			A := \bigcup\limits_{n=1}^{\infty} B_{n}\\
+			\nu(A) = \sum\limits_{n=1}^{\infty} \nu(B_{n}) \le \sum\limits_{n=1}^{\infty} \nu(A_{n})
+		\end{gather*}
+	\end{proof}
 	\noindent Условимся далее, что на полукольце $ S $ с единицей $ E $ задана $ \sigma $-аддитивная мера $ m $, а $ \nu $ — её продолжение на $ R(S) $. Покажем, как продолжить $ \nu $ до $ \mu $ — $ \sigma $-аддитивной меры на $ \sigma(S) $.
 	\begin{definition}
 		\textbf{Внешняя мера Жордана}:
@@ -1536,7 +1545,7 @@
 		Выпишем простые-функции-аналоги верхней и нижней сумм Дарбу:
 		\begin{gather*}
 			m_{r, \mathbf{x}} := \inf\limits_{x \in E_{r, \mathbf{x}}} f(x),\quad
-			M_{r, \mathbf{x}} := \inf\limits_{x \in E_{r, \mathbf{x}}} f(x)\\
+			M_{r, \mathbf{x}} := \sup\limits_{x \in E_{r, \mathbf{x}}} f(x)\\
 			\underline{f}_{r} := \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} m_{r, \mathbf{x}} \cdot \mathbf{I}_{E_{r, \mathbf{x}}} \quad 
 			\overline{f}_{r} := \sum\limits_{\mathbf{x} \in \mathcal{R}^{n}_{2^{r}}} M_{r, \mathbf{x}} \cdot \mathbf{I}_{E_{r, \mathbf{x}}}
 		\end{gather*}
@@ -1549,7 +1558,7 @@
 		$
 			\lim\limits_{r\to\infty} \underline{f}_{r} =: \underline{f} \le f \le \overline{f} :=  \lim\limits_{r\to\infty} \overline{f}_{r}
 		$.\\
-		Поскольку $ \sup\limits_{r} \int_{E} \underline{f}_{r} \le \sup\limits_{r} \int_{E} \overline{f}_{r} \le I $, по следствию  20.1. имеем\footnote{Разве отсюда, в силу монотонности интеграла Лебега, всё не следует? Зачём всё, что дальше написано? Я уже молчу про то, что интегрируемость по Риману на брусе влечёт ограниченность на этом брусе, а по критерию всякая ограниченная функция на множестве конечной меры интегрируема по Лебегу.}
+		Поскольку $ \sup\limits_{r} \int_{E} \underline{f}_{r} \le I \le \sup\limits_{r} \int_{E} \overline{f}_{r} $, по следствию  20.1. имеем\footnote{Разве отсюда, в силу монотонности интеграла Лебега, всё не следует? Зачём всё, что дальше написано? Я уже молчу про то, что интегрируемость по Риману на брусе влечёт ограниченность на этом брусе, а по критерию всякая ограниченная функция на множестве конечной меры интегрируема по Лебегу.}
 		\[ \underline{f},\ \overline{f} \in L(E),\ \mbox{L-}\int\limits_{[a, b]} \underline{f} d\mu = I = \mbox{L-}\int\limits_{[a, b]} \overline{f} d\mu \]
 		Отсюда 
 		\[ 
